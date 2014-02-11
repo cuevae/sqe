@@ -1,9 +1,10 @@
 *.tmp
-github-post-receive.php
-index.php
+github-post-receive*
+index*
 .travis.yml
 license.txt
 user_guide/
+sys/
 
 .DS_Store
 
