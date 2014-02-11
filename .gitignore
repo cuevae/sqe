@@ -1,2 +1,16 @@
 *.tmp
 github-post-receive.php
+index.php
+.travis.yml
+license.txt
+user_guide/
+
+.DS_Store
+
+application/cache/*
+!application/cache/index.html
+!application/cache/.htaccess
+
+application/logs/*
+!application/logs/index.html
+!application/logs/.htaccess
