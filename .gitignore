@@ -4,6 +4,7 @@ index*
 .travis.yml
 license.txt
 user_guide/
+.htaccess
 
 .DS_Store
 
