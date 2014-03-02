@@ -6,7 +6,9 @@
  * Time: 17:45
  */
 
-class Pages extends CI_Controller
+namespace Controllers;
+
+class Pages extends \CI_Controller
 {
 
     /**
@@ -18,6 +20,11 @@ class Pages extends CI_Controller
         {
             show_404();
         }
+
+
+        $this->load->library( 'unit_test' );
+        echo $this->unit_test->report();
+
 
         $data['title'] = ucfirst( $page );
 
