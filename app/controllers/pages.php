@@ -6,25 +6,18 @@
  * Time: 17:45
  */
 
-namespace Controllers;
-
 class Pages extends \CI_Controller
 {
 
     /**
      * @param string $page
      */
-    public function view( $page = 'home' )
+    public function view( $page = 'about' )
     {
-        if ( !file_exists( 'app/views/pages/' . $page . 'php' ) ) ;
+        if ( !file_exists( 'app/views/pages/' . $page . '.php' ) )
         {
             show_404();
         }
-
-
-        $this->load->library( 'unit_test' );
-        echo $this->unit_test->report();
-
 
         $data['title'] = ucfirst( $page );
 
