@@ -6,14 +6,14 @@
  * Time: 17:41
  */
 
-class Cv extends Ci_Controller
+class Cv extends CI_Controller
 {
 
     public function __construct()
     {
         parent::__construct();
         //$this->load->model( 'cv' );
-        $this->load->database();
+        //$this->load->database();
         $this->load->library('form_validation');
         $this->load->helper('form');
     }
@@ -21,7 +21,7 @@ class Cv extends Ci_Controller
 
     public function add()
     {
-
+        //Form validation
         $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|md5');
         $this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');

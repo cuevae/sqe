@@ -6,7 +6,7 @@
  * Time: 17:45
  */
 
-class Pages extends \CI_Controller
+class Pages extends CI_Controller
 {
 
     /**
