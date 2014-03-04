@@ -298,7 +298,7 @@ class CI_Loader {
 
 			require_once($mod_path.'models/'.$path.$model.'.php');
 
-			$model = ucfirst($model);
+			$model = ucfirst($model) . '_Model';
 
 			$CI->$name = new $model();
 

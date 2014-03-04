@@ -12,7 +12,7 @@ class Curriculum extends CI_Controller
     public function __construct()
     {
         parent::__construct();
-        //$this->load->model( 'curriculum' );
+        $this->load->model( 'curriculum' );
         //$this->load->database();
         $this->load->library('form_validation');
         $this->load->helper('form');
@@ -26,6 +26,8 @@ class Curriculum extends CI_Controller
         $this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
         $this->form_validation->set_rules('forename1', 'Forename', 'trim|required|xss_clean');
         $this->form_validation->set_rules('surname', 'Surname', 'trim|required|xss_clean');
+
+        $result = $this->curriculum->get();
 
         if ($this->form_validation->run() == FALSE) // validation hasn't been passed
         {
