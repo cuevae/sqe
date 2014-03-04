@@ -6,7 +6,7 @@
  * Time: 17:56
  */
 
-class Cv_Model extends CI_Model
+class Curriculum_Model extends CI_Model
 {
 
 

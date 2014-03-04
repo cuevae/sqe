@@ -1,11 +1,4 @@
-*.tmp
-github-post-receive*
-index*
-.travis.yml
-license.txt
-user_guide/
-.htaccess
-.idea/
+
 
 .DS_Store
 

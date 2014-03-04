@@ -16,11 +16,11 @@
 
 <?php
 //Start the form
-$attributes = array( 'class' => 'cv-form', 'id' => 'cv-add' );
-$action = 'cv/add/';
+$attributes = array( 'class' => 'curriculum-form', 'id' => 'curriculum-add' );
+$action = 'curriculum/add/';
 echo form_open( $action, $attributes );
 ?>
-
+<br/>
 <?php
 //Name
 $data = array(
@@ -31,10 +31,10 @@ $data = array(
     'size' => '50',
     'style' => 'width:50%',
 );
-echo form_label( 'Username', 'username' );
+echo form_label( 'Username', 'username' ), " ";
 echo form_input( $data );
 ?>
-
+<br/>
 <?php
 //Password
 $data = array(
@@ -45,10 +45,10 @@ $data = array(
     'size' => '50',
     'style' => 'width:50%',
 );
-echo form_label( 'Password', 'password' );
+echo form_label( 'Password', 'password' ), " ";
 echo form_password( $data );
 ?>
-
+    <br/>
 <?php
 //Title
 $options = array(
@@ -57,10 +57,10 @@ $options = array(
     'miss' => 'Ms.',
     'lord' => 'Lord',
 );
-echo form_label( 'Title', 'title' );
+echo form_label( 'Title', 'title' ), " ";
 echo form_dropdown( 'title', $options, '' );
 ?>
-
+    <br/>
 <?php
 //Forename1
 $data = array(
@@ -71,10 +71,10 @@ $data = array(
     'size' => '50',
     'style' => 'width:50%',
 );
-echo form_label( 'Forename', 'forename1' );
+echo form_label( 'Forename', 'forename1' ), " ";
 echo form_password( $data );
 ?>
-
+    <br/>
 <?php
 //Forename2
 $data = array(
@@ -85,10 +85,10 @@ $data = array(
     'size' => '50',
     'style' => 'width:50%',
 );
-echo form_label( 'Forename2', 'forename2' );
+echo form_label( 'Forename2', 'forename2' ), " ";
 echo form_password( $data );
 ?>
-
+    <br/>
 <?php
 //Surname
 $data = array(
@@ -99,10 +99,10 @@ $data = array(
     'size' => '50',
     'style' => 'width:50%',
 );
-echo form_label( 'Surname', 'surname' );
+echo form_label( 'Surname', 'surname' ), " ";
 echo form_password( $data );
 ?>
-
+    <br/>
 <?php
-echo form_submit( 'submit-cv', 'Submit!' );
+echo form_submit( 'submit-curriculum', 'Submit!' );
 ?>
