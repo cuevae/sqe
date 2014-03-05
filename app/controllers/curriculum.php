@@ -9,6 +9,9 @@
 class Curriculum extends CI_Controller
 {
 
+    /**
+     *
+     */
     public function __construct()
     {
         parent::__construct();
@@ -19,7 +22,7 @@ class Curriculum extends CI_Controller
     }
 
 
-    public function add()
+    public function edit( $userId )
     {
         $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
         $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|md5');
@@ -39,7 +42,8 @@ class Curriculum extends CI_Controller
         }
     }
 
-    public function view( $id )
+
+    public function view( $userId )
     {
 
     }
