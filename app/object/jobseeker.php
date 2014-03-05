@@ -9,30 +9,30 @@
 class Jobseeker_Object extends Person_Object
 {
 
-    private $addressLine1;
-    private $addressLine2;
-    private $town;
-    private $postcode;
-    private $secondEmail;
-    private $personalUrl;
-    private $photo;
-    private $female;
-    private $postcodeStart;
-    private $authorityToWorkStatement;
-    private $contactPreference;
+    protected $addressLine1;
+    protected $addressLine2;
+    protected $town;
+    protected $postcode;
+    protected $secondEmail;
+    protected $personalUrl;
+    protected $photo;
+    protected $female;
+    protected $postcodeStart;
+    protected $authorityToWorkStatement;
+    protected $contactPreference;
     /** @var  Education_Level[] $educationLevels */
-    private $educationLevels;
-    private $noOfGcses;
-    private $gcseEnglishGrade;
-    private $gcseMathsGrade;
-    private $fiveOrMoreGcses;
-    private $noOfALevels;
-    private $ucasPoints;
-    private $studentStatus;
-    private $mobile;
-    private $landline;
-    private $dob;
-    private $penaltyPoints;
+    protected $educationLevels;
+    protected $noOfGcses;
+    protected $gcseEnglishGrade;
+    protected $gcseMathsGrade;
+    protected $fiveOrMoreGcses;
+    protected $noOfALevels;
+    protected $ucasPoints;
+    protected $studentStatus;
+    protected $mobile;
+    protected $landline;
+    protected $dob;
+    protected $penaltyPoints;
 
     public function __construct( array $data )
     {

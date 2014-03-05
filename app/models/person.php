@@ -6,9 +6,8 @@
  * Time: 12:52
  */
 
-class Person_Model extends CI_Model {
-
-
+class Person_Model extends CI_Model
+{
 
     protected $personsTable;
 
@@ -23,10 +22,16 @@ class Person_Model extends CI_Model {
         $this->personsTable = 'persons';
     }
 
-    public function add( Person_Object $person )
+    /**
+     * Adds a person to our collection of persons
+     *
+     * @param Person_Object $person
+     * @param $password
+     */
+    public function add( Person_Object $person, $password )
     {
-        #TODO: check if the person already exists
-        $this->db->insert( $this->personsTable , $person );
+        #TODO: Handle errors such as what would happen if the person already exists
+        $this->simpleloginsecure->create( $person->getForename1(), $person->getSurname(), $person->getUsername(), $password );
     }
 
 }
