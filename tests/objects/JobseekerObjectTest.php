@@ -12,7 +12,6 @@ require_once( '../../app/object/jobseeker.php' );
 class JobseekerObjectTest extends CIUnit_TestCase
 {
 
-
     public function testCreateJobseekerObjectWithTheRequiredData()
     {
         $data = array(
@@ -23,7 +22,6 @@ class JobseekerObjectTest extends CIUnit_TestCase
         $jobseeker = new Jobseeker_Object( $data );
         $this->assertInstanceOf( 'Jobseeker_Object', $jobseeker );
     }
-
 
     public function testCreateJobseekerWithNotEnoughData()
     {
