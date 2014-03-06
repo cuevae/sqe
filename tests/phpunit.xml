@@ -8,7 +8,7 @@
         <server name="SERVER_NAME" value="http://example.com" />
     </php>
     <testsuites>
-<!--        <testsuite name="ControllerTests">
+        <testsuite name="ControllerTests">
             <directory>controllers</directory>
         </testsuite>
         <testsuite name="HelperTests">
@@ -19,12 +19,12 @@
         </testsuite>
         <testsuite name="ModelTests">
             <directory suffix=".php">models</directory>
-        </testsuite>-->
+        </testsuite>
         <testsuite name="ObjectTests">
             <directory suffix=".php">objects</directory>
         </testsuite>
-<!--        <testsuite name="SystemTests">
+        <testsuite name="SystemTests">
             <directory suffix=".php">system</directory>
-        </testsuite>-->
+        </testsuite>
     </testsuites>
 </phpunit>
