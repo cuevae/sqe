@@ -132,10 +132,9 @@ class Person_Object
     public function validateData( array $data )
     {
         $givenKeys = array_keys( $data );
-        $requiredKeys = array_flip( $this->requiredFields );
-        $match = array_intersect( $requiredKeys, $givenKeys );
+        $match = array_intersect( $this->requiredFields, $givenKeys );
 
-        return is_array( $match ) && ( count( $match ) == count( $requiredKeys ) );
+        return is_array( $match ) && ( count( $match ) == count( $this->requiredFields ) );
     }
 
 
