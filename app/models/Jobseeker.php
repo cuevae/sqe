@@ -14,13 +14,14 @@ class Jobseeker_Model extends CI_Model {
     {
         parent::__construct();
 
+        $this->load->database();
+
         $this->jobseekerTable = 'persons';
     }
 
     public function add( Jobseeker_Object $jobseeker )
     {
-        #TODO: check if the jobseeker already exists
-        $this->db->insert( $this->personsTable , $jobseeker );
+        $result = $this->simpleloginsecure->create('Enmanuel', 'Cueva', 'cuevaec@gmail.com', 'helloDarling');
     }
 
     public function getFromId( $id ){
@@ -28,6 +29,11 @@ class Jobseeker_Model extends CI_Model {
     }
 
     public function getFromEmail( $email )
+    {
+
+    }
+
+    public function test()
     {
 
     }

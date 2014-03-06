@@ -20,6 +20,9 @@
         <testsuite name="ModelTests">
             <directory suffix=".php">models</directory>
         </testsuite>
+        <testsuite name="ObjectTests">
+            <directory suffix=".php">objects</directory>
+        </testsuite>
         <testsuite name="SystemTests">
             <directory suffix=".php">system</directory>
         </testsuite>

@@ -17,6 +17,8 @@ class Employme extends CI_Controller
         parent::__construct();
         $this->load->helper( array( 'form' ) );
         $this->load->library( 'form_validation' );
+        $this->load->library('SimpleLoginSecure');
+        $this->load->model('jobseeker');
     }
 
 
@@ -41,6 +43,9 @@ class Employme extends CI_Controller
      */
     public function signup()
     {
+
+        $this->jobseeker->test();
+
         $this->form_validation->set_rules( 'username', 'Username', 'required' );
         if ( $this->form_validation->run() == FALSE ) {
             $this->load->view( 'employme/signup' );
