@@ -20,7 +20,7 @@ class PersonObjectTest extends CIUnit_TestCase
         );
         $personObject = new Person_Object( $data );
         $this->assertInstanceOf( 'Person_Object', $personObject );
-
+    }
 
     public function testCreatePersonWithNotEnoughData()
     {
