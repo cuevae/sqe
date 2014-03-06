@@ -128,7 +128,10 @@ class Person_Object
         return $this->username;
     }
 
-
+    /**
+     * @param array $data
+     * @return bool
+     */
     public function validateData( array $data )
     {
         $givenKeys = array_keys( $data );

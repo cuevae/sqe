@@ -11,13 +11,14 @@ require_once( '../../app/object/person.php' );
 class PersonObjectTest extends CIUnit_TestCase
 {
 
-    public function testSuccessfulCreatePerson()
+    public function testCreatePersonWithTheRequiredData()
     {
         $data = array(
             'forename1' => 'Enmanuel',
             'surname' => 'Cueva',
             'username' => 'cuevaec@gmail.com',
         );
+
         $personObject = new Person_Object( $data );
         $this->assertInstanceOf( 'Person_Object', $personObject );
     }
