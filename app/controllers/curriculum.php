@@ -6,7 +6,7 @@
  * Time: 17:41
  */
 
-class Curriculum extends CI_Controller
+class Curriculum extends MY_Controller
 {
 
     /**
@@ -16,36 +16,24 @@ class Curriculum extends CI_Controller
     {
         parent::__construct();
         $this->load->model( 'curriculum' );
-        //$this->load->database();
-        $this->load->library('form_validation');
-        $this->load->helper('form');
     }
 
 
     public function edit( $userId )
     {
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|md5');
-        $this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('forename1', 'Forename', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('surname', 'Surname', 'trim|required|xss_clean');
+        $this->form_validation->set_rules( 'title', 'Title', 'trim|required|xss_clean' );
+        $this->form_validation->set_rules( 'forename1', 'Forename', 'trim|required|xss_clean' );
+        $this->form_validation->set_rules( 'surname', 'Surname', 'trim|required|xss_clean' );
 
-        $result = $this->curriculum->get();
-
-        if ($this->form_validation->run() == FALSE) // validation hasn't been passed
-        {
-            $this->load->view( 'curriculum/add' );
-        }
-        else // passed validation proceed to post success logic
-        {
-            $this->load->view( 'curriculum/add', array('success' => 'Form is correct!') );
-        }
+        $tmpData['_educationLevelOptions'] = array( 1, 2, 3, 4, 5 );
+        $this->viewData['main_content_view'] = $this->load->view( 'curriculum/edit', $tmpData, TRUE );
+        $this->load->view( 'default', $this->viewData );
     }
 
 
     public function view( $userId )
     {
-
+        $this->load->view( 'curriculum/view' );
     }
 
 } 
