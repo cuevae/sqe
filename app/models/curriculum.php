@@ -29,7 +29,7 @@ class Curriculum_Model extends CI_Model
 
         try {
             $this->db->where('idUser', $jobseeker->getId() );
-            $result = $this->db->update( $this->personsTable, $jobseeker );
+            $this->db->update( $this->personsTable, $jobseeker );
             return 1;
         } catch ( Exception $e ) {
             return -2;
