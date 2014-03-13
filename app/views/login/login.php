@@ -1,4 +1,6 @@
-<?php
+<div id="login_form" style="width:400px; margin:100px auto; border-radius: 5px;border:1px solid #909090; padding:20px">
+
+    <?php
     $this->load->helper('html');
     echo form_open('login');
     echo form_label('Username: ') . br(2);
@@ -31,3 +33,6 @@
     );
     echo form_submit($data) . br(2);
     echo form_close();
+
+    ?>
+</div>
