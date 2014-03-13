@@ -38,6 +38,8 @@ class Curriculum_Model extends CI_Model
 
     public function get( $id = null )
     {
+        //I've changed this
+
         if ( isset( $id ) ) {
             $query = $this->db->get_where( $this->personsTable, array( 'idUser' => $id ) );
             return $query->row_array();
