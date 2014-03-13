@@ -11,4 +11,4 @@
     <title><?= $title ?></title>
 </head>
 <body>
-    <h1>EmployMe</h1>
+    <h1>Admin Login Page</h1>
