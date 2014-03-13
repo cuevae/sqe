@@ -38,30 +38,11 @@ class Jobseeker extends Person
     {
         parent::__construct( $data );
 
-        $this->addressLine1 = $data['addressLine1'];
-        $this->addressLine2 = $data['addressLine2'];
-        $this->town = $data['town'];
-        $this->postcode = $data['postcode'];
-        $this->secondEmail = $data['secondEmail'];
-        $this->personalUrl = $data['personalUrl'];
-        $this->photo = $data['photo'];
-        $this->female = $data['female'];
-        $this->postcodeStart = $data['postcodeStart'];
-        $this->authorityToWorkStatement = $data['authorityToWorkStatement'];
-        $this->contactPreference = $data['contactPreference'];
-        $this->EducationLevels_idEducationLevel = $data['educationLevel'];
-        $this->noOfGcses = $data['noOfGcses'];
-        $this->gcseEnglishGrade = $data['gcseEnglishGrade'];
-        $this->gcseMathsGrade = $data['gcseMathsGrade'];
-        $this->fiveOrMoreGcses = $data['fiveOrMoreGcses'];
-        $this->noOfALevels = $data['noOfALevels'];
-        $this->ucasPoints = $data['ucasPoints'];
-        $this->studentStatus = $data['studentStatus'];
-        $this->mobile = $data['mobile'];
-        $this->landline = $data['landline'];
-        $this->dob = $data['dob'];
-        $this->penaltyPoints = $data['penaltyPoints'];
-
+        foreach ( $data as $key => $value ) {
+            if ( property_exists( $this, $key ) ) {
+                $this->$key = $value;
+            }
+        }
     }
 
 } 

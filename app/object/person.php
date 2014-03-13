@@ -24,12 +24,11 @@ class Person
             throw new Exception( 'Not enough data to create a Person_Object' );
         }
 
-        $this->idUser = $data['idUser'];
-        $this->username = $data['username'];
-        $this->title = $data['title'];
-        $this->forename1 = $data['forename1'];
-        $this->forename2 = $data['forename2'];
-        $this->surname = $data['surname'];
+        foreach ( $data as $key => $value ) {
+            if ( property_exists( $this, $key ) ) {
+                $this->$key = $value;
+            }
+        }
     }
 
     /**
