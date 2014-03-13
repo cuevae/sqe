@@ -6,7 +6,7 @@
  * Time: 17:44
  */
 ?>
-<h2>Edit CV</h2>
+    <h2>Edit CV</h2>
 
 <?php if ( isset( $success ) && $success ) : ?>
     <h3><?= $success ?></h3>
@@ -32,7 +32,8 @@ $options = array(
 );
 echo form_label( $label, $id );
 echo form_dropdown( $id, $options );
-#endregion ?>
+#endregion
+?>
 
 <?php #region Forename1
 $id = 'forename1';
@@ -40,11 +41,12 @@ $label = 'Forename 1: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id),
+    'value' => set_value( $id ),
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Forename2
 $id = 'forename2';
@@ -52,11 +54,12 @@ $label = 'Forename 2: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id),
+    'value' => set_value( $id ),
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion ?>
+#endregion
+?>
 
 <?php #region Surname
 $id = 'surname';
@@ -64,11 +67,12 @@ $label = 'Surname: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region AddressLine1
 $id = 'addressLine1';
@@ -76,11 +80,12 @@ $label = 'Address Line 1: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region AddressLine2
 $id = 'addressLine2';
@@ -88,11 +93,12 @@ $label = 'Address Line 2: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Town
 $id = 'town';
@@ -100,11 +106,12 @@ $label = 'Town: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Postcode
 $id = 'postcode';
@@ -112,11 +119,12 @@ $label = 'Postcode: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Second Email
 $id = 'secondEmail';
@@ -124,11 +132,12 @@ $label = 'Alternative Email: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Personal Url
 $id = 'personalUrl';
@@ -136,11 +145,12 @@ $label = 'Website: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Photo
 $id = 'photo';
@@ -151,7 +161,8 @@ $data = array(
 );
 echo form_label( $label, $id );
 echo form_upload( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Male/Female
 $id = 'sex';
@@ -162,7 +173,8 @@ $options = array(
 );
 echo form_label( $label, $id );
 echo form_dropdown( $id, $options );
-#endregion?>
+#endregion
+?>
 
 <?php #region Authority To Work Statement
 $id = 'authorityToWorkStatement';
@@ -170,11 +182,12 @@ $label = 'Authority To Work Statement: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_textarea( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Contact Preference
 $id = 'contactPreference';
@@ -186,14 +199,16 @@ $options = array(
 );
 echo form_label( $label, $id );
 echo form_dropdown( $id, $options );
-#endregion?>
+#endregion
+?>
 
 <?php #region Education Level
 $id = 'educationLevel';
 $label = 'Education Level: ';
 echo form_label( $label, $id );
 echo form_dropdown( $id, $_educationLevelOptions );
-#endregion?>
+#endregion
+?>
 
 <?php #region No Of GCSEs
 $id = 'noOFGcses';
@@ -203,7 +218,8 @@ $options = array( 0 => 'None', 5 => 'Five', 6 => 'Six',
                   10 => 'Ten', 11 => 'Eleven', 12 => 'Twelve' );
 echo form_label( $label, $id );
 echo form_dropdown( $id, $options );
-#endregion?>
+#endregion
+?>
 
 <?php #region GCSE English Grade
 $id = 'gcseEnglishGrade';
@@ -211,11 +227,12 @@ $label = 'GCSE English Grade: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region GCSE Maths Grade
 $id = 'gcseMathsGrade';
@@ -223,11 +240,12 @@ $label = 'GCSE Maths Grade: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region No Of A Levels
 $id = 'noOFALevels';
@@ -237,7 +255,8 @@ $options = array( 0 => 'None', 5 => 'Five', 6 => 'Six',
                   10 => 'Ten', 11 => 'Eleven', 12 => 'Twelve' );
 echo form_label( $label, $id );
 echo form_dropdown( $id, $options );
-#endregion?>
+#endregion
+?>
 
 <?php #region UCAS Points
 //20 to 280
@@ -246,11 +265,12 @@ $label = 'UCAS Points: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Student Status
 $id = 'studentStatus';
@@ -262,7 +282,8 @@ $options = array(
 );
 echo form_label( $label, $id );
 echo form_dropdown( $id, $options );
-#endregion?>
+#endregion
+?>
 
 <?php #region Mobile
 $id = 'mobile';
@@ -270,11 +291,12 @@ $label = 'Mobile: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Land Line
 $id = 'landLine';
@@ -282,11 +304,12 @@ $label = 'Land Line: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region DOB
 //20 to 280
@@ -295,11 +318,12 @@ $label = 'Date Of Birth: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php #region Penalty Points
 $id = 'penaltyPoints';
@@ -307,13 +331,73 @@ $label = 'Penalty Points: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value( $id )
 );
 echo form_label( $label, $id );
 echo form_input( $data );
-#endregion?>
+#endregion
+?>
 
 <?php
 echo form_submit( 'submit-curriculum', 'Submit!' );
 ?>
 <?= form_close(); ?>
+
+<?= $this->form_builder->open_form( array( 'action' => 'curriculum/edit' ) ); ?>
+<?php
+echo $this->form_builder->build_form_horizontal(
+                        array(
+                             array(
+                                 'type' => 'dropdown',
+                                 'id' => 'title',
+                                 'label' => 'Title',
+                                 'options' => array(
+                                     'mr' => 'Mr.',
+                                     'mrs' => 'Mrs.',
+                                     'miss' => 'Ms.',
+                                     'lord' => 'Lord',
+                                 )
+                             ),
+                             array(
+                                 'id' => 'forename1',
+                                 'label' => 'Forename 1',
+                                 'value' => !empty( $forename1 ) ? $forename1 : ''
+                             ),
+                             array(
+                                 'id' => 'forename2',
+                                 'label' => 'Forename 2',
+                                 'value' => !empty( $forename2 ) ? $forename2 : ''
+                             ),
+                             array(
+                                 'id' => 'surname',
+                                 'label' => 'Surname',
+                                 'value' => !empty( $surname ) ? $surname : ''
+                             ),
+                             array(
+                                 'id' => 'addressLine1',
+                                 'label' => 'Address line 1',
+                             ),
+                             array(
+                                 'id' => 'addressLine2',
+                                 'label' => 'Address line 2',
+                             ),
+                             array(
+                                 'id' => 'town',
+                                 'label' => 'Town',
+                             ),
+                             array(
+                                 'id' => 'postcode',
+                                 'label' => 'Postcode',
+                             ),
+                             array(
+                                 'type' => 'email',
+                                 'id' => 'secondEmail',
+                                 'label' => 'Second email',
+                             ),
+                             array(
+                                 'id' => 'personalUrl',
+                                 'label' => 'Personal Url',
+                             )
+                        ) );
+?>
+<?= $this->form_builder->close_form(); ?>

@@ -26,6 +26,7 @@ class Curriculum extends MY_Controller
         $this->form_validation->set_rules( 'surname', 'Surname', 'trim|required|xss_clean' );
 
         $tmpData['_educationLevelOptions'] = array( 1, 2, 3, 4, 5 );
+        $tmpData['prefix'] = 'shipping';
         $this->viewData['main_content_view'] = $this->load->view( 'curriculum/edit', $tmpData, TRUE );
         $this->load->view( 'default', $this->viewData );
     }
