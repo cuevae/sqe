@@ -19,8 +19,8 @@ class JobseekerObjectTest extends CIUnit_TestCase
             'surname' => 'Cueva',
             'username' => 'cuevaec@gmail.com',
         );
-        $jobseeker = new Jobseeker_Object( $data );
-        $this->assertInstanceOf( 'Jobseeker_Object', $jobseeker );
+        $jobseeker = new Jobseeker( $data );
+        $this->assertInstanceOf( 'Jobseeker', $jobseeker );
     }
 
     public function testCreateJobseekerWithNotEnoughData()
@@ -29,7 +29,7 @@ class JobseekerObjectTest extends CIUnit_TestCase
         $data = array();
         $jobseekerObject = null;
         try {
-            $jobseekerObject = new Jobseeker_Object( $data );
+            $jobseekerObject = new Jobseeker( $data );
         } catch ( Exception $e ) {
             $this->assertNull( $jobseekerObject );
         }
@@ -38,7 +38,7 @@ class JobseekerObjectTest extends CIUnit_TestCase
         $data = array( 'forename1' => 'Enmanuel' );
         $jobseekerObject = null;
         try {
-            $jobseekerObject = new Jobseeker_Object( $data );
+            $jobseekerObject = new Jobseeker( $data );
         } catch ( Exception $e ) {
             $this->assertNull( $jobseekerObject );
         }
@@ -47,7 +47,7 @@ class JobseekerObjectTest extends CIUnit_TestCase
         $data = array( 'forename1' => 'Enmanuel' );
         $jobseekerObject = null;
         try {
-            $jobseekerObject = new Jobseeker_Object( $data );
+            $jobseekerObject = new Jobseeker( $data );
         } catch ( Exception $e ) {
             $this->assertNull( $jobseekerObject );
         }
