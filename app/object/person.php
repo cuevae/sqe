@@ -6,15 +6,15 @@
  * Time: 13:00
  */
 
-class Person_Object
+class Person
 {
 
-    protected $id;
-    protected $username;
-    protected $title;
-    protected $forename1;
-    protected $forename2;
-    protected $surname;
+    public $idUser;
+    public $username;
+    public $title;
+    public $forename1;
+    public $forename2;
+    public $surname;
 
     protected $requiredFields = array( 'username', 'forename1', 'surname' );
 
@@ -24,7 +24,7 @@ class Person_Object
             throw new Exception( 'Not enough data to create a Person_Object' );
         }
 
-        $this->id = $data['id'];
+        $this->idUser = $data['idUser'];
         $this->username = $data['username'];
         $this->title = $data['title'];
         $this->forename1 = $data['forename1'];
@@ -65,11 +65,11 @@ class Person_Object
     }
 
     /**
-     * @param mixed $id
+     * @param $idUser
      */
-    public function setId( $id )
+    public function setId( $idUser )
     {
-        $this->id = $id;
+        $this->idUser = $idUser;
     }
 
     /**
@@ -77,7 +77,7 @@ class Person_Object
      */
     public function getId()
     {
-        return $this->id;
+        return $this->idUser;
     }
 
     /**

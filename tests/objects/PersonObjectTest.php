@@ -19,8 +19,8 @@ class PersonObjectTest extends CIUnit_TestCase
             'username' => 'cuevaec@gmail.com',
         );
 
-        $personObject = new Person_Object( $data );
-        $this->assertInstanceOf( 'Person_Object', $personObject );
+        $personObject = new Person( $data );
+        $this->assertInstanceOf( 'Person', $personObject );
     }
 
     public function testCreatePersonWithNotEnoughData()
@@ -29,7 +29,7 @@ class PersonObjectTest extends CIUnit_TestCase
         $data = array();
         $personObject = null;
         try {
-            $personObject = new Person_Object( $data );
+            $personObject = new Person( $data );
         } catch ( Exception $e ) {
             $this->assertNull( $personObject );
         }
@@ -38,7 +38,7 @@ class PersonObjectTest extends CIUnit_TestCase
         $data = array( 'forename1' => 'Enmanuel' );
         $personObject = null;
         try {
-            $personObject = new Person_Object( $data );
+            $personObject = new Person( $data );
         } catch ( Exception $e ) {
             $this->assertNull( $personObject );
         }
@@ -47,7 +47,7 @@ class PersonObjectTest extends CIUnit_TestCase
         $data = array( 'forename1' => 'Enmanuel' );
         $personObject = null;
         try {
-            $personObject = new Person_Object( $data );
+            $personObject = new Person( $data );
         } catch ( Exception $e ) {
             $this->assertNull( $personObject );
         }
