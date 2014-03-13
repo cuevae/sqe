@@ -6,7 +6,7 @@
  * Time: 17:41
  */
 
-class Curriculum extends CI_Controller
+class Curriculum extends MY_Controller
 {
 
     /**
@@ -16,36 +16,59 @@ class Curriculum extends CI_Controller
     {
         parent::__construct();
         $this->load->model( 'curriculum' );
-        //$this->load->database();
-        $this->load->library('form_validation');
-        $this->load->helper('form');
     }
 
 
-    public function edit( $userId )
+    public function edit( $idUser )
     {
-        $this->form_validation->set_rules('username', 'Username', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('password', 'Password', 'required|min_length[5]|md5');
-        $this->form_validation->set_rules('title', 'Title', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('forename1', 'Forename', 'trim|required|xss_clean');
-        $this->form_validation->set_rules('surname', 'Surname', 'trim|required|xss_clean');
+        $this->setEditFormRules();
+        $tmpData['_educationLevelOptions'] = array( 1 => 1, 2, 3, 4, 5 );
+        $tmpData['_idUser'] = $idUser;
+        $tmpData['_username'] = 'manei_cc@hotmail.com';
 
-        $result = $this->curriculum->get();
+        if( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ){
+            if( $this->form_validation->run() === false ){
+                $this->load->view( 'curriculum/edit', $tmpData );
+            } else {
+                try{
+                    $data = $this->input->post();
+                    $data['idUser'] = $idUser; #TODO: userId should be picked from SESSION
+                    $data['female'] = ( $data['sex'] == 'female' );
+                    if( $data['postcode'] ){
+                        $data['postcode'] = strtoupper( $data['postcode'] );
+                        preg_match('#^[A-Z]+[0-9]{2}#', $data['postcode'], $matches );
+                        $data['postcodeStart'] = $matches[0];
+                    }
+                    $data['fiveOrMoreGcses'] = ( $data['noOfGcses'] >= 5 );
+                    $jobseeker = new Jobseeker( $data );
+                } catch( Exception $e ){
+                    $tmpData['errors'][] = ['bad_data' => 'Error in the given data.'];
+                    $this->load->view('curriculum/edit', $tmpData );
+                }
 
-        if ($this->form_validation->run() == FALSE) // validation hasn't been passed
-        {
-            $this->load->view( 'curriculum/add' );
+                $result = $this->curriculum->saveJobseekerDetails( $jobseeker );
+
+                redirect( 'curriculum/view/' . $idUser );
+            }
         }
-        else // passed validation proceed to post success logic
-        {
-            $this->load->view( 'curriculum/add', array('success' => 'Form is correct!') );
-        }
+
+        $this->viewData['main_content_view'] = $this->load->view( 'curriculum/edit', $tmpData, TRUE );
+        //$this->load->view( 'default', $this->viewData );
+        $this->load->view( 'curriculum/edit', $tmpData );
     }
 
 
     public function view( $userId )
     {
+        $this->load->view( 'curriculum/view' );
+    }
 
+
+    private function setEditFormRules()
+    {
+        $this->form_validation->set_rules( 'title', 'Title', 'trim|required|xss_clean' );
+        $this->form_validation->set_rules( 'forename1', 'Forename', 'trim|required|xss_clean' );
+        $this->form_validation->set_rules( 'surname', 'Surname', 'trim|required|xss_clean' );
     }
 
 } 

@@ -6,33 +6,33 @@
  * Time: 13:07
  */
 
-class Jobseeker_Object extends Person_Object
+class Jobseeker extends Person
 {
 
-    protected $addressLine1;
-    protected $addressLine2;
-    protected $town;
-    protected $postcode;
-    protected $secondEmail;
-    protected $personalUrl;
-    protected $photo;
-    protected $female;
-    protected $postcodeStart;
-    protected $authorityToWorkStatement;
-    protected $contactPreference;
+    public $addressLine1;
+    public $addressLine2;
+    public $town;
+    public $postcode;
+    public $secondEmail;
+    public $personalUrl;
+    public $photo;
+    public $female;
+    public $postcodeStart;
+    public $authorityToWorkStatement;
+    public $contactPreference;
     /** @var  Education_Level[] $educationLevels */
-    protected $educationLevels;
-    protected $noOfGcses;
-    protected $gcseEnglishGrade;
-    protected $gcseMathsGrade;
-    protected $fiveOrMoreGcses;
-    protected $noOfALevels;
-    protected $ucasPoints;
-    protected $studentStatus;
-    protected $mobile;
-    protected $landline;
-    protected $dob;
-    protected $penaltyPoints;
+    public $EducationLevels_idEducationLevel;
+    public $noOfGcses;
+    public $gcseEnglishGrade;
+    public $gcseMathsGrade;
+    public $fiveOrMoreGcses;
+    public $noOfALevels;
+    public $ucasPoints;
+    public $studentStatus;
+    public $mobile;
+    public $landline;
+    public $dob;
+    public $penaltyPoints;
 
     public function __construct( array $data )
     {
@@ -49,7 +49,7 @@ class Jobseeker_Object extends Person_Object
         $this->postcodeStart = $data['postcodeStart'];
         $this->authorityToWorkStatement = $data['authorityToWorkStatement'];
         $this->contactPreference = $data['contactPreference'];
-        $this->educationLevels = $data['educationLevels'];
+        $this->EducationLevels_idEducationLevel = $data['educationLevel'];
         $this->noOfGcses = $data['noOfGcses'];
         $this->gcseEnglishGrade = $data['gcseEnglishGrade'];
         $this->gcseMathsGrade = $data['gcseMathsGrade'];
