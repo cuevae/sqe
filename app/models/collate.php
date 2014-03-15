@@ -15,6 +15,14 @@ class Collate_Model extends CI_Model
 
     }
 
+    public function search( $queryData )
+    {
+        $this->db->where('studentStatus', $queryData['studentStatus'] );
+        $result = $this->db->get( 'persons' )->row_array();
+
+        return $result;
+    }
+
     public function getOne()
     {
         $query = $this->db->query('SELECT Persons_idUser FROM educational_qualifications WHERE qualificationType = "bsc"');

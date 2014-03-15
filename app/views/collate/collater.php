@@ -71,7 +71,35 @@ echo form_dropdown( 'professional_qualification', $qualificationName);
 <br/>
 
 <?php
+//Student Status
+$options = array(
+    'Full-Time' => 'Full-Time',
+    'Part-Time' => 'Part-Time',
+    'Not a student' => 'Not a student',
+
+);
+echo form_label('Student status', 'studentStatus'), " ";
+echo form_dropdown('studentStatus', $options, '');
+?>
+<br/>
+
+<?php
 echo form_submit( 'submit-query', 'Submit!' );
 ?>
 
 <?php echo form_close(); ?>
+
+<?php if ( isset( $_jobseeker ) ) : ?>
+    <?php if ( empty( $_jobseeker ) ) : ?>
+        <h3>No results to display</h3>
+    <?php else : ?>
+        <h3>Found:</h3>
+        <?=$_jobseeker->getFullName();?>
+        <br/>
+        <br/>
+        And below the whole jobseeker object
+        <br/>
+        <br/>
+        <?=var_dump( $_jobseeker ); ?>
+    <?php endif; ?>
+<?php endif; ?>

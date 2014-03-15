@@ -6,7 +6,7 @@
  * Date: 05/03/14
  * Time: 11:08
  */
-class Collate extends CI_Controller
+class Collate extends MY_Controller
 {
     public function __construct()
     {
@@ -23,7 +23,22 @@ class Collate extends CI_Controller
 
     public function collater()
     {
-        $this->load->view('collate/collater');
+        $data = array();
+
+        if( $this->input->server('REQUEST_METHOD') == 'POST' ){
+
+            $post = $this->input->post();
+
+            //Now you can use the post data to perform the query with the data above by calling the model
+
+            $result = $this->collate->search( $post );
+
+            $jobseeker = new Jobseeker( $result );
+
+            $data['_jobseeker'] = $jobseeker;
+        }
+
+        $this->load->view('collate/collater', $data);
     }
 
     public function collatelist()
