@@ -180,9 +180,9 @@ echo form_textarea( $data );
 $id = 'contactPreference';
 $label = 'Contact Preference: ';
 $options = array(
-    'email' => 'Email',
-    'landLine' => 'Land Line',
-    'mobile' => 'Mobile'
+    'Email' => 'Email',
+    'Landline' => 'Landline',
+    'Mobile' => 'Mobile'
 );
 echo form_label( $label, $id );
 echo form_dropdown( $id, $options, $_jobseeker->getContactPreference() );
@@ -192,7 +192,7 @@ echo form_dropdown( $id, $options, $_jobseeker->getContactPreference() );
 $id = 'EducationLevels_idEducationLevel';
 $label = 'Education Level: ';
 echo form_label( $label, $id );
-echo form_dropdown( $id, $_educationLevelOptions, $_jobseeker->getEducationLevel() );
+echo form_dropdown( $id, $_educationLevelOptions, $_jobseeker->getEducationLevelId() );
 #endregion?>
     <br/>
 <?php #region No Of GCSEs
@@ -230,13 +230,13 @@ echo form_input( $data );
 #endregion?>
     <br/>
 <?php #region No Of A Levels
-$id = 'noOfALevels';
+$id = 'noOfAlevels';
 $label = 'Number Of A Levels: ';
 $options = array( 0 => 'None', 5 => 'Five', 6 => 'Six',
                   7 => 'Seven', 8 => 'Eight', 9 => 'Nine',
                   10 => 'Ten', 11 => 'Eleven', 12 => 'Twelve' );
 echo form_label( $label, $id );
-echo form_dropdown( $id, $options, $_jobseeker->getNoOfALevels() );
+echo form_dropdown( $id, $options, $_jobseeker->getNoOfAlevels() );
 #endregion?>
     <br/>
 <?php #region UCAS Points
@@ -246,7 +246,7 @@ $label = 'UCAS Points: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->getUcasPoints()
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -256,9 +256,9 @@ echo form_input( $data );
 $id = 'studentStatus';
 $label = 'Student Status: ';
 $options = array(
-    1 => 'Status 1',
-    2 => 'Status 2',
-    3 => 'Status 3'
+    1 => 'Full-time',
+    2 => 'Part-time',
+    3 => 'Not a student'
 );
 echo form_label( $label, $id );
 echo form_dropdown( $id, $options, $_jobseeker->getUcasPoints() );
@@ -277,7 +277,7 @@ echo form_input( $data );
 #endregion?>
     <br/>
 <?php #region Land Line
-$id = 'landLine';
+$id = 'landline';
 $label = 'Land Line: ';
 $data = array(
     'name' => $id,

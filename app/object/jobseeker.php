@@ -25,7 +25,7 @@ class Jobseeker extends Person
     public $gcseEnglishGrade;
     public $gcseMathsGrade;
     public $fiveOrMoreGcses;
-    public $noOfALevels;
+    public $noOfAlevels;
     public $ucasPoints;
     public $studentStatus;
     public $mobile;
@@ -44,25 +44,6 @@ class Jobseeker extends Person
                 $this->$key = $value;
             }
         }
-    }
-
-    public function getFullName( $htmlSafe = true )
-    {
-        $result = '';
-        if ( !empty( $this->title ) ) {
-            $result .= ucfirst( strtolower( $this->title ) ) . ', ';
-        }
-        $result .= ucfirst( strtolower( $this->forename1 ) );
-        if ( !empty( $this->forename2 ) ) {
-            $result .= ' ' . ucfirst( $this->forename2[0] ) . '. ';
-        }
-        $result .= ' ' . ucfirst( strtolower( $this->surname ) );
-
-        if ( $htmlSafe ) {
-            $result = $this->sanitizeForHtmlOutput( $result );
-        }
-
-        return $result;
     }
 
     public function getAuthorityToWorkStatement( $htmlSafe = true )
@@ -143,6 +124,11 @@ class Jobseeker extends Person
         }
 
         return $result;
+    }
+
+    public function getEducationLevelId()
+    {
+        return $this->EducationLevels_idEducationLevel;
     }
 
     public function getEducationLevel( $htmlSafe = true )
@@ -245,9 +231,9 @@ class Jobseeker extends Person
         return $result;
     }
 
-    public function getNoOfALevels( $htmlSafe = true )
+    public function getNoOfAlevels( $htmlSafe = true )
     {
-        $result = $this->noOfALevels;
+        $result = $this->noOfAlevels;
         if ( $htmlSafe ) {
             $result = $this->sanitizeForHtmlOutput( $result );
         }
@@ -275,8 +261,13 @@ class Jobseeker extends Person
         return $result;
     }
 
-    private function sanitizeForHtmlOutput( $text )
+    public function getStudentStatus( $htmlSafe = true )
     {
-        return nl2br( htmlentities( htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' ), ENT_NOQUOTES ) );
+        $result = $this->studentStatus;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 }

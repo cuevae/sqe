@@ -1,4 +1,4 @@
-<?php /** @var $_jobseeker Jobseeker */?>
+<?php /** @var $_jobseeker Jobseeker */ ?>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-2 column">
@@ -37,17 +37,47 @@
             <ul>
                 <?php if ( !empty( $contactPreference = $_jobseeker->getContactPreference() ) ) : ?>
                     <li>
-                        Contact preference: <?=$contactPreference?>
+                        Contact preference: <?= $contactPreference ?>
                     </li>
                 <?php endif; ?>
                 <?php if ( !empty( $educationLevel = $_jobseeker->getEducationLevel() ) ) : ?>
                     <li>
-                        Education level: <?=$educationLevel?>
+                        Education level: <?= $educationLevel ?>
                     </li>
                 <?php endif; ?>
                 <?php if ( !empty( $noOfGcses = $_jobseeker->getNoOfGCses() ) ) : ?>
                     <li>
-                        No of GCSEs: <?=$noOfGcses?>
+                        No of GCSEs: <?= $noOfGcses ?>
+                    </li>
+                <?php endif; ?>
+                <?php if ( !empty( $gcseEnglishGrade = $_jobseeker->getGcseEnglishGrade() ) ) : ?>
+                    <li>
+                        GCSE English grade: <?= $gcseEnglishGrade ?>
+                    </li>
+                <?php endif; ?>
+                <?php if ( !empty( $gcseMathsGrade = $_jobseeker->getGcseMathsGrade() ) ) : ?>
+                    <li>
+                        GCSE Maths grade: <?= $gcseMathsGrade ?>
+                    </li>
+                <?php endif; ?>
+                <?php if ( !empty( $noOfAlevels = $_jobseeker->getNoOfAlevels() ) ) : ?>
+                    <li>
+                        No of A Levels: <?= $noOfAlevels ?>
+                    </li>
+                <?php endif; ?>
+                <?php if ( !empty( $ucasPoints = $_jobseeker->getUcasPoints() ) ) : ?>
+                    <li>
+                        UCAS points: <?= $ucasPoints ?>
+                    </li>
+                <?php endif; ?>
+                <?php if ( !empty( $studenStatus = $_jobseeker->getStudentStatus() ) ) : ?>
+                    <li>
+                        Student status: <?= $studenStatus ?>
+                    </li>
+                <?php endif; ?>
+                <?php if ( !empty( $penaltyPoints = $_jobseeker->getPenaltyPoints() ) ) : ?>
+                    <li>
+                        Penalty points: <?= $penaltyPoints ?>
                     </li>
                 <?php endif; ?>
             </ul>

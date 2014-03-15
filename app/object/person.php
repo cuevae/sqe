@@ -39,12 +39,15 @@ class Person
         $this->forename1 = $forename1;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getForename1()
+
+    public function getForename1( $htmlSafe = true )
     {
-        return $this->forename1;
+        $result = $this->forename1;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
@@ -55,12 +58,15 @@ class Person
         $this->forename2 = $forename2;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getForename2()
+
+    public function getForename2( $htmlSafe = true )
     {
-        return $this->forename2;
+        $result = $this->forename2;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
@@ -87,12 +93,15 @@ class Person
         $this->surname = $surname;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getSurname()
+
+    public function getSurname( $htmlSafe = true )
     {
-        return $this->surname;
+        $result = $this->surname;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
@@ -103,12 +112,15 @@ class Person
         $this->title = $title;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getTitle()
+
+    public function getTitle( $htmlSafe = true )
     {
-        return $this->title;
+        $result = $this->title;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
@@ -119,12 +131,34 @@ class Person
         $this->username = $username;
     }
 
-    /**
-     * @return mixed
-     */
-    public function getUsername()
+
+    public function getUsername( $htmlSafe = true )
     {
-        return $this->username;
+        $result = $this->forename1;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    public function getFullName( $htmlSafe = true )
+    {
+        $result = '';
+        if ( !empty( $this->title ) ) {
+            $result .= ucfirst( strtolower( $this->title ) ) . ', ';
+        }
+        $result .= ucfirst( strtolower( $this->forename1 ) );
+        if ( !empty( $this->forename2 ) ) {
+            $result .= ' ' . ucfirst( $this->forename2[0] ) . '. ';
+        }
+        $result .= ' ' . ucfirst( strtolower( $this->surname ) );
+
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
@@ -137,6 +171,11 @@ class Person
         $match = array_intersect( $this->requiredFields, $givenKeys );
 
         return is_array( $match ) && ( count( $match ) == count( $this->requiredFields ) );
+    }
+
+    protected function sanitizeForHtmlOutput( $text )
+    {
+        return nl2br( htmlentities( htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' ), ENT_NOQUOTES ) );
     }
 
 
