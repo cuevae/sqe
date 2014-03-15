@@ -28,7 +28,6 @@ class Collate extends MY_Controller
         if( $this->input->server('REQUEST_METHOD') == 'POST' ){
 
             $post = $this->input->post();
-
             //Now you can use the post data to perform the query with the data above by calling the model
 
             $result = $this->collate->search( $post );
@@ -43,7 +42,7 @@ class Collate extends MY_Controller
 
     public function collatelist()
     {
-       $this->load->model('collate');
+        $post = $this->input->post();
         $data['result'] = $this->collate->getOne();
         $this->load->view('collate/collatelist', $data);
     }
