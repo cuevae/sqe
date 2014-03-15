@@ -15,6 +15,7 @@
 $skillName = array(
     'java' => 'Java',
     'c#' => 'C#',
+
 );
 echo form_label('Skill Name', 'skill'), " ";
 echo form_dropdown('skill', $skillName, '');
