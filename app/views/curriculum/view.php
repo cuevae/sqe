@@ -42,7 +42,7 @@
                 <?php endif; ?>
                 <?php if ( !empty( $educationLevel = $_jobseeker->getEducationLevel() ) ) : ?>
                     <li>
-                        Contact preference: <?=$contactPreference?>
+                        Education level: <?=$educationLevel?>
                     </li>
                 <?php endif; ?>
             </ul>

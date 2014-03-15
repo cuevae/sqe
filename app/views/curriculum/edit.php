@@ -1,10 +1,5 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: manei
- * Date: 03/03/14
- * Time: 17:44
- */
+/** @var $_jobseeker Jobseeker */
 ?>
 <h2>Edit CV</h2>
 
@@ -21,9 +16,9 @@ $action = 'curriculum/edit/'.$_idUser;
 echo form_open_multipart( $action, $attributes );
 ?>
 
-<?php #region Title
+<?php #region Username
 $id = 'username';
-echo form_hidden( $id, $_username );
+echo form_hidden( $id, $_jobseeker->username );
 #endregion ?>
 
 <?php #region Title
@@ -36,7 +31,7 @@ $options = array(
     'lord' => 'Lord',
 );
 echo form_label( $label, $id );
-echo form_dropdown( $id, $options );
+echo form_dropdown( $id, $options, $_jobseeker->title );
 #endregion ?>
 <br/>
 <?php #region Forename1
@@ -45,7 +40,7 @@ $label = 'Forename 1: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id),
+    'value' => $_jobseeker->forename1,
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -57,7 +52,7 @@ $label = 'Forename 2: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id),
+    'value' => $_jobseeker->forename2,
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -69,7 +64,7 @@ $label = 'Surname: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->surname
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -81,7 +76,7 @@ $label = 'Address Line 1: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->addressLine1
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -93,7 +88,7 @@ $label = 'Address Line 2: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->addressLine2
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -105,7 +100,7 @@ $label = 'Town: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->town
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -117,7 +112,7 @@ $label = 'Postcode: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->postcode
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -129,7 +124,7 @@ $label = 'Alternative Email: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->secondEmail
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -141,7 +136,7 @@ $label = 'Website: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->personalUrl
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -166,7 +161,7 @@ $options = array(
     'female' => 'Female',
 );
 echo form_label( $label, $id );
-echo form_dropdown( $id, $options );
+echo form_dropdown( $id, $options, $_jobseeker->female ? 'female' : 'male' );
 #endregion?>
     <br/>
 <?php #region Authority To Work Statement
@@ -175,7 +170,7 @@ $label = 'Authority To Work Statement: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->authorityToWorkStatement
 );
 echo form_label( $label, $id );
 echo form_textarea( $data );
@@ -190,14 +185,14 @@ $options = array(
     'mobile' => 'Mobile'
 );
 echo form_label( $label, $id );
-echo form_dropdown( $id, $options );
+echo form_dropdown( $id, $options, $_jobseeker->contactPreference );
 #endregion?>
     <br/>
 <?php #region Education Level
-$id = 'educationLevel';
+$id = 'EducationLevels_idEducationLevel';
 $label = 'Education Level: ';
 echo form_label( $label, $id );
-echo form_dropdown( $id, $_educationLevelOptions );
+echo form_dropdown( $id, $_educationLevelOptions, $_jobseeker->EducationLevels_idEducationLevel );
 #endregion?>
     <br/>
 <?php #region No Of GCSEs
@@ -207,7 +202,7 @@ $options = array( 0 => 'None', 5 => 'Five', 6 => 'Six',
                   7 => 'Seven', 8 => 'Eight', 9 => 'Nine',
                   10 => 'Ten', 11 => 'Eleven', 12 => 'Twelve' );
 echo form_label( $label, $id );
-echo form_dropdown( $id, $options );
+echo form_dropdown( $id, $options, $_jobseeker->noOfGcses );
 #endregion?>
     <br/>
 <?php #region GCSE English Grade
@@ -216,7 +211,7 @@ $label = 'GCSE English Grade: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->gcseEnglishGrade
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -228,7 +223,7 @@ $label = 'GCSE Maths Grade: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->gcseMathsGrade
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -241,7 +236,7 @@ $options = array( 0 => 'None', 5 => 'Five', 6 => 'Six',
                   7 => 'Seven', 8 => 'Eight', 9 => 'Nine',
                   10 => 'Ten', 11 => 'Eleven', 12 => 'Twelve' );
 echo form_label( $label, $id );
-echo form_dropdown( $id, $options );
+echo form_dropdown( $id, $options, $_jobseeker->noOfALevels );
 #endregion?>
     <br/>
 <?php #region UCAS Points
@@ -266,7 +261,7 @@ $options = array(
     3 => 'Status 3'
 );
 echo form_label( $label, $id );
-echo form_dropdown( $id, $options );
+echo form_dropdown( $id, $options, $_jobseeker->ucasPoints );
 #endregion?>
     <br/>
 <?php #region Mobile
@@ -275,7 +270,7 @@ $label = 'Mobile: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->mobile
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -287,7 +282,7 @@ $label = 'Land Line: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->landline
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -312,7 +307,7 @@ $label = 'Penalty Points: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => $_jobseeker->penaltyPoints
 );
 echo form_label( $label, $id );
 echo form_input( $data );

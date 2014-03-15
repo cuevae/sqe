@@ -18,6 +18,7 @@ class Curriculum_Model extends CI_Model
         $this->load->database();
         //Tables init
         $this->personsTable = 'persons';
+        $this->educationLevelsTable = 'education_levels';
     }
 
     public function saveJobseekerDetails( Jobseeker $jobseeker )
@@ -48,6 +49,22 @@ class Curriculum_Model extends CI_Model
         } catch ( Exception $e ) {
             return -1;
         }
+    }
+
+    public function getAvailableEducationLevels( $reduced = true )
+    {
+        $this->db->select( 'e.*' );
+        $this->db->from( 'education_levels as e' );
+        $result = $this->db->get()->result_array();
+
+        if ( $reduced ) {
+            $result = array_reduce( $result, function ( $res, $item ) {
+                $res[$item['idEducationLevel']] = $item['educationLevel'];
+                return $res;
+            }, array() );
+        }
+
+        return $result;
     }
 
 

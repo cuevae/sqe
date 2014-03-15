@@ -20,8 +20,8 @@ class Jobseeker extends Person
     public $postcodeStart;
     public $authorityToWorkStatement;
     public $contactPreference;
-    /** @var  Education_Level[] $educationLevels */
     public $EducationLevels_idEducationLevel;
+    protected $educationLevel;
     public $noOfGcses;
     public $gcseEnglishGrade;
     public $gcseMathsGrade;
@@ -44,7 +44,6 @@ class Jobseeker extends Person
             }
         }
     }
-
 
     public function getFullName( $html = true )
     {
@@ -145,9 +144,14 @@ class Jobseeker extends Person
         return $result;
     }
 
-    public function getEducationLevel()
+    public function getEducationLevel( $html = true )
     {
+        $result = $this->educationLevel;
+        if ( $html ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
 
+        return $result;
     }
 
 

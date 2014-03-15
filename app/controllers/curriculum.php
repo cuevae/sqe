@@ -25,9 +25,14 @@ class Curriculum extends MY_Controller
     public function edit( $idUser )
     {
         $this->setEditFormRules();
-        $tmpData['_educationLevelOptions'] = array( 1 => 1, 2, 3, 4, 5 );
+        $tmpData['_educationLevelOptions'] = $this->curriculum->getAvailableEducationLevels();
         $tmpData['_idUser'] = $idUser;
-        $tmpData['_username'] = 'manei_cc@hotmail.com';
+        try{
+            $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
+        } catch( Exception $e ){
+            show_404();
+        }
+        $tmpData['_jobseeker'] = $jobseeker;
 
         if( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ){
             if( $this->form_validation->run() === false ){
