@@ -58,9 +58,17 @@ class Curriculum extends MY_Controller
     }
 
 
-    public function view( $userId )
+    public function view( $idUser )
     {
-        $this->load->view( 'curriculum/view' );
+        $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
+
+        if( !$jobseeker instanceof Jobseeker ){
+            show_404();
+        }
+
+        $tmpData = ['_jobseeker' => $jobseeker ];
+        $this->viewData['main_content_view'] = $this->load->view( 'curriculum/view', $tmpData, TRUE );
+        $this->load->view( 'default', $this->viewData );
     }
 
 
