@@ -5,41 +5,47 @@
             <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-circle"/>
         </div>
         <div class="col-md-10 column">
-            <h3 class="text-left">
-                <?= $_jobseeker->getFullName(); ?>
-            </h3>
+            <div class="row clearfix">
+                <div class="col-md-8 column">
+                    <h1 class="text-left">
+                        <?= $_jobseeker->getFullName(); ?>
+                    </h1>
 
-            <p>
-                <?= $_jobseeker->getAuthorityToWorkStatement(); ?>
-            </p>
+                    <p>
+                        <?= $_jobseeker->getAuthorityToWorkStatement(); ?>
+                    </p>
+                </div>
+                <div class="col-md-4 column">
+                    <address>
+                        <?= $_jobseeker->getFullAddress(); ?>
+                    </address>
+                </div>
+            </div>
         </div>
     </div>
     <div class="row clearfix">
         <div class="col-md-4 column">
-            <address>
-                <?= $_jobseeker->getFullAddress(); ?><br/>---
-                <br/><abbr title="Email">E:</abbr> <?= $_jobseeker->getUsername(); ?>
-                <?php if ( !empty( $email2 = $_jobseeker->getSecondEmail() ) && $email2 != $_jobseeker->getUsername() ) : ?>
-                    <br/><abbr title="Email2">E:</abbr> <?= $email2; ?>
-                <?php endif; ?>
-                <?php if ( !empty( $landline = $_jobseeker->getLandline() ) ) : ?>
-                    <br/><abbr title="Phone">P:</abbr> <?= $landline; ?>
-                <?php endif; ?>
-                <?php if ( !empty( $mobile = $_jobseeker->getMobile() ) ) : ?>
-                    <br/><abbr title="Mobile">M:</abbr> <?= $mobile; ?>
-                <?php endif; ?>
-                <?php if ( !empty( $personalUrl = $_jobseeker->getPersonalUrl() ) ) : ?>
-                    <br/><abbr title="Web">W:</abbr> <?= $personalUrl; ?>
-                <?php endif; ?>
-            </address>
+            <h4>Contact</h4>
+            <abbr title="Email">E:</abbr> <?= $_jobseeker->getUsername(); ?>
+            <?php if ( !empty( $email2 = $_jobseeker->getSecondEmail() ) && $email2 != $_jobseeker->getUsername() ) : ?>
+                <br/><abbr title="Email2">E:</abbr> <?= $email2; ?>
+            <?php endif; ?>
+            <?php if ( !empty( $landline = $_jobseeker->getLandline() ) ) : ?>
+                <br/><abbr title="Phone">P:</abbr> <?= $landline; ?>
+            <?php endif; ?>
+            <?php if ( !empty( $mobile = $_jobseeker->getMobile() ) ) : ?>
+                <br/><abbr title="Mobile">M:</abbr> <?= $mobile; ?>
+            <?php endif; ?>
+            <?php if ( !empty( $personalUrl = $_jobseeker->getPersonalUrl() ) ) : ?>
+                <br/><abbr title="Web">W:</abbr> <?= $personalUrl; ?>
+            <?php endif; ?>
+            <?php if ( !empty( $contactPreference = $_jobseeker->getContactPreference() ) ) : ?>
+                    <br/><em>Contact preference: <?= $contactPreference ?></em>
+            <?php endif; ?>
         </div>
         <div class="col-md-4 column">
+            <h4>Educational details</h4>
             <ul>
-                <?php if ( !empty( $contactPreference = $_jobseeker->getContactPreference() ) ) : ?>
-                    <li>
-                        Contact preference: <?= $contactPreference ?>
-                    </li>
-                <?php endif; ?>
                 <?php if ( !empty( $educationLevel = $_jobseeker->getEducationLevel() ) ) : ?>
                     <li>
                         Education level: <?= $educationLevel ?>
@@ -83,7 +89,8 @@
             </ul>
         </div>
         <div class="col-md-4 column">
-            <ol>
+            <h4>Skills</h4>
+            <ul>
                 <li>
                     Lorem ipsum dolor sit amet
                 </li>
@@ -108,7 +115,7 @@
                 <li>
                     Eget porttitor lorem
                 </li>
-            </ol>
+            </ul>
         </div>
     </div>
 </div>

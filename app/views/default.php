@@ -14,7 +14,7 @@
     <title>
         <?php $__element = 'title'; ?>
         <?php if ( isset( $$__element ) ): ?>
-            <?php echo $__element; ?>
+            <?php echo $$__element . ' | EmployMe 0.1'; ?>
         <?php else: ?>
             <?php if ( ENVIRONMENT != 'production' ): ?>
                 <?php echo 'Missing' . $__element . ', please check the variables you are passing to the view'; ?>

@@ -34,6 +34,7 @@ class Jobseeker extends Person
     public $penaltyPoints;
 
     protected $educationLevel;
+    protected $skills;
 
     public function __construct( array $data )
     {
@@ -269,5 +270,10 @@ class Jobseeker extends Person
         }
 
         return $result;
+    }
+
+    public function getSkills()
+    {
+        return $this->skills;
     }
 }

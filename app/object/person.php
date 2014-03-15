@@ -6,30 +6,17 @@
  * Time: 13:00
  */
 
-class Person
+class Person extends Base
 {
 
-    public $idUser;
-    public $username;
-    public $title;
-    public $forename1;
-    public $forename2;
-    public $surname;
+    var $idUser;
+    var $username;
+    var $title;
+    var $forename1;
+    var $forename2;
+    var $surname;
 
     protected $requiredFields = array( 'username', 'forename1', 'surname' );
-
-    public function __construct( array $data )
-    {
-        if ( !$this->validateData( $data ) ) {
-            throw new Exception( 'Not enough data to create a Person_Object' );
-        }
-
-        foreach ( $data as $key => $value ) {
-            if ( property_exists( $this, $key ) ) {
-                $this->$key = $value;
-            }
-        }
-    }
 
     /**
      * @param mixed $forename1
@@ -159,23 +146,6 @@ class Person
         }
 
         return $result;
-    }
-
-    /**
-     * @param array $data
-     * @return bool
-     */
-    public function validateData( array $data )
-    {
-        $givenKeys = array_keys( $data );
-        $match = array_intersect( $this->requiredFields, $givenKeys );
-
-        return is_array( $match ) && ( count( $match ) == count( $this->requiredFields ) );
-    }
-
-    protected function sanitizeForHtmlOutput( $text )
-    {
-        return nl2br( htmlentities( htmlspecialchars( $text, ENT_COMPAT, 'UTF-8' ), ENT_NOQUOTES ) );
     }
 
 
