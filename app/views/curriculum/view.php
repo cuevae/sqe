@@ -45,6 +45,11 @@
                         Education level: <?=$educationLevel?>
                     </li>
                 <?php endif; ?>
+                <?php if ( !empty( $noOfGcses = $_jobseeker->getNoOfGCses() ) ) : ?>
+                    <li>
+                        No of GCSEs: <?=$noOfGcses?>
+                    </li>
+                <?php endif; ?>
             </ul>
         </div>
         <div class="col-md-4 column">
