@@ -23,7 +23,7 @@ class Collate_Model extends CI_Model
         return $result;
     }
 
-    public function getOne( $type )
+    public function getOne()
     {
         $this->db->select( 'p.username, p.forename1, eq.qualificationType, eq.result, pq.*' );
         $this->db->from( 'persons as p' );
