@@ -9,4 +9,13 @@
 
 Qualified Applicants
 
-<?php echo $item['qualificationType'] ?>
+<?php print_r($result) ?>
+
+<?php
+echo "<br/>";
+foreach ( $result as $row ){
+echo $row->Persons_idUser;
+echo "<br/>";
+}
+
+?>

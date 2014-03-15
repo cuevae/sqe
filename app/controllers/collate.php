@@ -23,17 +23,14 @@ class Collate extends CI_Controller
 
     public function collater()
     {
-        $data['qualificationType'] = $this->collate->getAll();
         $this->load->view('collate/collater');
     }
 
     public function collatelist()
     {
-
-        $userQuery = $_POST['query'];
-
-        $data['item'] = $this->collate->getOne( $userQuery );
-        $this->load->view( 'collate/collatelist', $data );
+       $this->load->model('collate');
+        $data['result'] = $this->collate->getOne();
+        $this->load->view('collate/collatelist', $data);
     }
 
 } 
