@@ -37,12 +37,15 @@ class Curriculum_Model extends CI_Model
 
     public function getJobseekerDetails( $idUser )
     {
-        $query = $this->db->get_where( $this->personsTable, array( 'idUser' => $idUser ) );
-        $result = $query->row_array();
-        try{
+        $this->db->select( 'p.*, e.educationLevel' );
+        $this->db->from( 'persons as p' );
+        $this->db->join( 'education_levels as e', 'e.idEducationLevel = p.EducationLevels_idEducationLevel', 'left' );
+        $this->db->where( 'idUser', $idUser );
+        $result = $this->db->get()->row_array();
+        try {
             $jobseeker = new Jobseeker( $result );
             return $jobseeker;
-        } catch( Exception $e ){
+        } catch ( Exception $e ) {
             return -1;
         }
     }

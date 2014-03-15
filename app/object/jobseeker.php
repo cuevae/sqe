@@ -125,9 +125,35 @@ class Jobseeker extends Person
         return $result;
     }
 
+    public function getSecondEmail( $html = true )
+    {
+        $result = $this->secondEmail;
+        if ( $html ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    public function getContactPreference( $html = true )
+    {
+        $result = $this->contactPreference;
+        if ( $html ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    public function getEducationLevel()
+    {
+
+    }
+
+
     private function sanitizeForHtmlOutput( $text )
     {
-        return nl2br( htmlentities( htmlspecialchars( $text , ENT_COMPAT, 'UTF-8' ) ) );
+        return nl2br( htmlentities( htmlspecialchars( $text , ENT_COMPAT, 'UTF-8' ), ENT_NOQUOTES ) );
     }
 
 } 

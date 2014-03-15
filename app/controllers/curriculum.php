@@ -9,6 +9,9 @@
 class Curriculum extends MY_Controller
 {
 
+    /** @var  $curriculum Curriculum_Model */
+    var $curriculum;
+
     /**
      *
      */
