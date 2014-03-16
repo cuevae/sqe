@@ -8,7 +8,7 @@
 ?>
     Search Cv's
 
-<?php echo form_open('collate/collater'); ?>
+<?php echo form_open('collate/collatelist'); ?>
 
 <?php
 //Title
@@ -18,7 +18,7 @@ $skillName = array(
 
 );
 echo form_label('Skill Name', 'skill'), " ";
-echo form_dropdown('skill', $skillName, '');
+echo form_dropdown('skillName', $skillName, '');
 ?>
 
 <?php
@@ -28,7 +28,7 @@ $skillLevel = array(
     'good' => 'Good',
 );
 echo form_label( 'Skill Level', 'skill' ), " ";
-echo form_dropdown( 'skill', $skillLevel, '' );
+echo form_dropdown( 'skillLevel', $skillLevel, '' );
 ?>
 <br/>
 
@@ -55,7 +55,7 @@ $qualificationType = array(
     'phd' => 'Phd',
 );
 echo form_label( 'Educational Qualification', 'educational_qualification' ), " ";
-echo form_dropdown( 'educational_qualification', $qualificationType);
+echo form_dropdown( 'qualificationType', $qualificationType);
 ?>
 <br/>
 
@@ -66,21 +66,11 @@ $qualificationName = array(
     'ccnp' => 'CCNP',
 );
 echo form_label( 'Professional Qualification', 'professional_qualification' ), " ";
-echo form_dropdown( 'professional_qualification', $qualificationName);
+echo form_dropdown( 'qualificationName', $qualificationName);
 ?>
 <br/>
 
-<?php
-//Student Status
-$options = array(
-    'Full-Time' => 'Full-Time',
-    'Part-Time' => 'Part-Time',
-    'Not a student' => 'Not a student',
 
-);
-echo form_label('Student status', 'studentStatus'), " ";
-echo form_dropdown('studentStatus', $options, '');
-?>
 <br/>
 
 <?php
@@ -89,17 +79,4 @@ echo form_submit( 'submit-query', 'Submit!' );
 
 <?php echo form_close(); ?>
 
-<?php if ( isset( $_jobseeker ) ) : ?>
-    <?php if ( empty( $_jobseeker ) ) : ?>
-        <h3>No results to display</h3>
-    <?php else : ?>
-        <h3>Found:</h3>
-        <?=$_jobseeker->getFullName();?>
-        <br/>
-        <br/>
-        And below the whole jobseeker object
-        <br/>
-        <br/>
-        <?=var_dump( $_jobseeker ); ?>
-    <?php endif; ?>
-<?php endif; ?>
+

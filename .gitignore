@@ -1,3 +1,5 @@
+app/config/config.php
+app/config/database.php
 .idea/*
 
 .DS_Store
@@ -9,3 +11,4 @@ app/cache/*
 app/logs/*
 !app/logs/index.html
 !app/logs/.htaccess
+

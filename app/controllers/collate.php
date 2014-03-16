@@ -24,26 +24,13 @@ class Collate extends MY_Controller
     public function collater()
     {
         $data = array();
-
-        if( $this->input->server('REQUEST_METHOD') == 'POST' ){
-
-            $post = $this->input->post();
-            //Now you can use the post data to perform the query with the data above by calling the model
-
-            $result = $this->collate->search( $post );
-
-            $jobseeker = new Jobseeker( $result );
-
-            $data['_jobseeker'] = $jobseeker;
-        }
-
         $this->load->view('collate/collater', $data);
     }
 
     public function collatelist()
     {
         $post = $this->input->post();
-        $data['results'] = $this->collate->getOne();
+        $data['results'] = $this->collate->getOne($post);
         $this->load->view('collate/collatelist', $data);
     }
 
