@@ -13,6 +13,7 @@
 <?php
 //Title
 $skillName = array(
+    'null' => 'Null ',
     'java' => 'Java',
     'c#' => 'C#',
 
@@ -24,6 +25,7 @@ echo form_dropdown('skillName', $skillName, '');
 <?php
 //Title
 $skillLevel = array(
+    'null' => 'Null ',
     'basic' => 'Basic',
     'good' => 'Good',
 );
@@ -35,6 +37,7 @@ echo form_dropdown( 'skillLevel', $skillLevel, '' );
 <?php
 //Title
 $options = array(
+    'null' => 'Null ',
     'no experience' => 'No Experience',
     '1 year' => '1 year',
     '2 years' => '2 years + ',
@@ -49,6 +52,7 @@ echo form_dropdown( 'experience', $options, '' );
 <?php
 //Title
 $qualificationType = array(
+    'null' => 'Null ',
     'olevel' => 'OLevel',
     'bsc' => 'BSc',
     'msc' => 'MSc . ',
@@ -62,6 +66,7 @@ echo form_dropdown( 'qualificationType', $qualificationType);
 <?php
 //Title
 $qualificationName = array(
+    'null' => 'Null ',
     'ccna' => 'CCNA',
     'ccnp' => 'CCNP',
 );

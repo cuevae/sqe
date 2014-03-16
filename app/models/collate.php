@@ -21,8 +21,12 @@ class Collate_Model extends CI_Model
         $this->db->from( 'persons as p' );
         $this->db->join( 'educational_qualifications as eq', 'eq.Persons_idUser = p.idUser', 'left' );
         $this->db->join( 'professional_qualifications as pq', 'pq.Persons_idUser = p.idUser', 'left' );
+        $this->db->join( 'skills as sk', 'sk.Persons_idUser = p.idUser', 'left' );
         $this->db->where( 'eq.qualificationType', $post['qualificationType'] );
         $this->db->where( 'pq.qualificationName', $post['qualificationName'] );
+        $this->db->where( 'sk.skillName', $post['skillName'] );
+        $this->db->where( 'sk.skillLevel', $post['skillLevel'] );
+
         $result = $this->db->get()->result_array();
 
         /*$query = $this->db->query('SELECT Persons_idUser FROM educational_qualifications WHERE qualificationType = "bsc"');

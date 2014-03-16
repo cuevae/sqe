@@ -19,8 +19,8 @@ Qualified Applicants
     <ol>
         <?php foreach ( $results as $key => $result ): ?>
             <li>
-                <h3><?= $result['forename1'] ?></h3>
-                <p><?=$result['surname']?></p>
+                <p><?= $result['forename1'] ?>
+                <?=$result['surname']?></p>
             </li>
         <?php endforeach; ?>
     </ol>
