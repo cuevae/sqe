@@ -5,6 +5,11 @@ if (!defined('BASEPATH'))
 class Login_Model extends CI_Model
 {
 
+    public function __construct()
+    {
+        $this->load->database();
+    }
+
     public function get_user($name, $password)
     {
         $query = $this->db->get_where('persons', array('username' => $name));
@@ -15,11 +20,9 @@ class Login_Model extends CI_Model
             if ($name === $username) {
                 $userdata = array('username' => $username);
                 $this->session->set_userdata($userdata);
-                return true;
+                return $query['idUser'];
             } else {
                 return false;
-
-
             }
 
         }
