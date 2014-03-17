@@ -111,6 +111,20 @@ $autoload['language'] = array();
 
 $autoload['model'] = array();
 
+function custom_autoload( $class )
+{
+    $path = array('core', 'libraries', 'models', 'object');
+
+    if(strpos($class, 'CI_') !== 0) {
+        foreach($path as $dir) {
+            if (file_exists(APPPATH.$dir.'/'.strtolower($class).'.php'))
+                include_once(APPPATH.$dir.'/'.strtolower($class).'.php');
+        }
+    }
+}
+
+spl_autoload_register('custom_autoload');
+
 
 /* End of file autoload.php */
 /* Location: ./application/config/autoload.php */
