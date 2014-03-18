@@ -40,7 +40,7 @@ class Signup extends MY_Controller
                 $result = $this->signup->signup( $forename1, $surname, $userEmail, $password );
 
                 if ( $result !== false ) {
-                    redirect( 'curriculum/edit/' . $result );
+                    redirect( 'curriculum/edit/' );
                 }
 
             }

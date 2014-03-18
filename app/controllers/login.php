@@ -31,7 +31,7 @@ class Login extends MY_Controller
                 $result = $this->login->login( $username, $password );
 
                 if ( $result !== false ) {
-                    redirect( base_url() . 'index.php/curriculum/view/' . $result );
+                    redirect( base_url() . 'index.php/curriculum/view/' );
                 } else {
                     $data['error message'] = "Invalid Username and Password";
                 }

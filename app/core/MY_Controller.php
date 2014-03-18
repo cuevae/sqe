@@ -66,7 +66,7 @@ class MY_Controller extends CI_Controller
     {
         $userData = $this->session->userdata;
         $controller = $this->router->class;
-        if ( $userData['logged_in'] !== true ) {
+        if ( !isset( $userData['logged_in'] ) || $userData['logged_in'] !== true ) {
             if ( !in_array( $controller, array( 'login', 'signup' ) ) ) {
                 redirect( 'login' );
             }

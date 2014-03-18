@@ -12,10 +12,12 @@ class Skill extends Base
     var $idSkills;
     var $Persons_idUser;
     var $skillName;
+    var $skillLevel;
     var $verified;
     var $howVerified;
 
     protected $requiredFields = array( 'Persons_idUser', 'skillName' );
+    protected $availableSkillLevels = array( 'Basic', 'Good', 'Excellent' );
 
     public function getPersonsidUser()
     {
@@ -40,7 +42,37 @@ class Skill extends Base
     public function getHowVerified( $htmlSafe = true )
     {
         $result = $this->howVerified;
-        if( $htmlSafe ){
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    public function getVerified( $htmlSafe = true )
+    {
+        $result = '';
+
+        if ( $this->isVerified() ) {
+            $result = 'Verified: ' . $this->getHowVerified( false );
+        }
+
+        if ( !empty( $result ) && $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    public function getAvailableSkillLevels()
+    {
+        return $this->availableSkillLevels;
+    }
+
+    public function getSkillLevel( $htmlSafe = true )
+    {
+        $result = $this->skillLevel;
+        if ( $htmlSafe ) {
             $result = $this->sanitizeForHtmlOutput( $result );
         }
 
@@ -48,5 +80,4 @@ class Skill extends Base
     }
 
 
-
-} 
+}

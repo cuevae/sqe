@@ -14,7 +14,7 @@ class Base
     public function __construct( array $data )
     {
         if ( !$this->validateData( $data ) ) {
-            throw new Exception( 'Not enough data to create a Person_Object' );
+            throw new Exception( 'Not enough data to create a the object.' );
         }
 
         foreach ( $data as $key => $value ) {
