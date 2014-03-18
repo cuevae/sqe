@@ -6,9 +6,15 @@
  * Time: 19:52
  */
 
-class SkillsModelTest extends CIUnit_TestCase {
+class SkillsModelTest extends CIUnit_TestCase
+{
 
     protected $model;
-    protected $availableSkillLevels = array('Basic', 'Good', 'Excellent');
+    protected $availableSkillLevels = array( 'Basic', 'Good', 'Excellent' );
+
+    public function testAddSkill()
+    {
+
+    }
 
 } 
