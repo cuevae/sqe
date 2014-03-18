@@ -13,8 +13,9 @@ class MY_Controller extends CI_Controller
 
     public function __construct()
     {
-
         parent::__construct();
+
+        $this->checkLoggedIn();
 
         $this->viewData = array();
 
@@ -59,6 +60,25 @@ class MY_Controller extends CI_Controller
 
         /// Otherwise, the boring ol' menu gets delivered.
         return ( $menu_data_array );
+    }
+
+    private function checkLoggedIn()
+    {
+        $userData = $this->session->userdata;
+        $controller = $this->router->class;
+        if ( $userData['logged_in'] !== true ) {
+            if ( !in_array( $controller, array( 'login', 'signup' ) ) ) {
+                redirect( 'login' );
+            }
+        }
+    }
+
+    public function checkPermissions( $idUser )
+    {
+        $userData = $this->session->userdata;
+        if( $userData['idUser'] != $idUser && $userData['isAdmin'] !== true ){
+            show_error( 'Unauthorized', 401, 'Unauthorized' );
+        }
     }
 
 } 

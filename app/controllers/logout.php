@@ -19,6 +19,5 @@ class Logout extends MY_Controller
     public function index()
     {
         $this->simpleloginsecure->logout();
-
     }
 } 

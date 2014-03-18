@@ -22,11 +22,16 @@ class Curriculum extends MY_Controller
     }
 
 
-    public function edit( $idUser )
+    /**
+     * Handles the CV main information edit
+     */
+    public function edit()
     {
-        $this->setEditFormRules();
+        $idUser = $this->session->userdata( 'idUser' );
+
         $tmpData['_educationLevelOptions'] = $this->curriculum->getAvailableEducationLevels();
         $tmpData['_idUser'] = $idUser;
+
         try {
             $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
         } catch ( Exception $e ) {
@@ -35,6 +40,7 @@ class Curriculum extends MY_Controller
         $tmpData['_jobseeker'] = $jobseeker;
 
         if ( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ) {
+            $this->setEditFormRules();
             if ( $this->form_validation->run() === false ) {
                 $this->load->view( 'curriculum/edit', $tmpData );
             } else {
@@ -67,8 +73,13 @@ class Curriculum extends MY_Controller
     }
 
 
-    public function view( $idUser )
+    /**
+     * Handles the CV display
+     */
+    public function view()
     {
+        $idUser = $this->session->userdata( 'idUser' );
+
         $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
 
         if ( !$jobseeker instanceof Jobseeker ) {
@@ -81,10 +92,14 @@ class Curriculum extends MY_Controller
         $this->load->view( 'default', $this->viewData );
     }
 
-    public function skills( $idUser )
+    /**
+     * Handles a user's skills view/edit
+     */
+    public function skills()
     {
-        $this->setSkillFormRules();
+        $idUser = $this->session->userdata( 'idUser' );
         $tmpData['_idUser'] = $idUser;
+
         try {
             $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
         } catch ( Exception $e ) {
@@ -93,6 +108,7 @@ class Curriculum extends MY_Controller
         $tmpData['_jobseeker'] = $jobseeker;
 
         if ( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ) {
+            $this->setSkillFormRules();
             if ( $this->form_validation->run() === false ) {
                 $this->load->view( 'curriculum/skills', $tmpData );
             } else {
@@ -117,7 +133,6 @@ class Curriculum extends MY_Controller
         $this->viewData['main_content_view'] = $this->load->view( 'curriculum/skills', $tmpData, TRUE );
         $this->viewData['title'] = 'Skills';
         $this->load->view( 'default', $this->viewData );
-        //$this->load->view( 'curriculum/edit', $tmpData );
     }
 
 

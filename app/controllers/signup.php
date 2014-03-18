@@ -14,8 +14,7 @@ class Signup extends MY_Controller
     {
         parent:: __construct();
         $this->load->helper( 'url' );
-        $this->load->library( 'SimpleLoginSecure' );
-        $this->load->database();
+        $this->load->model( 'signup' );
     }
 
     public function index()
@@ -33,15 +32,15 @@ class Signup extends MY_Controller
         if ( $this->input->server( 'REQUEST_METHOD' ) == 'POST' ) {
             if ( $this->form_validation->run() === true ) {
 
-                    $forename1 = $this->input->post( 'forename1' );
-                    $surname = $this->input->post( 'surname' );
-                    $userEmail = strtolower( $this->input->post( 'username' ) );
-                    $password = $this->input->post( 'password' );
+                $forename1 = $this->input->post( 'forename1' );
+                $surname = $this->input->post( 'surname' );
+                $userEmail = strtolower( $this->input->post( 'username' ) );
+                $password = $this->input->post( 'password' );
 
-                $result = $this->simpleloginsecure->create( $forename1, $surname, $userEmail, $password, true );
+                $result = $this->signup->signup( $forename1, $surname, $userEmail, $password );
 
-                if( $result !==false ){
-                    redirect('curriculum/edit/'. $result);
+                if ( $result !== false ) {
+                    redirect( 'curriculum/edit/' . $result );
                 }
 
             }

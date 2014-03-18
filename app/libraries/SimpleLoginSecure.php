@@ -2,7 +2,7 @@
 
 require_once('phpass-0.3/PasswordHash.php');
 
-define('PHPASS_HASH_STRENGTH', 3);
+define('PHPASS_HASH_STRENGTH', 8);
 define('PHPASS_HASH_PORTABLE', false);
 
 /**
@@ -10,10 +10,10 @@ define('PHPASS_HASH_PORTABLE', false);
  *
  * Makes authentication simple and secure.
  *
- * Simplelogin expects the following database setup. If you are not using 
+ * Simplelogin expects the following database setup. If you are not using
  * this setup you may need to do some tweaking.
- *   
- * 
+ *
+ *
  *   CREATE TABLE `users` (
  *     `user_id` int(10) unsigned NOT NULL auto_increment,
  *     `user_email` varchar(255) NOT NULL default '',
@@ -24,7 +24,7 @@ define('PHPASS_HASH_PORTABLE', false);
  *     PRIMARY KEY  (`user_id`),
  *     UNIQUE KEY `user_email` (`user_email`),
  *   ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
- * 
+ *
  * @package   SimpleLoginSecure
  * @version   2.1.1
  * @author    Stéphane Bourzeix, Pixelmio <stephane[at]bourzeix.com>
@@ -58,11 +58,11 @@ class SimpleLoginSecure
 		if( $forename == '' OR $surname == '' OR $user_email == '' OR $user_pass == '') {
 			return false;
 		}
-		
+
 		//Check against user table
 		$this->CI->db->where('username', $user_email);
 		$query = $this->CI->db->get_where($this->user_table);
-		
+
 		if ($query->num_rows() > 0) //user_email already exists
 			return false;
 
@@ -75,16 +75,14 @@ class SimpleLoginSecure
                     'forename1' => $forename,
                     'surname' => $surname,
 					'username' => $user_email,
-					'password' => $user_pass_hashed,
-					//'user_date' => date('c'),
-					//'user_modified' => date('c'),
+					'password' => $user_pass_hashed
 				);
 
-		$this->CI->db->set($data); 
+		$this->CI->db->set($data);
 
-		if(!$this->CI->db->insert($this->user_table)) //There was a problem! 
-			return false;						
-				
+		if(!$this->CI->db->insert($this->user_table)) //There was a problem!
+			return false;
+
 		if($auto_login)
 			$this->login($user_email, $user_pass);
 
@@ -92,14 +90,14 @@ class SimpleLoginSecure
         $this->CI->db->where('username', $user_email);
         $query = $this->CI->db->get_where($this->user_table);
         $newUser = $query->row_array();
-		
+
 		return $newUser['idUser'];
 	}
 
 	/**
 	 * Update a user account
 	 *
-	 * Only updates the email, just here for you can 
+	 * Only updates the email, just here for you can
 	 * extend / use it in your own class.
 	 *
 	 * @access	public
@@ -108,7 +106,7 @@ class SimpleLoginSecure
 	 * @param	bool
 	 * @return	bool
 	 */
-	function update($user_id = null, $user_email = '', $auto_login = true) 
+	function update($user_id = null, $user_email = '', $auto_login = true)
 	{
 		$this->CI =& get_instance();
 
@@ -116,29 +114,29 @@ class SimpleLoginSecure
 		if($user_id == null OR $user_email == '') {
 			return false;
 		}
-		
+
 		//Check against user table
 		$this->CI->db->where('idUser', $user_id);
 		$query = $this->CI->db->get_where($this->user_table);
-		
+
 		if ($query->num_rows() == 0){ // user don't exists
 			return false;
 		}
-		
+
 		//Update account into the database
 		$data = array(
 					'username' => $user_email
 				);
- 
+
 		$this->CI->db->where('idUser', $user_id);
 
-		if(!$this->CI->db->update($this->user_table, $data)) //There was a problem! 
-			return false;						
-				
+		if(!$this->CI->db->update($this->user_table, $data)) //There was a problem!
+			return false;
+
 		if($auto_login){
 			$user_data['username'] = $user_email;
 			$user_data['user'] = $user_data['username']; // for compatibility with Simplelogin
-			
+
 			$this->CI->session->set_userdata($user_data);
 			}
 		return true;
@@ -152,7 +150,7 @@ class SimpleLoginSecure
 	 * @param	string
 	 * @return	bool
 	 */
-	function login($user_email = '', $user_pass = '') 
+	function login($user_email = '', $user_pass = '')
 	{
 
 		$this->CI =& get_instance();
@@ -170,7 +168,7 @@ class SimpleLoginSecure
         {
             return $user_data['idUser'];
         }
-		
+
 		if (!empty( $user_data['idUser'] ))
         {
 
@@ -181,24 +179,28 @@ class SimpleLoginSecure
 
 			//Destroy old session
 			$this->CI->session->sess_destroy();
-			
+
 			//Create a fresh, brand new session
 			$this->CI->session->sess_create();
 
 			//$this->CI->db->simple_query('UPDATE ' . $this->user_table  . ' SET user_last_login = "' . date('c') . '" WHERE user_id = ' . $user_data['user_id']);
 
 			//Set session data
-			unset($user_data['user_pass']);
-			$user_data['user'] = $user_data['username']; // for compatibility with Simplelogin
-			$user_data['logged_in'] = true;
-			$this->CI->session->set_userdata($user_data);
-			
+            $sessionData = array(
+                'username'=>$user_data['username'],
+                'idUser' => $user_data['idUser'],
+                'logged_in' => true,
+                'isAdmin' => ( $user_data['is_admin'] === 1 )
+            );
+			unset($user_data['password']);
+			$this->CI->session->set_userdata($sessionData);
+
 			return $user_data['idUser'];
-		} 
-		else 
+		}
+		else
 		{
 			return false;
-		}	
+		}
 
 	}
 
@@ -209,7 +211,7 @@ class SimpleLoginSecure
 	 * @return	void
 	 */
 	function logout() {
-		$this->CI =& get_instance();		
+		$this->CI =& get_instance();
 
 		$this->CI->session->sess_destroy();
 	}
@@ -221,17 +223,17 @@ class SimpleLoginSecure
 	 * @param integer
 	 * @return	bool
 	 */
-	function delete($user_id) 
+	function delete($user_id)
 	{
 		$this->CI =& get_instance();
-		
+
 		if(!is_numeric($user_id))
-			return false;			
+			return false;
 
 		return $this->CI->db->delete($this->user_table, array('idUser' => $user_id));
 	}
-	
-	
+
+
 	/**
 	* Edit a user password
 	* @author    Stéphane Bourzeix, Pixelmio <stephane[at]bourzeix.com>
@@ -251,18 +253,18 @@ class SimpleLoginSecure
 		$query = $this->CI->db->get_where($this->user_table, array('username' => $user_email));
 		$user_data = $query->row_array();
 
-		$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);	
+		$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
 		if (!$hasher->CheckPassword($old_pass, $user_data['password'])){ //old_pass is the same
 			return FALSE;
 		}
-		
+
 		// Hash new_pass using phpass
 		$user_pass_hashed = $hasher->HashPassword($new_pass);
 		// Insert new password into the database
 		$data = array(
 			'password' => $user_pass_hashed
 		);
-		
+
 		$this->CI->db->set($data);
 		$this->CI->db->where('username', $user_email);
 		if(!$this->CI->db->update($this->user_table, $data)){ // There was a problem!
@@ -271,6 +273,6 @@ class SimpleLoginSecure
 			return TRUE;
 		}
 	}
-	
+
 }
 ?>

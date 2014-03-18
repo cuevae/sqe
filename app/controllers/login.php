@@ -1,7 +1,7 @@
 <?php
 
-if (!defined('BASEPATH'))
-    exit ('No direct script access allowed');
+if ( !defined( 'BASEPATH' ) )
+    exit ( 'No direct script access allowed' );
 
 /**
  * Created by PhpStorm.
@@ -13,32 +13,25 @@ if (!defined('BASEPATH'))
 class Login extends MY_Controller
 {
 
-    public function __construct()
-    {
-        parent::__construct();
-        $this->load->library( 'SimpleLoginSecure' );
-        $this->load->database();
-    }
-
     public function index()
     {
-        $this->form_validation->set_rules('username', 'Username', 'valid_email|trim|required|xss_clean');
-        $this->form_validation->set_rules('password', 'Password', 'required');
+        $this->form_validation->set_rules( 'username', 'Username', 'valid_email|trim|required|xss_clean' );
+        $this->form_validation->set_rules( 'password', 'Password', 'required' );
 
-        if( $this->input->server('REQUEST_METHOD') === 'POST' ){
-            if ($this->form_validation->run() === false) {
+        if ( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ) {
+            if ( $this->form_validation->run() === false ) {
                 $data['title'] = "Login Page";
-                $this->load->view('templates/header', $data);
-                $this->load->view('login/login', $data);
+                $this->load->view( 'templates/header', $data );
+                $this->load->view( 'login/login', $data );
 
             } else {
-                $name = $this->input->post('username');
-                $password = $this->input->post('password');
+                $username = $this->input->post( 'username' );
+                $password = $this->input->post( 'password' );
 
-                $idUser = $this->simpleloginsecure->login( $name, $password );
+                $result = $this->login->login( $username, $password );
 
-                if ($idUser !== false ) {
-                    redirect(base_url() . 'index.php/curriculum/view/' . $idUser);
+                if ( $result !== false ) {
+                    redirect( base_url() . 'index.php/curriculum/view/' . $result );
                 } else {
                     $data['error message'] = "Invalid Username and Password";
                 }
@@ -46,8 +39,8 @@ class Login extends MY_Controller
         }
 
         $data ['title'] = "Login Page";
-        $this->load->view('templates/header', $data);
-        $this->load->view('login/login', $data);
+        $this->load->view( 'templates/header', $data );
+        $this->load->view( 'login/login', $data );
     }
 
 }

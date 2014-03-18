@@ -7,7 +7,13 @@ class Login_Model extends CI_Model
 
     public function __construct()
     {
+        $this->load->library( 'SimpleLoginSecure' );
         $this->load->database();
+    }
+
+    public function login( $username, $password )
+    {
+        return $this->simpleloginsecure->login( $username, $password );
     }
 
     public function get_user($name, $password)

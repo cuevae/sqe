@@ -11,4 +11,3 @@
     <title><?= $title ?></title>
 </head>
 <body>
-    <h1>Login Page</h1>
