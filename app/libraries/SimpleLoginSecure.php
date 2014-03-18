@@ -2,7 +2,7 @@
 
 require_once('phpass-0.3/PasswordHash.php');
 
-define('PHPASS_HASH_STRENGTH', 8);
+define('PHPASS_HASH_STRENGTH', 3);
 define('PHPASS_HASH_PORTABLE', false);
 
 /**
@@ -53,8 +53,6 @@ class SimpleLoginSecure
 	function create( $forename = '', $surname = '', $user_email = '', $user_pass = '', $auto_login = true)
 	{
 		$this->CI =& get_instance();
-		
-
 
 		//Make sure account info was sent
 		if( $forename == '' OR $surname == '' OR $user_email == '' OR $user_pass == '') {
@@ -89,8 +87,13 @@ class SimpleLoginSecure
 				
 		if($auto_login)
 			$this->login($user_email, $user_pass);
+
+        //Get new userId
+        $this->CI->db->where('username', $user_email);
+        $query = $this->CI->db->get_where($this->user_table);
+        $newUser = $query->row_array();
 		
-		return true;
+		return $newUser['idUser'];
 	}
 
 	/**
@@ -151,25 +154,25 @@ class SimpleLoginSecure
 	 */
 	function login($user_email = '', $user_pass = '') 
 	{
+
 		$this->CI =& get_instance();
 
 		if($user_email == '' OR $user_pass == '')
 			return false;
 
+        $this->CI->db->where('username', $user_email);
+        $query = $this->CI->db->get_where($this->user_table);
+        $user_data = $query->row_array();
 
 		//Check if already logged in
-		if($this->CI->session->userdata('username') == $user_email)
-			return true;
+		if($this->CI->session->userdata('username') == $user_email
+            && !empty( $user_data['idUser'] ) )
+        {
+            return $user_data['idUser'];
+        }
 		
-		
-		//Check against user table
-		$this->CI->db->where('username', $user_email);
-		$query = $this->CI->db->get_where($this->user_table);
-
-		
-		if ($query->num_rows() > 0) 
-		{
-			$user_data = $query->row_array(); 
+		if (!empty( $user_data['idUser'] ))
+        {
 
 			$hasher = new PasswordHash(PHPASS_HASH_STRENGTH, PHPASS_HASH_PORTABLE);
 
@@ -190,7 +193,7 @@ class SimpleLoginSecure
 			$user_data['logged_in'] = true;
 			$this->CI->session->set_userdata($user_data);
 			
-			return true;
+			return $user_data['idUser'];
 		} 
 		else 
 		{

@@ -7,13 +7,18 @@
  */
 if (!defined('BASEPATH')) exit ('No direct script access allowed');
 
-class Logout extends CI_Controller
+class Logout extends MY_Controller
 {
+    public function __construct()
+    {
+        parent:: __construct();
+        $this->load->library( 'SimpleLoginSecure' );
+        $this->load->database();
+    }
+
     public function index()
     {
-        $this->session->sess_destroy();
-        $this->load->helper('url');
-        redirect(base_url() . 'index.php/login');
+        $this->simpleloginsecure->logout();
 
     }
 } 

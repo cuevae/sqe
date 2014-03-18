@@ -11,11 +11,11 @@ class Signup_Model extends CI_Model
 
     public function signup($data)
     {
-        $this->db->insert('persons', $data);
+        $this->db->insert( 'persons', $data );
 
         $id = $this->db->insert_id();
 
-        return (isset($id)) ? $id : FALSE;
+        return ( isset( $id ) ) ? $id : FALSE;
     }
 
 }
