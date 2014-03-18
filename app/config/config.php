@@ -357,6 +357,21 @@ $config['rewrite_short_tags'] = FALSE;
 */
 $config['proxy_ips'] = '';
 
+function custom_autoload( $class )
+{
+    $path = array( 'core', 'libraries', 'models', 'object' );
+
+    if ( strpos( $class, 'CI_' ) !== 0 ) {
+        foreach ( $path as $dir ) {
+            if ( file_exists( APPPATH . $dir . '/' . strtolower( $class ) . '.php' ) ) {
+                include_once( APPPATH . $dir . '/' . strtolower( $class ) . '.php' );
+            }
+        }
+    }
+}
+
+spl_autoload_register('custom_autoload');
+
 
 /* End of file config.php */
 /* Location: ./application/config/config.php */
