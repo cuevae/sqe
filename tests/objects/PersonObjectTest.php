@@ -6,7 +6,7 @@
  * Time: 15:46
  */
 
-require_once( '../../app/object/person.php' );
+require_once( '../app/object/person.php' );
 
 class PersonObjectTest extends CIUnit_TestCase
 {

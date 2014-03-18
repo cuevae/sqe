@@ -6,8 +6,8 @@
  * Time: 13:36
  */
 
-require_once( '../../app/object/person.php' );
-require_once( '../../app/object/jobseeker.php' );
+require_once( '../app/object/person.php' );
+require_once( '../app/object/jobseeker.php' );
 
 class JobseekerObjectTest extends CIUnit_TestCase
 {

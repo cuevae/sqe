@@ -73,12 +73,17 @@ class MY_Controller extends CI_Controller
         }
     }
 
-    public function checkPermissions( $idUser )
+    protected function checkPermissions( $idUser )
     {
         $userData = $this->session->userdata;
-        if( $userData['idUser'] != $idUser && $userData['isAdmin'] !== true ){
+        if ( $userData['idUser'] != $idUser && $userData['isAdmin'] !== true ) {
             show_error( 'Unauthorized', 401, 'Unauthorized' );
         }
+    }
+
+    protected function getIdUser()
+    {
+        return $this->session->userdata( 'idUser' );
     }
 
 } 
