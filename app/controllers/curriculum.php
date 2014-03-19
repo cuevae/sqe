@@ -25,9 +25,9 @@ class Curriculum extends MY_Controller
     /**
      * Handles the CV main information edit
      */
-    public function edit()
+    public function edit( $idUser = null )
     {
-        $idUser = $this->getIdUser();
+        $idUser = $idUser ?: $this->getIdUser();
 
         $tmpData['_educationLevelOptions'] = $this->curriculum->getAvailableEducationLevels();
         $tmpData['_idUser'] = $idUser;
@@ -76,9 +76,9 @@ class Curriculum extends MY_Controller
     /**
      * Handles the CV display
      */
-    public function view()
+    public function view( $idUser = null )
     {
-        $idUser = $this->getIdUser();
+        $idUser = $idUser ?: $this->getIdUser();
 
         $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
 
