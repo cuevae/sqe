@@ -19,8 +19,8 @@ Qualified Applicants
     <ol>
         <?php foreach ( $results as $key => $result ): ?>
             <li>
-                <p><?= $result['forename1'] ?>
-                <?=$result['surname']?></p>
+                <p><a href="curriculum/view/<?=$result['idUser']?>"><?= $result['forename1'] ?>
+                        <?=$result['surname']?></a></p>
             </li>
         <?php endforeach; ?>
     </ol>

@@ -48,12 +48,12 @@ class Skills extends MY_Controller
 
                 $result = $this->skills->addSkill( $skill );
 
-                $this->session->set_flashdata( array( 'message' => 'Skill successfully added' ) );
-                redirect( 'skills' );
+                $this->session->set_flashdata( array( 'message' => 'Skill successfully added.' ) );
             }
-        } else {
-            redirect( 'skills' );
         }
+
+        redirect( 'skills' );
+
     }
 
     private function setSkillFormRules()
