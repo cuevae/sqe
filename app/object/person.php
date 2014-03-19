@@ -9,7 +9,7 @@
 class Person extends Base
 {
 
-    var $idUser;
+    protected $idUser;
     var $username;
     var $title;
     var $forename1;

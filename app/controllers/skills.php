@@ -53,7 +53,6 @@ class Skills extends MY_Controller
         }
 
         redirect( 'skills' );
-
     }
 
     private function setSkillFormRules()

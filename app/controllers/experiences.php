@@ -22,7 +22,7 @@ class Experiences extends MY_Controller
 
         $tmpData['_idUser'] = $idUser;
         $tmpData['_experiences'] = $userExperiences;
-        $this->viewData['main_content_view'] = $this->load->view( 'experiences/view-edit', $tmpData, TRUE );
+        $this->viewData['main_content_view'] = $this->load->view( 'experiences/view-add', $tmpData, TRUE );
         $this->viewData['title'] = 'Experiences';
         $this->load->view( 'default', $this->viewData );
     }
