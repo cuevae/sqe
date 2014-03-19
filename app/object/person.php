@@ -121,7 +121,7 @@ class Person extends Base
 
     public function getUsername( $htmlSafe = true )
     {
-        $result = $this->forename1;
+        $result = $this->username;
         if ( $htmlSafe ) {
             $result = $this->sanitizeForHtmlOutput( $result );
         }
