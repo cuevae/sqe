@@ -13,6 +13,12 @@ if ( !defined( 'BASEPATH' ) )
 class Login extends MY_Controller
 {
 
+    public function __construct()
+    {
+        parent::__construct();
+        $this->load->model( 'login' );
+    }
+
     public function index()
     {
         $this->form_validation->set_rules( 'username', 'Username', 'valid_email|trim|required|xss_clean' );
