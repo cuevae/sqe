@@ -17,7 +17,7 @@ class Collate_Model extends CI_Model
 
     public function getOne($post)
     {
-        $this->db->select( 'p.username, p.forename1, p.surname, eq.qualificationType, eq.result, eq.courseName, pq.*' );
+        $this->db->select( 'p.username, p.forename1, p.surname, eq.qualificationType, p.idUser, eq.result, eq.courseName, pq.*' );
         $this->db->from( 'persons as p' );
         $this->db->join( 'educational_qualifications as eq', 'eq.Persons_idUser = p.idUser', 'left' );
         $this->db->join( 'professional_qualifications as pq', 'pq.Persons_idUser = p.idUser', 'left' );

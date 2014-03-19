@@ -10,7 +10,7 @@
 Qualified Applicants
 
  <?php // print_r($results); ?>
-
+     <?php $this->load->helper('url'); ?>
 <?php if ( isset( $results ) && empty( $results ) ): ?>
     <h3>No results found</h3>
 <?php endif; ?>
@@ -19,8 +19,8 @@ Qualified Applicants
     <ol>
         <?php foreach ( $results as $key => $result ): ?>
             <li>
-                <p><a href="curriculum/view/<?=$result['idUser']?>"><?= $result['forename1'] ?>
-                        <?=$result['surname']?></a></p>
+                <p><a href="<?=site_url() . '/curriculum/view/' . $result['idUser']?>"><?= $result['forename1'] ?>
+                <?=$result['surname']?><a/></p>
             </li>
         <?php endforeach; ?>
     </ol>
