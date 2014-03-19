@@ -28,7 +28,6 @@ class Sectors extends MY_Controller
         $this->load->view( 'default', $this->viewData );
     }
 
-
     public function add()
     {
         if ( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ) {
@@ -51,6 +50,7 @@ class Sectors extends MY_Controller
             redirect( 'sectors' );
         }
     }
+
 
     public function delete( $idSectors )
     {

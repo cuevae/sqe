@@ -40,6 +40,22 @@ class Sectors_Model extends CI_Model
         return $objects;
     }
 
+    public function getAvailableSectors( $reduced = true )
+    {
+        $this->db->select( 's.*' );
+        $this->db->from( 'sectors as s' );
+        $result = $this->db->get()->result_array();
+
+        if ( $reduced ) {
+            $result = array_reduce( $result, function ( $res, $item ) {
+                $res[$item['idSectors']] = $item['sectorTitle'];
+                return $res;
+            }, array() );
+        }
+
+        return $result;
+    }
+
 
     public function searchSectors( $query )
     {
