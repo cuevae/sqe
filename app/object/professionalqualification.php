@@ -11,7 +11,7 @@ class ProfessionalQualification extends Base
 
     protected $requiredFields = array( 'Persons_idUser', 'qualificationName' );
 
-    var $idProfessionalQualifications;
+    protected $idProfessionalQualifications;
     var $Persons_idUser;
     var $qualificationName;
     var $Sectors_idSectors;
@@ -23,6 +23,7 @@ class ProfessionalQualification extends Base
     var $howVerified;
 
     protected $sector;
+    protected $jobseeker;
 
     /**
      * @return mixed
@@ -55,8 +56,6 @@ class ProfessionalQualification extends Base
     {
         return $this->yearObtained;
     }
-
-    protected $jobseeker;
 
     /**
      * @return mixed

@@ -26,9 +26,9 @@ $id = 'title';
 $label = 'Title: ';
 $options = array(
     'mr' => 'Mr.',
+    'ms' => 'Ms.',
     'mrs' => 'Mrs.',
-    'miss' => 'Ms.',
-    'lord' => 'Lord',
+    'miss' => 'Miss.'
 );
 echo form_label( $label, $id );
 echo form_dropdown( $id, $options, $_jobseeker->getTitle() );
