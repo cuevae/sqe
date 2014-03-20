@@ -9,7 +9,7 @@
 //Start the form
 $attributes = array( 'class' => 'curriculum-form', 'id' => 'curriculum-edit' );
 $action = 'skills/add/';
-echo form_open_multipart( $action, $attributes );
+echo form_open( $action, $attributes );
 ?>
 
 <?php #region Skill Name

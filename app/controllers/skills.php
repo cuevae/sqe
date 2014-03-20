@@ -25,7 +25,7 @@ class Skills extends MY_Controller
 
         $tmpData['_idUser'] = $idUser;
         $tmpData['_skills'] = $userSkills;
-        $this->viewData['main_content_view'] = $this->load->view( 'skills/view-edit', $tmpData, TRUE );
+        $this->viewData['main_content_view'] = $this->load->view( 'skills/view-add', $tmpData, TRUE );
         $this->viewData['title'] = 'Skills';
         $this->load->view( 'default', $this->viewData );
     }

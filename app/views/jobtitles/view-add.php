@@ -24,7 +24,7 @@ $this->load->helper( 'url' );
 //Start the form
 $attributes = array( 'class' => 'jobtitles-form', 'id' => 'jobtitles-add' );
 $action = 'jobtitles/add';
-echo form_open_multipart( $action, $attributes );
+echo form_open( $action, $attributes );
 ?>
 
 <?php #region Skill Name

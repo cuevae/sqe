@@ -15,7 +15,7 @@ class MY_Controller extends CI_Controller
     {
         parent::__construct();
 
-        //$this->checkLoggedIn();
+        $this->checkLoggedIn();
 
         $this->viewData = array();
 
