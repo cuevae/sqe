@@ -6,7 +6,7 @@
  * Time: 19:47
  */
 
-class Edqualifications_Model extends CI_Model
+class Educationqualifications_Model extends CI_Model
 {
 
     public function __construct()
