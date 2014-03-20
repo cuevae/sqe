@@ -9,6 +9,9 @@
 class Skills extends MY_Controller
 {
 
+    /** @var $skills Skills_Model */
+    public $skills;
+
     public function __construct()
     {
         parent::__construct();
@@ -25,6 +28,8 @@ class Skills extends MY_Controller
 
         $tmpData['_idUser'] = $idUser;
         $tmpData['_skills'] = $userSkills;
+        $tmpData['_error'] = $this->session->flashdata( 'error' );
+        $tmpData['_success'] = $this->session->flashdata( 'success' );
         $this->viewData['main_content_view'] = $this->load->view( 'skills/view-add', $tmpData, TRUE );
         $this->viewData['title'] = 'Skills';
         $this->load->view( 'default', $this->viewData );
@@ -35,7 +40,7 @@ class Skills extends MY_Controller
         if ( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ) {
             $this->setSkillFormRules();
             if ( $this->form_validation->run() === false ) {
-                $this->index();
+                $this->session->set_flashdata( array( 'error' => validation_errors() ) );
             } else {
                 try {
                     $data = $this->input->post();
@@ -46,10 +51,33 @@ class Skills extends MY_Controller
                     $this->load->view( 'curriculum/skills', $tmpData );
                 }
 
-                $result = $this->skills->addSkill( $skill );
-
-                $this->session->set_flashdata( array( 'message' => 'Skill successfully added.' ) );
+                $result = $this->skills->addSkill( $this->getIdUser(), $skill );
+                switch ( $result ) {
+                    case -1:
+                        $this->session->set_flashdata( array( 'error' => 'There was a problem adding the skill.' ) );
+                        break;
+                    case -2:
+                        $this->session->set_flashdata( array( 'error' => 'The skill '
+                            . $skill->getSkillName() . ' already exists.' ) );
+                        break;
+                    default:
+                        /*$this->session->set_flashdata( array( 'success' => 'New skill "' . $skill->getSkillName()
+                            . ' [' . $skill->getSkillLevel() . ']' . '" added.' ) );*/
+                }
             }
+        }
+        redirect( 'skills' );
+    }
+
+    public function delete( $id )
+    {
+        $skill = $this->skills->getSkill( $id );
+        $idUser = $this->getIdUser();
+        if ( ( !$skill instanceof Skill ) || ( $skill->getPersonsidUser() != $idUser ) ) {
+            $this->session->set_flashdata( array( 'error' => 'Skill not found.' ) );
+        } else {
+            $this->skills->deleteSkill( $id );
+            $this->session->set_flashdata( array( 'success' => 'Skill ' . $skill->getSkillName() . ' deleted.' ) );
         }
 
         redirect( 'skills' );

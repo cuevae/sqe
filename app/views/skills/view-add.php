@@ -3,7 +3,15 @@
 
     <h3>Add new skill</h3>
 
-<?= validation_errors(); ?>
+<?php if ( isset( $_error ) && !empty( $_error ) ): ?>
+    <div>
+        <p><?= $_error ?></p>
+    </div>
+<?php elseif ( isset( $_success ) && !empty( $_success ) ): ?>
+    <div>
+        <p><?= $_success ?></p>
+    </div>
+<?php endif; ?>
 
 <?php
 //Start the form
@@ -50,7 +58,8 @@ echo form_submit( 'submit-skill', 'Add' );
     <ul>
         <?php foreach ( $_skills as $_skill ): ?>
             <li>
-                <?= $_skill->getSkillName(); ?> [<?= $_skill->getSkillLevel(); ?>] <?= $_skill->getVerified(); ?>
+                <?= $_skill->getSkillName(); ?> [<?= $_skill->getSkillLevel(); ?>] <a
+                    href="<?= site_url( 'skills/delete/' . $_skill->getId() ) ?>">(x)</a>
             </li>
         <?php endforeach; ?>
     </ul>

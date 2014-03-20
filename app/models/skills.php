@@ -25,12 +25,25 @@ class Skills_Model extends CI_Model
         $results = $this->db->get()->result_array();
 
         $objects = array();
-        foreach( $results as $result ){
-            $skill = new Skill($result);
+        foreach ( $results as $result ) {
+            $skill = new Skill( $result );
             $objects[] = $skill;
         }
 
         return $objects;
+    }
+
+    public function getSkill( $id )
+    {
+        $this->db->select( '*' );
+        $this->db->from( 'skills' );
+        $this->db->where( 'idSkills', $id );
+        $data = $this->db->get()->row_array();
+        if ( !empty( $data ) ) {
+            return new Skill( $data );
+        } else {
+            return -1;
+        }
     }
 
     public function searchSkills( $name, $level = null, $verified = null )
@@ -51,12 +64,16 @@ class Skills_Model extends CI_Model
         return $result;
     }
 
-    public function addSkill( Skill $skill )
+    public function addSkill( $idUser, Skill $skill )
     {
         try {
+            //Check the skill does not exist already
+            if ( $this->skillAlreadyExists( $idUser, $skill->getSkillName() ) ) {
+                return -2;
+            }
             $this->db->insert( 'skills', $skill );
         } catch ( Exception $e ) {
-            return false;
+            return -1;
         }
 
         return $this->db->insert_id();
@@ -80,6 +97,15 @@ class Skills_Model extends CI_Model
         $data = [ 'verified' => 0, 'howVerified' => null ];
         $this->db->where( 'idSkills', $skillId );
         $this->db->update( 'skills', $data );
+    }
+
+    public function skillAlreadyExists( $idUser, $name )
+    {
+        $this->db->select( '*' );
+        $this->db->from( 'skills' );
+        $this->db->where( 'skillName', $name );
+        $this->db->where( 'Persons_idUser', $idUser );
+        return $this->db->get()->num_rows();
     }
 
 } 

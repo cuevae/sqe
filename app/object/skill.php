@@ -9,7 +9,7 @@
 class Skill extends Base
 {
 
-    var $idSkills;
+    protected $idSkills;
     var $Persons_idUser;
     var $skillName;
     var $skillLevel;
@@ -18,6 +18,11 @@ class Skill extends Base
 
     protected $requiredFields = array( 'Persons_idUser', 'skillName' );
     protected $availableSkillLevels = array( 'Basic', 'Good', 'Excellent' );
+
+    public function getId()
+    {
+        return $this->idSkills;
+    }
 
     public function getPersonsidUser()
     {
