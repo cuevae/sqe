@@ -14,8 +14,8 @@ $this->load->helper( 'url' );
 
 <?php
 //Start the form
-$attributes = array( 'class' => 'edqualifications-form', 'id' => 'edqualifications-add' );
-$action = 'edqualifications/add';
+$attributes = array( 'class' => 'educationqualifications-form', 'id' => 'educationqualifications-add' );
+$action = 'educationqualifications/add';
 echo form_open( $action, $attributes );
 ?>
 
@@ -136,7 +136,7 @@ echo form_input( $data );
 ?>
     <br/>
 <?php
-echo form_submit( 'submit-edqualifications', 'Add' );
+echo form_submit( 'submit-educationqualifications', 'Add' );
 ?>
 <?= form_close(); ?>
 
