@@ -56,7 +56,7 @@ $label = 'Vocational: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => 'vocational',
+    'value' => '1',
     'checked' => TRUE
 );
 echo form_label( $label, $id );

@@ -6,7 +6,7 @@
  * Time: 19:47
  */
 
-class Educationalqualifications_Model extends CI_Model
+class EducationalQualifications_Model extends CI_Model
 {
 
     protected $table;
@@ -42,9 +42,20 @@ class Educationalqualifications_Model extends CI_Model
         $this->db->delete( $this->table );
     }
 
-    public function getJobseekerQualifications( $idUser )
+    public function getAvailableEducationalQualifications( $reduced = true )
     {
+        $this->db->select( array( 'idEducationalQualifications', 'qualificationType', 'courseName' ) );
+        $this->db->from( 'educational_qualifications' );
+        $result = $this->db->get()->result_array();
 
+        if ( $reduced ) {
+            $result = array_reduce( $result, function ( $res, $item ) {
+                $res[$item['idEducationalQualifications']] = $item['qualificationType'] . ' ' . $item['courseName'];
+                return $res;
+            }, array() );
+        }
+
+        return $result;
     }
 
     public function getUserEdQualifications( $idUser )

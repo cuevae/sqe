@@ -50,6 +50,22 @@ class Professionalqualifications_Model extends CI_Model
         }
     }
 
+    public function getAvailableProfessionalQualifications( $reduced = true )
+    {
+        $this->db->select( array( 'idProfessionalQualifications', 'qualificationName' ) );
+        $this->db->from( 'professional_qualifications' );
+        $result = $this->db->get()->result_array();
+
+        if ( $reduced ) {
+            $result = array_reduce( $result, function ( $res, $item ) {
+                $res[$item['idProfessionalQualifications']] = $item['qualificationName'];
+                return $res;
+            }, array() );
+        }
+
+        return $result;
+    }
+
     public function deleteProfessionalQualification( $id )
     {
         $this->db->where( $this->objectIdField, $id );

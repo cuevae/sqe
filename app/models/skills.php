@@ -46,6 +46,22 @@ class Skills_Model extends CI_Model
         }
     }
 
+    public function getAvailableSkillNames( $reduced = true )
+    {
+        $this->db->select( array( 'idSkills', 'skillName' ) );
+        $this->db->from( 'skills' );
+        $result = $this->db->get()->result_array();
+
+        if ( $reduced ) {
+            $result = array_reduce( $result, function ( $res, $item ) {
+                $res[$item['idSkills']] = $item['skillName'];
+                return $res;
+            }, array() );
+        }
+
+        return $result;
+    }
+
     public function searchSkills( $name, $level = null, $verified = null )
     {
         $this->db->select( '*' );
