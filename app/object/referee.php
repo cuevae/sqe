@@ -6,7 +6,8 @@
  * Time: 20:52
  */
 
-class Referee extends Base {
+class Referee extends Base
+{
 
     protected $requiredFields = array( 'Persons_idUser', 'forename', 'surname' );
 
@@ -33,41 +34,65 @@ class Referee extends Base {
     }
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getContactPhone()
+    public function getContactPhone( $htmlSafe = true )
     {
-        return $this->contactPhone;
+        $result = $this->contactPhone;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param bool $htmlSafe
+     * @return mixed
+     */
+    public function getEmail( $htmlSafe = true )
+    {
+        $result = $this->email;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param bool $htmlSafe
+     * @return mixed
+     */
+    public function getHowVerified( $htmlSafe = true )
+    {
+        $result = $this->howVerified;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param bool $htmlSafe
+     * @return mixed
+     */
+    public function getForename( $htmlSafe = true )
+    {
+        $result = $this->forename;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
      * @return mixed
      */
-    public function getEmail()
-    {
-        return $this->email;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getHowVerified()
-    {
-        return $this->howVerified;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getForename()
-    {
-        return $this->forename;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdReferees()
+    public function getId()
     {
         return $this->idReferees;
     }
@@ -97,27 +122,45 @@ class Referee extends Base {
     }
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getRelationship()
+    public function getRelationship( $htmlSafe = true )
     {
-        return $this->relationship;
+        $result = ucfirst( strtolower( $this->relationship ) );
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getSurname()
+    public function getSurname( $htmlSafe = true )
     {
-        return $this->surname;
+        $result = $this->surname;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getTitle()
+    public function getTitle( $htmlSafe = true )
     {
-        return $this->title;
+        $result = ucfirst( strtolower( $this->title ) );
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
@@ -128,6 +171,25 @@ class Referee extends Base {
         return $this->verified;
     }
 
+    public function getFullName( $htmlSafe = true )
+    {
+        $title = $this->getTitle( $htmlSafe );
+        $forename = $this->getForename( $htmlSafe );
+        $surname = $this->getSurname( $htmlSafe );
+
+        $result = '';
+        $result .= ( $title ) ? $title . ', ' : '';
+        $result .= $forename;
+        $result .= ( $surname ) ? ' ' . $surname : '';
+
+        return $result;
+    }
 
 
-} 
+    public function hasEmail()
+    {
+        return !empty( $this->email );
+    }
+
+
+}

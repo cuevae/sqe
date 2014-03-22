@@ -3,22 +3,30 @@
 
 <h3>Add new referee</h3>
 
-<?= validation_errors(); ?>
+<?php if ( isset( $_error ) && !empty( $_error ) ): ?>
+    <div>
+        <p><?= $_error ?></p>
+    </div>
+<?php elseif ( isset( $_success ) && !empty( $_success ) ): ?>
+    <div>
+        <p><?= $_success ?></p>
+    </div>
+<?php endif; ?>
 
 <?php
 //Start the form
-$attributes = array( 'class' => 'experiences-form', 'id' => 'experience-add' );
-$action = 'skills/add/';
+$attributes = array( 'class' => 'referee-form', 'id' => 'referee-add' );
+$action = 'referees/add/';
 echo form_open_multipart( $action, $attributes );
 ?>
 <?php
 $id = 'title';
 $label = 'Title: ';
 $options = array(
-    'mr' => 'Mr.',
-    'ms' => 'Ms.',
-    'mrs' => 'Mrs.',
-    'miss' => 'Miss.'
+    'Mr' => 'Mr.',
+    'Ms' => 'Ms.',
+    'Mrs' => 'Mrs.',
+    'Miss' => 'Miss.'
 );
 echo form_label( $label, $id );
 echo form_dropdown( $id, $options );
@@ -127,13 +135,49 @@ echo form_submit( 'submit-referee', 'Add' );
 <?php if ( !isset( $_referees ) || empty( $_referees ) ) : ?>
     <p>You have no referees added. Please use the form above to start adding.</p>
 <?php else : ?>
-    <ul>
+    <ol>
         <?php foreach ( $_referees as $_referee ): ?>
             <li>
+                <p><?= $_referee->getFullName(); ?> <a
+                        href="<?= site_url( 'referees/delete/' . $_referee->getId() ) ?>">(x)</a>
                 <div>
-                    Experience Here
+                    <ul>
+                        <?php $var = $_referee->getEmail() ?>
+                        <?php if ( !empty( $var ) ) : ?>
+                            <li>
+                                Email: <?= $var ?>
+                            </li>
+                        <?php unset($var); endif; ?>
+                        <?php $var = $_referee->getContactPhone() ?>
+                        <?php if ( !empty( $var ) ) : ?>
+                            <li>
+                                Contact phone: <?= $var ?>
+                            </li>
+                        <?php unset($var); endif; ?>
+                        <?php $var = $_referee->getRelationship() ?>
+                        <?php if ( !empty( $var ) ) : ?>
+                            <li>
+                                Relationship: <?= $var ?>
+                            </li>
+                            <?php unset( $var ); endif; ?>
+                        <li>
+                            Permission to contact: <?= $_referee->getPermissionToContact() ? 'Yes' : 'No' ?>
+                        </li>
+                        <li>
+                            Permission to store details: <?= $_referee->getPermissionToStoreDetails() ? 'Yes' : 'No' ?>
+                        </li>
+                        <li>
+                            Verified: <?= $_referee->getVerified() ? 'Yes' : 'No' ?>
+                        </li>
+                        <?php $var = $_referee->getHowVerified() ?>
+                        <?php if ( !empty( $var ) ) : ?>
+                            <li>
+                                How verified: <?= $var ?>
+                            </li>
+                        <?php unset( $var ); endif; ?>
+                    </ul>
                 </div>
             </li>
         <?php endforeach; ?>
-    </ul>
+    </ol>
 <?php endif; ?>
