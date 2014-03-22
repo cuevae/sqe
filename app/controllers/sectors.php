@@ -9,12 +9,15 @@
 class Sectors extends MY_Controller
 {
 
+    /** @var  $sectors Sectors_Model */
+    public $sectors;
+
     public function __construct()
     {
         parent::__construct();
-        /*if( !$this->isAdmin() ){
-            show_404();
-        }*/
+        if ( !$this->isAdmin() ) {
+            show_error( 'Admin access only', 401, 'Not Authorized' );
+        }
         $this->load->model( 'sectors' );
     }
 
@@ -24,7 +27,7 @@ class Sectors extends MY_Controller
         $tmpData['_error'] = $this->session->flashdata( 'error' );
         $tmpData['_sectors'] = $sectors;
         $this->viewData['main_content_view'] = $this->load->view( 'sectors/view-add', $tmpData, TRUE );
-        $this->viewData['title'] = 'Skills';
+        $this->viewData['title'] = 'Sectors';
         $this->load->view( 'default', $this->viewData );
     }
 
@@ -33,22 +36,33 @@ class Sectors extends MY_Controller
         if ( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ) {
             $this->setFormRules();
             if ( $this->form_validation->run() === false ) {
-                $this->index();
+                $this->session->set_flashdata( array( 'error' => validation_errors() ) );
             } else {
                 try {
                     $data = $this->input->post();
                     $sector = new Sector( $data );
                     $result = $this->sectors->addSector( $sector );
-                    $this->session->set_flashdata( array( 'message' => 'Skill successfully added.' ) );
+                    $this->session->set_flashdata( array( 'success' => 'Sector successfully added.' ) );
                 } catch ( Exception $e ) {
-                    $this->session->set_flashdata( array( 'error' => 'Sector could not be added,
-                    please ensure you are providing all the needed data.' ) );
+                    $this->session->set_flashdata( array( 'error' => 'There was a problem adding the sector.' ) );
                 }
-                redirect( 'sectors' );
+
+                switch ( $result ) {
+                    case -1:
+                        $this->session->set_flashdata( array( 'error' => 'There was a problem adding the sector.' ) );
+                        break;
+                    case -2:
+                        $this->session->set_flashdata( array( 'error' => 'The sector '
+                            . $sector->getSectorTitle() . ' already exists.' ) );
+                        break;
+                    default:
+                        /*$this->session->set_flashdata( array( 'success' => 'New skill "' . $skill->getSkillName()
+                            . ' [' . $skill->getSkillLevel() . ']' . '" added.' ) );*/
+                }
+
             }
-        } else {
-            redirect( 'sectors' );
         }
+        redirect( 'sectors' );
     }
 
 
@@ -56,11 +70,28 @@ class Sectors extends MY_Controller
     {
         $sector = $this->sectors->getSector( $idSectors );
         if ( !$sector instanceof Sector ) {
-            show_404();
+            $this->session->set_flashdata( array( 'error' => 'Sector not found.' ) );
+        } else {
+            $canBeDeleted = $this->sectors->sectorCanBeDeleted( $idSectors );
+            if ( $canBeDeleted < 1 ) {
+                switch ( $canBeDeleted ) {
+                    case -1:
+                        $this->session->set_flashdata( array( 'error' => 'Sector cannot be deleted, professional qualifications and job titles linked.' ) );
+                        break;
+                    case -2:
+                        $this->session->set_flashdata( array( 'error' => 'Sector cannot be deleted, job titles linked.' ) );
+                        break;
+                    case -3:
+                        $this->session->set_flashdata( array( 'error' => 'Sector cannot be deleted, professional qualifications linked.' ) );
+                        break;
+                    default:
+                        $this->session->set_flashdata( array( 'error' => 'Sector cannot be deleted, it has existing resources linked.' ) );
+                        break;
+                }
+            } else {
+                $result = $this->sectors->deleteSector( $idSectors );
+            }
         }
-
-        $this->sectors->deleteSector( $idSectors );
-
         redirect( 'sectors' );
     }
 

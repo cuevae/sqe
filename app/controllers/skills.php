@@ -46,12 +46,11 @@ class Skills extends MY_Controller
                     $data = $this->input->post();
                     $data['Persons_idUser'] = $this->getIdUser();
                     $skill = new Skill( $data );
+                    $result = $this->skills->addSkill( $this->getIdUser(), $skill );
                 } catch ( Exception $e ) {
-                    $tmpData['errors'][] = [ 'bad_data' => 'Error in the given data.' ];
-                    $this->load->view( 'curriculum/skills', $tmpData );
+                    $this->session->set_flashdata( array( 'error' => 'There was a problem adding the skill.' ) );
                 }
 
-                $result = $this->skills->addSkill( $this->getIdUser(), $skill );
                 switch ( $result ) {
                     case -1:
                         $this->session->set_flashdata( array( 'error' => 'There was a problem adding the skill.' ) );

@@ -190,7 +190,7 @@ class SimpleLoginSecure
                 'username'=>$user_data['username'],
                 'idUser' => $user_data['idUser'],
                 'logged_in' => true,
-                'isAdmin' => ( $user_data['is_admin'] === 1 )
+                'isAdmin' => ( $user_data['isAdmin'] == 1 )
             );
 			unset($user_data['password']);
 			$this->CI->session->set_userdata($sessionData);

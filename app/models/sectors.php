@@ -67,14 +67,59 @@ class Sectors_Model extends CI_Model
 
     public function addSector( Sector $sector )
     {
-        $this->db->insert( 'sectors', $sector );
+        try {
+            if ( $this->sectorAlreadyExists( $sector->getSectorTitle( false ) ) ) {
+                return -2;
+            }
+            $this->db->insert( 'sectors', $sector );
+        } catch ( Exception $e ) {
+            return -1;
+        }
+
         return $this->db->insert_id();
     }
 
     public function deleteSector( $idSectors )
     {
-        $this->db->where( 'idSectors', $idSectors );
-        return $this->db->delete( 'sectors' );
+        try {
+            if ( !$this->sectorCanBeDeleted( $idSectors ) ) {
+                return -2;
+            }
+            $this->db->where( 'idSectors', $idSectors );
+            $this->db->delete( 'sectors' );
+        } catch ( Exception $e ) {
+            return -1;
+        }
+        return 1;
+
+    }
+
+    public function sectorAlreadyExists( $name )
+    {
+        $this->db->select( '*' );
+        $this->db->from( 'sectors' );
+        $this->db->where( 'sectorTitle', $name );
+        return $this->db->get()->num_rows();
+    }
+
+
+    public function sectorCanBeDeleted( $id )
+    {
+        $this->db->select( array( 's.idSectors', 'jt.idJobTitles', 'pq.idProfessionalQualifications' ) );
+        $this->db->from( 'sectors as s' );
+        $this->db->join( 'job_titles as jt', 'jt.Sectors_idSectors = s.idSectors', 'left' );
+        $this->db->join( 'professional_qualifications pq', 'pq.idProfessionalQualifications = s.idSectors', 'left' );
+        $this->db->where( 's.idSectors', $id );
+        $res = $this->db->get()->row_array();
+        if ( empty( $res['idJobTitles'] ) && empty( $res['idProfessionalQualifications'] ) ) {
+            return 1;
+        } elseif ( !empty( $res['idJobTitles'] ) && !empty( $res['idProfessionalQualifications'] ) ) {
+            return -1;
+        } elseif ( !empty( $res['idJobTitles'] ) ) {
+            return -2;
+        } else {
+            return -3;
+        }
     }
 
 }

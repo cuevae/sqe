@@ -86,4 +86,9 @@ class MY_Controller extends CI_Controller
         return $this->session->userdata( 'idUser' );
     }
 
+    protected function isAdmin()
+    {
+        return $this->session->userdata( 'isAdmin' ) == true;
+    }
+
 } 
