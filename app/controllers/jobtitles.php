@@ -50,7 +50,7 @@ class Jobtitles extends MY_Controller
 
                 switch ( $result ) {
                     case -1:
-                        $this->session->set_flashdata( array( 'error' => 'There was a problem adding the title.' ) );
+                        $this->session->set_flashdata( array( 'error' => 'There was a problem adding the job title.' ) );
                         break;
                     case -2:
                         $this->session->set_flashdata( array( 'error' => 'The job title "'

@@ -1,24 +1,14 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: manei
- * Date: 19/03/14
- * Time: 20:51
- */
-
-$this->load->helper( 'url' );
-
-?>
-
-    <h3>Add a new job title</h3>
+<h3>Add a new job title</h3>
 
 <?php if ( isset( $_error ) && !empty( $_error ) ): ?>
-    <div class="error">
-        <p><?= $_error; ?></p>
+    <div>
+        <p><?= $_error ?></p>
+    </div>
+<?php elseif ( isset( $_success ) && !empty( $_success ) ): ?>
+    <div>
+        <p><?= $_success ?></p>
     </div>
 <?php endif; ?>
-
-<?= validation_errors(); ?>
 
 <?php
 //Start the form
@@ -59,7 +49,7 @@ echo form_submit( 'submit-jobtitle', 'Add' );
 <?php else : ?>
     <ul>
         <?php foreach ( $_jobtitlesBySector as $sector => $_jobtitles ): ?>
-            <li><?= $sector; ?>
+            <li>Sector: <?= $sector; ?>
                 <ol>
                     <?php foreach ($_jobtitles as $_jobtitle): ?>
                     <li>

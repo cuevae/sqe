@@ -9,17 +9,23 @@
 class Edlevel extends Base
 {
 
-    protected $requiredFields = array( 'educationLevel ' );
+    protected $requiredFields = array( 'educationLevel' );
 
     protected $idEducationLevel;
     var $educationLevel;
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getEducationLevel()
+    public function getEducationLevel( $htmlSafe = true )
     {
-        return $this->educationLevel;
+        $result = $this->educationLevel;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
@@ -29,7 +35,6 @@ class Edlevel extends Base
     {
         return $this->idEducationLevel;
     }
-
 
 
 }

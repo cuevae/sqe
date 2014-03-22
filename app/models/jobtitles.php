@@ -82,7 +82,16 @@ class Jobtitles_Model extends CI_Model
 
     public function addJobTitle( Jobtitle $jobtitle )
     {
-        $this->db->insert( 'job_titles', $jobtitle );
+        try {
+            //Check the skill does not exist already
+            if ( $this->alreadyExists( $jobtitle->getJobTitle( false ), $jobtitle->getSectorId() ) ) {
+                return -2;
+            }
+            $this->db->insert( 'job_titles', $jobtitle );
+        } catch ( Exception $e ) {
+            return -1;
+        }
+
         return $this->db->insert_id();
     }
 
@@ -93,8 +102,17 @@ class Jobtitles_Model extends CI_Model
 
     public function deleteJobTitle( $id )
     {
-        $this->db->where( 'idJobTitles', $id );
-        $this->db->delete( 'job_titles' );
+        try {
+            if ( $this->canBeDeleted( $id ) < 1 ) {
+                return -2;
+            } else {
+                $this->db->where( 'idJobTitles', $id );
+                $this->db->delete( 'job_titles' );
+            }
+        } catch ( Exception $e ) {
+            return -1;
+        }
+        return 1;
     }
 
     public function canBeDeleted( $id )
@@ -114,6 +132,15 @@ class Jobtitles_Model extends CI_Model
         } else {
             return -3;
         }
+    }
+
+    public function alreadyExists( $jobtitle, $idSectors )
+    {
+        $this->db->select( '*' );
+        $this->db->from( 'job_titles' );
+        $this->db->where( 'jobTitle', $jobtitle );
+        $this->db->where( 'Sectors_idSectors', $idSectors );
+        return $this->db->get()->num_rows();
     }
 
 } 

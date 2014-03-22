@@ -25,6 +25,7 @@ class Sectors extends MY_Controller
     {
         $sectors = $this->sectors->getSectors();
         $tmpData['_error'] = $this->session->flashdata( 'error' );
+        $tmpData['_success'] = $this->session->flashdata( 'success' );
         $tmpData['_sectors'] = $sectors;
         $this->viewData['main_content_view'] = $this->load->view( 'sectors/view-add', $tmpData, TRUE );
         $this->viewData['title'] = 'Sectors';
