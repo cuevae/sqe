@@ -125,7 +125,7 @@ echo form_input( $data );
     <br/>
 <?php
 $id = 'thesesTitle';
-$label = 'Country: ';
+$label = 'Thesis title: ';
 $data = array(
     'name' => $id,
     'id' => $id,
