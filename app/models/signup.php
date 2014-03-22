@@ -1,4 +1,3 @@
-
 <?php
 
 class Signup_Model extends CI_Model
@@ -16,10 +15,3 @@ class Signup_Model extends CI_Model
     }
 
 }
-
-/**
- * Created by PhpStorm.
- * User: mypc
- * Date: 15/03/14
- * Time: 21:05
- */ 
