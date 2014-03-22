@@ -36,4 +36,9 @@ class Jobtitle extends Base
         return $this->idJobTitles;
     }
 
+    public function getSector()
+    {
+        return $this->sector;
+    }
+
 } 

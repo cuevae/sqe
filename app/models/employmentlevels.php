@@ -14,7 +14,7 @@ class Employmentlevels_Model extends CI_Model{
         $this->load->database();
     }
 
-    public function getLevel( $idLevel )
+    public function getEmploymentLevel( $idLevel )
     {
         $this->db->select( '*' )->from( 'employment_levels' )->where( 'idLevelsOfEmployment', $idLevel );
         $result = $this->db->get()->row_array();

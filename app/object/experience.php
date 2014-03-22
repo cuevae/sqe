@@ -9,7 +9,7 @@
 class Experience extends Base
 {
 
-    var $idExperience;
+    var $idExperiences;
     var $Persons_idUser;
     var $dateStarted;
     var $dateFinished;
@@ -21,14 +21,18 @@ class Experience extends Base
     var $verified;
     var $howVerified;
 
-    private $jobTitle;
-    private $jobSector;
+    /** @var  Jobtitle */
+    protected $jobtitle;
+    /** @var  Sector */
+    protected $sector;
+    /** @var  Employmentlevel */
+    protected $employmentlevel;
 
-    protected $requiredFields = array( 'Persons_idUser', 'dateStarted', 'JobTitles_idJobTitle' );
+    protected $requiredFields = array( 'Persons_idUser', 'dateStarted', 'JobTitles_idJobTitles' );
 
     public function getExperienceId()
     {
-        return $this->idExperience;
+        return $this->idExperiences;
     }
 
     public function getIdUser()
@@ -59,14 +63,15 @@ class Experience extends Base
         return $date;
     }
 
-    public function getJobTitle( $htmlSafe = true )
+    public function getJobTitleName( $htmlSafe = true )
     {
-        $result = $this->jobTitle;
-        if ( $htmlSafe ) {
-            $result = $this->sanitizeForHtmlOutput( $result );
-        }
-
+        $result = $this->jobtitle->getJobTitle( $htmlSafe );
         return $result;
+    }
+
+    public function getJobTitleId()
+    {
+        return $this->JobTitles_idJobTitles;
     }
 
     public function getOtherJobTitle( $htmlSafe = true )
@@ -79,13 +84,9 @@ class Experience extends Base
         return $result;
     }
 
-    public function getJobSector( $htmlSafe = true )
+    public function getSectorTitle( $htmlSafe = true )
     {
-        $result = $this->jobSector;
-        if ( $htmlSafe ) {
-            $result = $this->sanitizeForHtmlOutput( $result );
-        }
-
+        $result = $this->sector->getSectorTitle( $htmlSafe );
         return $result;
     }
 
@@ -101,10 +102,47 @@ class Experience extends Base
 
     public function getEmploymentLevel( $htmlSafe = true )
     {
-        $result = $this->employmentLevel;
+        $result = $this->employmentlevel->getEmploymentLevel( $htmlSafe );
+        return $result;
+    }
+
+
+    public function getEmployerName( $htmlSafe = true )
+    {
+        $result = $this->employerName;
         if ( $htmlSafe ) {
             $result = $this->sanitizeForHtmlOutput( $result );
         }
+
+        return $result;
+    }
+
+    public function getVerified()
+    {
+        return $this->verified;
+    }
+
+    public function getHowVerified( $htmlSafe = true )
+    {
+        $result = $this->howVerified;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    public function getExperienceName( $htmlSafe = true )
+    {
+        $jobTitle = $this->jobtitle->getJobTitle( $htmlSafe );
+        $employerName = $this->getEmployerName( $htmlSafe );
+        $dateStarted = $this->getDateStarted( $htmlSafe );
+        $dateFinished = $this->getDateFinished( $htmlSafe );
+
+        $result = $jobTitle;
+        $result .= ( $employerName ) ? ' @ ' . $employerName : '';
+        $result .= ( $dateStarted ) ? ' [' . $dateStarted . ' - ' : '';
+        $result .= ( $dateFinished ) ? ' ' . $dateFinished . ']' : ']';
 
         return $result;
     }

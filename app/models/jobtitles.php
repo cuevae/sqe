@@ -32,6 +32,22 @@ class Jobtitles_Model extends CI_Model
         return $objects;
     }
 
+    public function getAvailableJobTitles( $reduced = true )
+    {
+        $this->db->select( 'jt.*' );
+        $this->db->from( 'job_titles as jt' );
+        $result = $this->db->get()->result_array();
+
+        if ( $reduced ) {
+            $result = array_reduce( $result, function ( $res, $item ) {
+                $res[$item['idJobTitles']] = $item['jobTitle'];
+                return $res;
+            }, array() );
+        }
+
+        return $result;
+    }
+
     public function getJobTitlesBySector()
     {
         $this->db->select();
