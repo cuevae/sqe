@@ -93,7 +93,7 @@ class Educationlevels_Model extends CI_Model
 
     public function getAvailableEducationLevels( $reduced = true )
     {
-        $this->db->select( 's.*' );
+        $this->db->select( '*' );
         $this->db->from( 'education_levels as el' );
         $result = $this->db->get()->result_array();
 

@@ -15,32 +15,44 @@ class EdQualification extends Base
     var $Persons_idUser;
     var $qualificationType;
     var $courseName;
-    var $EducationLevels_idEducationLevels;
+    var $EducationLevels_idEducationLevel;
     var $vocational;
     var $mainSubject;
     var $nameOfInstitutions;
     var $country;
     var $yearObtained;
     var $result;
-    var $thesisTitle;
+    var $thesesTitle;
     var $verified;
     var $howVerified;
 
-    protected $_jobseeker;
-    protected $_edLevel;
+    /** @var  EdLevel */
+    protected $edLevel;
 
-    /**
-     * @return mixed
-     */
-    public function getEducationLevelsIdEducationLevels()
+    public function getQualificationFullName( $htmlSafe = true )
     {
-        return $this->EducationLevels_idEducationLevels;
+        $type = $this->getQualificationType( $htmlSafe );
+        $courseName = $this->getCourseName( $htmlSafe );
+        $yearObtained = $this->getYearObtained( $htmlSafe );
+
+        $result = $type . ' ' . $courseName;
+        $result .= ( $yearObtained ) ? ' [' . $yearObtained . ']' : '';
+
+        return $result;
     }
 
     /**
      * @return mixed
      */
-    public function getPersonsIdUser()
+    public function getEducationLevelsId()
+    {
+        return $this->EducationLevels_idEducationLevel;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getIdUser()
     {
         return $this->Persons_idUser;
     }
@@ -50,7 +62,12 @@ class EdQualification extends Base
      */
     public function getEdLevel()
     {
-        return $this->_edLevel;
+        return $this->edLevel;
+    }
+
+    public function getEducationLevelName( $htmlSafe = true )
+    {
+        return $this->edLevel->getEducationLevel( $htmlSafe );
     }
 
     /**
@@ -62,91 +79,123 @@ class EdQualification extends Base
     }
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getCountry()
+    public function getCountry( $htmlSafe = true )
     {
-        return $this->country;
+        $result = $this->country;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param bool $htmlSafe
+     * @return mixed
+     */
+    public function getCourseName( $htmlSafe = true )
+    {
+        $result = $this->courseName;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
+    }
+
+    /**
+     * @param bool $htmlSafe
+     * @return mixed
+     */
+    public function getHowVerified( $htmlSafe = true )
+    {
+        $result = $this->howVerified;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
      * @return mixed
      */
-    public function getCourseName()
-    {
-        return $this->courseName;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getHowVerified()
-    {
-        return $this->howVerified;
-    }
-
-    /**
-     * @return mixed
-     */
-    public function getIdEducationalQualifications()
+    public function getId()
     {
         return $this->idEducationalQualifications;
     }
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getKey()
+    public function getMainSubject( $htmlSafe = true )
     {
-        return $this->key;
+        $result = $this->mainSubject;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getMainSubject()
+    public function getNameOfInstitutions( $htmlSafe = true )
     {
-        return $this->mainSubject;
+        $result = $this->nameOfInstitutions;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getNameOfInstitutions()
+    public function getQualificationType( $htmlSafe = true )
     {
-        return $this->nameOfInstitutions;
+        $result = $this->qualificationType;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getQualificationType()
+    public function getResult( $htmlSafe = true )
     {
-        return $this->qualificationType;
+        $result = $this->result;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
     /**
-     * @return array
-     */
-    public function getRequiredFields()
-    {
-        return $this->requiredFields;
-    }
-
-    /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getResult()
+    public function getThesesTitle( $htmlSafe = true )
     {
-        return $this->result;
-    }
+        $result = $this->thesesTitle;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
 
-    /**
-     * @return mixed
-     */
-    public function getThesisTitle()
-    {
-        return $this->thesisTitle;
+        return $result;
     }
 
     /**
@@ -166,11 +215,17 @@ class EdQualification extends Base
     }
 
     /**
+     * @param bool $htmlSafe
      * @return mixed
      */
-    public function getYearObtained()
+    public function getYearObtained( $htmlSafe = true )
     {
-        return $this->yearObtained;
+        $result = $this->yearObtained;
+        if ( $htmlSafe ) {
+            $result = $this->sanitizeForHtmlOutput( $result );
+        }
+
+        return $result;
     }
 
 
