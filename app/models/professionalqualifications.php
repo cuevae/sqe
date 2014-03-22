@@ -14,7 +14,7 @@ class Professionalqualifications_Model extends CI_Model
         parent::__construct();
     }
 
-    public function addProfessionalQualification( ProfessionalQualification $qualification )
+    public function addProfessionalQualification( $idUser, ProfessionalQualification $qualification )
     {
 
     }
