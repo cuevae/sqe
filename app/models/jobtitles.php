@@ -34,13 +34,35 @@ class Jobtitles_Model extends CI_Model
 
     public function getAvailableJobTitles( $reduced = true )
     {
-        $this->db->select( 'jt.*' );
+        $this->db->select( '*' );
         $this->db->from( 'job_titles as jt' );
+        $this->db->join( 'sectors as s', 's.idSectors = jt.Sectors_idSectors' );
         $result = $this->db->get()->result_array();
 
         if ( $reduced ) {
             $result = array_reduce( $result, function ( $res, $item ) {
-                $res[$item['idJobTitles']] = $item['jobTitle'];
+                $res[$item['idJobTitles']] = $item['jobTitle'] . ' [S: ' . $item['sectorTitle'] . ']';
+                return $res;
+            }, array() );
+        }
+
+        return $result;
+    }
+
+
+    public function getAvailableJobTitlesOutOfUserPreferences( $idUser, $reduced = true )
+    {
+        $this->db->select( '*' );
+        $this->db->from( 'job_titles as jt' );
+        $this->db->join( 'sectors as s', 's.idSectors = jt.Sectors_idSectors', 'left' );
+        $this->db->join( 'job_preferences as jp', 'jp.JobTitles_idJobTitles = jt.idJobTitles', 'left' );
+        $result = $this->db->get()->result_array();
+
+        if ( $reduced ) {
+            $result = array_reduce( $result, function ( $res, $item ) use ( $idUser ) {
+                if ( $item['person_idUser'] != $idUser ) {
+                    $res[$item['idJobTitles']] = $item['jobTitle'] . ' [S: ' . $item['sectorTitle'] . ']';
+                }
                 return $res;
             }, array() );
         }
