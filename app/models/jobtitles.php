@@ -81,4 +81,23 @@ class Jobtitles_Model extends CI_Model
         $this->db->delete( 'job_titles' );
     }
 
+    public function canBeDeleted( $id )
+    {
+        $this->db->select( array( 'jt.idJobTitles', 'jp.JobTitles_idJobTitles', 'e.idExperiences' ) );
+        $this->db->from( 'job_titles as jt' );
+        $this->db->join( 'job_preferences as jp', 'jp.JobTitles_idJobTitles = jt.idJobTitles', 'left' );
+        $this->db->join( 'experiences e', 'e.JobTitles_idJobTitles = jt.idJobTitles', 'left' );
+        $this->db->where( 'jt.idJobTitles', $id );
+        $res = $this->db->get()->row_array();
+        if ( empty( $res['JobTitles_idJobTitles'] ) && empty( $res['idExperiences'] ) ) {
+            return 1;
+        } elseif ( !empty( $res['JobTitles_idJobTitles'] ) && !empty( $res['idExperiences'] ) ) {
+            return -1;
+        } elseif ( !empty( $res['idExperiences'] ) ) {
+            return -2;
+        } else {
+            return -3;
+        }
+    }
+
 } 

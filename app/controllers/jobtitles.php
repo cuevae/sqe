@@ -9,22 +9,25 @@
 class Jobtitles extends MY_Controller
 {
 
+    /** @var  Jobtitles_Model */
+    public $model;
+
     public function __construct()
     {
         parent::__construct();
-        /*if( !$this->isAdmin() ){
-            show_404();
-        }*/
-        $this->load->model( 'jobtitles' );
+        if ( !$this->isAdmin() ) {
+            show_error( 'Admin access only', 401, 'Not Authorized' );
+        }
+        $this->load->model( 'jobtitles', 'model' );
         $this->load->model( 'sectors' );
     }
 
     public function index()
     {
-        $tmpData['_error'] = $this->session->flashdata( 'error' );
-        $tmpData['_jobtitles'] = $this->jobtitles->getJobtitles();
-        $tmpData['_jobtitlesBySector'] = $this->jobtitles->getJobtitlesBySector();
+        $tmpData['_jobtitlesBySector'] = $this->model->getJobtitlesBySector();
         $tmpData['_sectors'] = $this->sectors->getAvailableSectors();
+        $tmpData['_error'] = $this->session->flashdata( 'error' );
+        $tmpData['_success'] = $this->session->flashdata( 'success' );
         $this->viewData['main_content_view'] = $this->load->view( 'jobtitles/view-add', $tmpData, TRUE );
         $this->viewData['title'] = 'Job Titles';
         $this->load->view( 'default', $this->viewData );
@@ -35,33 +38,60 @@ class Jobtitles extends MY_Controller
         if ( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ) {
             $this->setFormRules();
             if ( $this->form_validation->run() === false ) {
-                $this->index();
+                $this->session->set_flashdata( array( 'error' => validation_errors() ) );
             } else {
                 try {
                     $data = $this->input->post();
-                    $jobtitle = new JobTitle( $data );
-                    $result = $this->jobtitles->addJobTitle( $jobtitle );
+                    $obj = new JobTitle( $data );
+                    $result = $this->model->addJobTitle( $obj );
                 } catch ( Exception $e ) {
-                    $this->session->set_flashdata( array( 'error' => 'Jobtitle could not be added,
-                    please ensure you are providing all the needed data.' ) );
+                    $this->session->set_flashdata( array( 'error' => 'There was a problem adding the job title.' ) );
                 }
-                redirect( 'jobtitles' );
+
+                switch ( $result ) {
+                    case -1:
+                        $this->session->set_flashdata( array( 'error' => 'There was a problem adding the title.' ) );
+                        break;
+                    case -2:
+                        $this->session->set_flashdata( array( 'error' => 'The job title "'
+                            . $obj->getJobTitle() . '" already exists.' ) );
+                        break;
+                    default:
+                        /*$this->session->set_flashdata( array( 'success' => 'New skill "' . $skill->getSkillName()
+                            . ' [' . $skill->getSkillLevel() . ']' . '" added.' ) );*/
+                }
             }
-        } else {
-            redirect( 'jobtitles' );
         }
+        redirect( 'jobtitles' );
     }
 
 
-    public function delete( $idJobTitles )
+    public function delete( $id )
     {
-        $jobtitle = $this->jobtitles->getJobTitle( $idJobTitles );
-        if ( !$jobtitle instanceof Jobtitle ) {
-            show_404();
+        $obj = $this->model->getJobTitle( $id );
+        if ( !$obj instanceof Jobtitle ) {
+            $this->session->set_flashdata( array( 'error' => 'Job title not found.' ) );
+        } else {
+            $canBeDeleted = $this->model->canBeDeleted( $id );
+            if ( $canBeDeleted < 1 ) {
+                switch ( $canBeDeleted ) {
+                    case -1:
+                        $this->session->set_flashdata( array( 'error' => 'Job title cannot be deleted, job preferences and experiences linked.' ) );
+                        break;
+                    case -2:
+                        $this->session->set_flashdata( array( 'error' => 'Job title cannot be deleted, experiences linked.' ) );
+                        break;
+                    case -3:
+                        $this->session->set_flashdata( array( 'error' => 'Job title cannot be deleted, job preferences linked.' ) );
+                        break;
+                    default:
+                        $this->session->set_flashdata( array( 'error' => 'Job title cannot be deleted, it has existing resources linked.' ) );
+                        break;
+                }
+            } else {
+                $result = $this->model->deleteJobTitle( $id );
+            }
         }
-
-        $this->jobtitles->deleteJobTitle( $idJobTitles );
-
         redirect( 'jobtitles' );
     }
 
