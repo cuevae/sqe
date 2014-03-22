@@ -50,7 +50,7 @@ class SimpleLoginSecure
      * @internal param $string
      * @return    bool
      */
-	function create( $forename = '', $surname = '', $user_email = '', $user_pass = '', $auto_login = true)
+	function create( $forename = '', $surname = '', $user_email = '', $user_pass = '', $isAdmin = 0, $auto_login = true)
 	{
 		$this->CI =& get_instance();
 
@@ -75,7 +75,8 @@ class SimpleLoginSecure
                     'forename1' => $forename,
                     'surname' => $surname,
 					'username' => $user_email,
-					'password' => $user_pass_hashed
+					'password' => $user_pass_hashed,
+					'isAdmin' => $isAdmin
 				);
 
 		$this->CI->db->set($data);

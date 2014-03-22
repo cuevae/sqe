@@ -36,8 +36,9 @@ class Signup extends MY_Controller
                 $surname = $this->input->post( 'surname' );
                 $userEmail = strtolower( $this->input->post( 'username' ) );
                 $password = $this->input->post( 'password' );
+                $isAdmin = $this->input->post( 'isAdmin' );
 
-                $result = $this->signup->signup( $forename1, $surname, $userEmail, $password );
+                $result = $this->signup->signup( $forename1, $surname, $userEmail, $password, $isAdmin );
 
                 if ( $result !== false ) {
                     redirect( 'curriculum/edit/' );
@@ -84,6 +85,12 @@ class Signup extends MY_Controller
             'size' => 32,
             'maxlength' => 32,
             'value' => $this->form_validation->set_value( 'password' ),
+        );
+        $this->data['admin'] = array(
+            'name' => 'isAdmin',
+            'id' => 'isAdmin',
+            'value' => 1,
+            'checked' => FALSE
         );
 
         $this->load->view( 'signup/signup', $this->data );

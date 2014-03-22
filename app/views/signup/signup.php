@@ -41,6 +41,10 @@
             <td><CSS class="mandatory_star">*</CSS></td>
             <td nowrap="nowrap"><?php echo form_input($password);?></td>
         </tr>
+        <tr>
+            <td align="right">Make me admin</td>
+            <td nowrap="nowrap"><?php echo form_checkbox($admin);?></td>
+        </tr>
 
 
         <tr valign="top">
