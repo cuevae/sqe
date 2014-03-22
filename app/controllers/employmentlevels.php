@@ -9,20 +9,23 @@
 class Employmentlevels extends MY_Controller
 {
 
+    /** @var  Employmentlevels_Model */
+    public $em;
+
     public function __construct()
     {
         parent::__construct();
-        /*if( !$this->isAdmin() ){
-            show_404();
-        }*/
+        if ( !$this->isAdmin() ) {
+            show_error( 'Admin access only', 401, 'Not Authorized' );
+        }
         $this->load->model( 'employmentlevels', 'em' );
     }
 
     public function index()
     {
-        $employmentLevels = $this->em->getEmploymentLevels();
+        $tmpData['_levels'] = $this->em->getEmploymentLevels();
         $tmpData['_error'] = $this->session->flashdata( 'error' );
-        $tmpData['_levels'] = $employmentLevels;
+        $tmpData['_success'] = $this->session->flashdata( 'success' );
         $this->viewData['main_content_view'] = $this->load->view( 'employmentlevels/view-add', $tmpData, TRUE );
         $this->viewData['title'] = 'Employment Levels';
         $this->load->view( 'default', $this->viewData );
@@ -33,34 +36,54 @@ class Employmentlevels extends MY_Controller
         if ( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ) {
             $this->setFormRules();
             if ( $this->form_validation->run() === false ) {
-                $this->index();
+                $this->session->set_flashdata( array( 'error' => validation_errors() ) );
             } else {
                 try {
                     $data = $this->input->post();
-                    $level = new EmploymentLevel( $data );
-                    $result = $this->em->addEmploymentLevel( $level );
-                    $this->session->set_flashdata( array( 'message' => 'Skill successfully added.' ) );
+                    $obj = new EmploymentLevel( $data );
+                    $result = $this->em->addEmploymentLevel( $obj );
                 } catch ( Exception $e ) {
-                    $this->session->set_flashdata( array( 'error' => 'Sector could not be added,
-                    please ensure you are providing all the needed data.' ) );
+                    $this->session->set_flashdata( array( 'error' => 'There was a problem adding the job title.' ) );
                 }
-                redirect( 'employmentlevels' );
+
+                switch ( $result ) {
+                    case -1:
+                        $this->session->set_flashdata( array( 'error' => 'There was a problem adding the title.' ) );
+                        break;
+                    case -2:
+                        $this->session->set_flashdata( array( 'error' => 'The employment level "'
+                            . $obj->getEmploymentLevel() . '" already exists.' ) );
+                        break;
+                    default:
+                        /*$this->session->set_flashdata( array( 'success' => 'New skill "' . $skill->getSkillName()
+                            . ' [' . $skill->getSkillLevel() . ']' . '" added.' ) );*/
+                }
             }
-        } else {
-            redirect( 'employmentlevels' );
         }
+        redirect( 'employmentlevels' );
     }
 
 
     public function delete( $idLevel )
     {
-        $level = $this->em->getLevel( $idLevel );
+        $level = $this->em->getEmploymentLevel( $idLevel );
         if ( !$level instanceof EmploymentLevel ) {
-            show_404();
+            $this->session->set_flashdata( array( 'error' => 'Employment level not found.' ) );
+        } else {
+            $canBeDeleted = $this->em->canBeDeleted( $idLevel );
+            if ( $canBeDeleted < 1 ) {
+                switch ( $canBeDeleted ) {
+                    case -1:
+                        $this->session->set_flashdata( array( 'error' => 'Employment level cannot be deleted, experiences linked.' ) );
+                        break;
+                    default:
+                        $this->session->set_flashdata( array( 'error' => 'Sector cannot be deleted, it has existing resources linked.' ) );
+                        break;
+                }
+            } else {
+                $result = $this->em->deleteLevel( $idLevel );
+            }
         }
-
-        $this->em->deleteLevel( $idLevel );
-
         redirect( 'employmentlevels' );
     }
 

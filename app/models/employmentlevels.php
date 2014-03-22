@@ -6,7 +6,8 @@
  * Time: 00:05
  */
 
-class Employmentlevels_Model extends CI_Model{
+class Employmentlevels_Model extends CI_Model
+{
 
     public function __construct()
     {
@@ -66,14 +67,54 @@ class Employmentlevels_Model extends CI_Model{
 
     public function addEmploymentLevel( EmploymentLevel $level )
     {
-        $this->db->insert( 'employment_levels', $level );
+        try {
+            if ( $this->alreadyExists( $level->getEmploymentLevel( false ) ) ) {
+                return -2;
+            }
+            $this->db->insert( 'employment_levels', $level );
+        } catch ( Exception $e ) {
+            return -1;
+        }
+
         return $this->db->insert_id();
+
     }
 
     public function deleteLevel( $idLevel )
     {
-        $this->db->where( 'idLevelsOfEmployment', $idLevel );
-        return $this->db->delete( 'employment_levels' );
+        try {
+            if ( $this->canBeDeleted( $idLevel ) > 0 ) {
+                $this->db->where( 'idLevelsOfEmployment', $idLevel );
+                $this->db->delete( 'employment_levels' );
+            } else {
+                return -2;
+            }
+        } catch ( Exception $e ) {
+            return -1;
+        }
+        return 1;
+    }
+
+    public function alreadyExists( $name )
+    {
+        $this->db->select( '*' );
+        $this->db->from( 'employment_levels' );
+        $this->db->where( 'employmentLevel', $name );
+        return $this->db->get()->num_rows();
+    }
+
+    public function canBeDeleted( $id )
+    {
+        $this->db->select( array( 'el.idLevelsOfEmployment', 'e.EmploymentLevels_idLevelsOfEmployment' ) );
+        $this->db->from( 'employment_levels as el' );
+        $this->db->join( 'experiences as e', 'e.EmploymentLevels_idLevelsOfEmployment = el.idLevelsOfEmployment', 'left' );
+        $this->db->where( 'el.idLevelsOfEmployment', $id );
+        $res = $this->db->get()->row_array();
+        if ( empty( $res['EmploymentLevels_idLevelsOfEmployment'] ) ) {
+            return 1;
+        } else {
+            return -1;
+        }
     }
 
 }

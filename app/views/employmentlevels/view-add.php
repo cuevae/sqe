@@ -1,24 +1,14 @@
-<?php
-/**
- * Created by PhpStorm.
- * User: manei
- * Date: 19/03/14
- * Time: 20:51
- */
-
-$this->load->helper( 'url' );
-
-?>
-
-    <h3>Add a new employment level</h3>
+<h3>Add a new employment level</h3>
 
 <?php if ( isset( $_error ) && !empty( $_error ) ): ?>
-    <div class="error">
-        <p><?= $_error; ?></p>
+    <div>
+        <p><?= $_error ?></p>
+    </div>
+<?php elseif ( isset( $_success ) && !empty( $_success ) ): ?>
+    <div>
+        <p><?= $_success ?></p>
     </div>
 <?php endif; ?>
-
-<?= validation_errors(); ?>
 
 <?php
 //Start the form
@@ -38,13 +28,13 @@ echo form_label( $label, $id );
 echo form_input( $data );
 #endregion
 ?>
-    <br/>
+<br/>
 <?php
 echo form_submit( 'submit-elevels', 'Add' );
 ?>
 <?= form_close(); ?>
 
-    <h3>Current employment levels</h3>
+<h3>Current employment levels</h3>
 
 <?php if ( !isset( $_levels ) || empty( $_levels ) ) : ?>
     <p>You have no sectors added. Please use the form above to start adding.</p>
