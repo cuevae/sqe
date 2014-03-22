@@ -19,7 +19,7 @@ class MY_Controller extends CI_Controller
 
         $this->viewData = array();
 
-        $tmp_data['menu_data'] = $this->_generate_menu_data();
+        $tmp_data['_isAdmin'] = $this->isAdmin();
 
         $this->viewData['main_menu_view'] = $this->load->view( 'common/create_table_main_menu', $tmp_data, TRUE );
 
