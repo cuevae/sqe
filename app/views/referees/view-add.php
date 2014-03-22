@@ -1,6 +1,3 @@
-<?php
-?>
-
 <h3>Add new referee</h3>
 
 <?php if ( isset( $_error ) && !empty( $_error ) ): ?>

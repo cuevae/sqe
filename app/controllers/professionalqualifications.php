@@ -11,18 +11,22 @@ class Professionalqualifications extends MY_Controller
 
     /** @var  Professionalqualifications_Model */
     public $pqs;
+    /** @var Sectors_Model */
+    public $sectors;
 
     public function __construct()
     {
         parent::__construct();
         $this->load->model( 'professionalqualifications', 'pqs' );
+        $this->load->model( 'sectors' );
     }
 
     public function index()
     {
         $idUser = $this->getIdUser();
         $tmpData['_idUser'] = $idUser;
-        $tmpData['_pqs'] = $this->pqs->getUserProfessionalQualifications( $idUser );
+        $tmpData['_professionalQualifications'] = $this->pqs->getUserProfessionalQualifications( $idUser );
+        $tmpData['_sectors'] = $this->sectors->getAvailableSectors();
         $tmpData['_error'] = $this->session->flashdata( 'error' );
         $tmpData['_success'] = $this->session->flashdata( 'success' );
         $this->viewData['main_content_view'] = $this->load->view( 'professionalqualifications/view-add', $tmpData, TRUE );
@@ -70,11 +74,11 @@ class Professionalqualifications extends MY_Controller
         if ( ( !$pq instanceof ProfessionalQualification ) || ( $pq->getPersonsidUser() != $idUser ) ) {
             $this->session->set_flashdata( array( 'error' => 'Professional qualification not found.' ) );
         } else {
-            $this->pq->deleleProfessionalQualification( $id );
+            $this->pqs->deleteProfessionalQualification( $id );
             $this->session->set_flashdata( array( 'success' => 'Professional qualification ' . $pq->getQualificationName() . ' deleted.' ) );
         }
 
-        redirect( 'professionalQualifications' );
+        redirect( 'professionalqualifications' );
     }
 
     public function setFormRules()

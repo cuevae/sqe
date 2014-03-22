@@ -92,7 +92,7 @@ class ProfessionalQualification extends Base
     /**
      * @return mixed
      */
-    public function getIdProfessionalQualifications()
+    public function getId()
     {
         return $this->idProfessionalQualifications;
     }
