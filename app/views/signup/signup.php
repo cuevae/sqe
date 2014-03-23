@@ -32,7 +32,7 @@
         </tr>
 
         <tr>
-            <td align="right">Username</td>
+            <td align="right">Email</td>
             <td class="mandatory_star">*</td>
             <td nowrap="nowrap"><?php echo form_input($username);?></td>
         </tr>
