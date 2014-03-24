@@ -26,10 +26,7 @@ class Login extends MY_Controller
 
         if ( $this->input->server( 'REQUEST_METHOD' ) === 'POST' ) {
             if ( $this->form_validation->run() === false ) {
-                $data['title'] = "Login Page";
-                $this->load->view( 'templates/header', $data );
-                $this->load->view( 'login/login', $data );
-
+                //Not valid data
             } else {
                 $username = $this->input->post( 'username' );
                 $password = $this->input->post( 'password' );
@@ -39,7 +36,7 @@ class Login extends MY_Controller
                 if ( $result !== false ) {
                     redirect( base_url() . 'index.php/curriculum/view/' );
                 } else {
-                    $data['error message'] = "Invalid Username and Password";
+                    $data['error'] = "Invalid Username and Password";
                 }
             }
         }

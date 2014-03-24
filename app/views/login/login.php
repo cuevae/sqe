@@ -1,8 +1,8 @@
 <div id="login_form" style="width:400px; margin:100px auto; border-radius: 5px;border:1px solid #909090; padding:20px">
 
     <?php
-    if ( !empty ( $error_message ) ) {
-        echo '<span style="color:red">' . $error_message . '</span>';
+    if ( !empty ( $error ) ) {
+        echo '<span style="color:red">' . $error . '</span>';
 
     }
     echo form_open( 'login' );
