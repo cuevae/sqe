@@ -57,8 +57,12 @@ class Collate extends MY_Controller
     public function collatelist()
     {
         $post = $this->input->post();
-        $data['results'] = $this->collate->run( $post );
-        $this->load->view( 'collate/collatelist', $data );
+        $tmpData['results'] = $this->model->run( $post );
+        $tmpData['_error'] = $this->session->flashdata( 'error' );
+        $tmpData['_success'] = $this->session->flashdata( 'success' );
+        $this->viewData['main_content_view'] = $this->load->view( 'collate/collatelist', $tmpData, TRUE );
+        $this->viewData['title'] = 'Search Results';
+        $this->load->view( 'default', $this->viewData );;
     }
 
 } 

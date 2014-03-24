@@ -7,12 +7,22 @@
  */
 ?>
 
-Qualified Applicants
+<h3>Qualified applicants</h3>
+
+<?php if ( isset( $_error ) && !empty( $_error ) ): ?>
+    <div>
+        <p><?= $_error ?></p>
+    </div>
+<?php elseif ( isset( $_success ) && !empty( $_success ) ): ?>
+    <div>
+        <p><?= $_success ?></p>
+    </div>
+<?php endif; ?>
 
  <?php // print_r($results); ?>
      <?php $this->load->helper('url'); ?>
 <?php if ( isset( $results ) && empty( $results ) ): ?>
-    <h3>No results found</h3>
+    <p>No results found</p>
 <?php endif; ?>
 
 <?php if ( isset( $results ) && !empty( $results ) ): ?>
