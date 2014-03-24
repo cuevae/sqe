@@ -108,7 +108,7 @@ class Curriculum extends MY_Controller
 
         $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
         $tmpData = [ '_jobseeker' => $jobseeker ];
-        $empData['_alreadyPdf'] = true;
+        $tmpData['_alreadyPdf'] = true;
         $data['_view'] = $this->load->view( 'curriculum/view', $tmpData, TRUE );
         $data['_username'] = $this->session->userdata( 'username' );
 
