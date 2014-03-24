@@ -38,7 +38,7 @@ echo form_submit( 'submit-sector', 'Add', "class=btn btn-success btn-large"  );
     <h3>Current job sectors</h3>
 
 <?php if ( !isset( $_sectors ) || empty( $_sectors ) ) : ?>
-    <p>You have no sectors added. Please use the form above to start adding.</p>
+    <p>You have no sectors added. spanPlease use the form to start adding.</p>
 <?php else : ?>
     <ul>
         <?php foreach ( $_sectors as $_sector ): ?>

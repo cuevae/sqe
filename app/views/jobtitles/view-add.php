@@ -45,7 +45,7 @@ echo form_submit( 'submit-jobtitle', 'Add', "class=btn btn-success btn-large" );
     <h3>Current job titles</h3>
 
 <?php if ( !isset( $_jobtitlesBySector ) || empty( $_jobtitlesBySector ) ) : ?>
-    <p>You have no job titles added. Please use the form above to start adding.</p>
+    <p>You have no job titles added. spanPlease use the form to start adding.</p>
 <?php else : ?>
     <ul>
         <?php foreach ( $_jobtitlesBySector as $sector => $_jobtitles ): ?>

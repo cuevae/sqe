@@ -201,8 +201,7 @@ echo form_upload( $data );
         echo form_textarea( $data );
         #endregion
         ?>
-    </div>
-    <div class="col-md-6 column">
+        <br/>
         <?php #region Contact Preference
         $id = 'contactPreference';
         $label = 'Contact Preference: ';
@@ -215,7 +214,9 @@ echo form_upload( $data );
         echo form_dropdown( $id, $options, $_jobseeker->getContactPreference() );
         #endregion
         ?>
-        <br/>
+    </div>
+    <div class="col-md-6 column">
+
         <?php #region Education Level
         $id = 'EducationLevels_idEducationLevel';
         $label = 'Education Level: ';

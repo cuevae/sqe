@@ -16,6 +16,9 @@
             <a href="<?= site_url( 'experiences/' ) ?>">Working Experience</a>
         </li> |
         <li style="display: inline">
+            <a href="<?= site_url( 'jobpreferences/' ) ?>">Job Prefs</a>
+        </li> |
+        <li style="display: inline">
             <a href="<?= site_url( 'skills/' ) ?>">Skills</a>
         </li> |
         <li style="display: inline">
@@ -26,7 +29,10 @@
                 <a href="<?= site_url( 'collate/' ) ?>">Search</a>
             </li> |
             <li style="display: inline">
-                <a href="<?= site_url( 'employmentlevels/' ) ?>">Employment Levels</a>
+                <a href="<?= site_url( 'employmentlevels/' ) ?>">Emp. Levels</a>
+            </li> |
+            <li style="display: inline">
+                <a href="<?= site_url( 'educationlevels/' ) ?>">Educ. Levels</a>
             </li> |
             <li style="display: inline">
                 <a href="<?= site_url( 'jobtitles/' ) ?>">Job Titles</a>

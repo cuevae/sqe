@@ -53,7 +53,7 @@ echo form_submit( 'submit-skill', 'Add', "class=btn btn-success btn-large"  );
     <h3>Current skills</h3>
 
 <?php if ( !isset( $_skills ) || empty( $_skills ) ) : ?>
-    <p>You have no skills added. Please use the form above to start adding.</p>
+    <p>You have no skills added. spanPlease use the form to start adding.</p>
 <?php else : ?>
     <ul>
         <?php foreach ( $_skills as $_skill ): ?>

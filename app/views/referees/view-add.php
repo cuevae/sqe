@@ -130,7 +130,7 @@ echo form_submit( 'submit-referee', 'Add', "class=btn btn-success btn-large"  );
 <h3>Current referees</h3>
 
 <?php if ( !isset( $_referees ) || empty( $_referees ) ) : ?>
-    <p>You have no referees added. Please use the form above to start adding.</p>
+    <p>You have no referees added. spanPlease use the form to start adding.</p>
 <?php else : ?>
     <ol>
         <?php foreach ( $_referees as $_referee ): ?>
