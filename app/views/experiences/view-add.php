@@ -43,6 +43,7 @@ $label = 'Date Started: ';
 $data = array(
     'name' => $id,
     'id' => $id,
+    'class' => 'datepicker'
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -55,6 +56,7 @@ $label = 'Date Finished: ';
 $data = array(
     'name' => $id,
     'id' => $id,
+    'class' => 'datepicker'
 );
 echo form_label( $label, $id );
 echo form_input( $data );

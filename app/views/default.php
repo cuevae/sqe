@@ -1,16 +1,18 @@
 <html>
 <head>
+    <script src="<?=base_url();?>/assets/js/jquery-1.11.0.min.js"></script>
+    <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
+    <script src="<?=base_url();?>/assets/js/scripts.js"></script>
+    <script src="<?=base_url();?>/assets/js/bootstrap.min.js"></script>
     <?php
     echo "\n" . link_tag( 'assets/css/bootstrap.min.css' );
+    echo "\n" . link_tag( 'assets/css/datepicker.css' );
     if ( isset( $theme ) ) {
         echo "\n" . link_tag( 'assets/css/' . $theme . '.min.css' );
     } else {
         echo "\n" . link_tag( 'assets/css/bootstrap-theme.min.css' );
     }
-    echo "\n" . link_tag( 'assets/js/bootstrap.min.js' );
     ?>
-    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
-
     <title>
         <?php $__element = 'title'; ?>
         <?php if ( isset( $$__element ) ): ?>

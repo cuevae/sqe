@@ -295,7 +295,8 @@ $label = 'Date Of Birth: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => set_value($id)
+    'value' => set_value($id),
+    'class' => 'datepicker'
 );
 echo form_label( $label, $id );
 echo form_input( $data );

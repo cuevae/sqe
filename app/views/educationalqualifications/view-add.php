@@ -101,14 +101,14 @@ echo form_input( $data );
     <br/>
 <?php
 $id = 'yearObtained';
-$label = 'yearObtained: ';
+$label = 'Year Obtained: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'max_length' => 45
+    'max_length' => 45,
 );
 echo form_label( $label, $id );
-echo form_input( $data );
+echo form_dropdown( $id, array_reverse( array_combine( range( 1920, date( 'Y' ) ), range( 1920, date( 'Y' ) ) ) ), date( 'Y' ) );
 ?>
     <br/>
 <?php
