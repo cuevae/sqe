@@ -1,7 +1,7 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-2 column">
-            <?php if( $_jobseeker->isFemale() ) :?>
+            <?php if ( $_jobseeker->isFemale() ) : ?>
                 <img alt="140x140" src="http://lorempixel.com/140/140/people/9" class="img-circle"/>
             <?php else: ?>
                 <img alt="140x140" src="http://lorempixel.com/140/140/business/7" class="img-circle"/>
@@ -13,7 +13,7 @@
                     <h1 class="text-left">
                         <?= $_jobseeker->getFullName(); ?>
                         <?php if ( !isset( $_alreadyPdf ) ): ?>
-                            <small><a href="<?= site_url( 'curriculum/pdf/' ) ?>">pdf</a></small>
+                            <small><a href="<?= site_url( 'curriculum/pdf/' . $_jobseeker->getId() ) ?>">pdf</a></small>
                         <?php endif; ?>
                     </h1>
 
@@ -115,7 +115,7 @@
                 <ol>
                     <?php foreach ( $_skills as $_skill ): ?>
                         <li>
-                            <?=$_skill->getFullName();?>
+                            <?= $_skill->getFullName(); ?>
                         </li>
                     <?php endforeach; ?>
                 </ol>
@@ -126,12 +126,13 @@
         <div class="col-md-4 column">
             <h4>Educational Qualifications</h4>
             <?php if ( !isset( $_edQualifications ) || empty( $_edQualifications ) ): ?>
-                <p>No qualifications added. Click <a href="<?= site_url( 'educationalqualifications' ) ?>">here</a> to start adding</p>
+                <p>No qualifications added. Click <a href="<?= site_url( 'educationalqualifications' ) ?>">here</a> to
+                    start adding</p>
             <?php else: ?>
                 <ol>
                     <?php foreach ( $_edQualifications as $_edQualification ): ?>
                         <li>
-                            <?=$_edQualification->getQualificationFullName();?>
+                            <?= $_edQualification->getQualificationFullName(); ?>
                         </li>
                     <?php endforeach; ?>
                 </ol>
@@ -140,12 +141,13 @@
         <div class="col-md-4 column">
             <h4>Professional Qualifications</h4>
             <?php if ( !isset( $_profQualifications ) || empty( $_profQualifications ) ): ?>
-                <p>No qualifications added. Click <a href="<?= site_url( 'professionalqualifications' ) ?>">here</a> to start adding</p>
+                <p>No qualifications added. Click <a href="<?= site_url( 'professionalqualifications' ) ?>">here</a> to
+                    start adding</p>
             <?php else: ?>
                 <ol>
                     <?php foreach ( $_profQualifications as $_profQualification ): ?>
                         <li>
-                            <?=$_profQualification->getFullName();?>
+                            <?= $_profQualification->getFullName(); ?>
                         </li>
                     <?php endforeach; ?>
                 </ol>
@@ -154,12 +156,13 @@
         <div class="col-md-4 column">
             <h4>Working Experience</h4>
             <?php if ( !isset( $_experiences ) || empty( $_experiences ) ): ?>
-                <p>No working experiences added. Click <a href="<?= site_url( 'experiences' ) ?>">here</a> to start adding</p>
+                <p>No working experiences added. Click <a href="<?= site_url( 'experiences' ) ?>">here</a> to start
+                    adding</p>
             <?php else: ?>
                 <ol>
                     <?php foreach ( $_experiences as $_experience ): ?>
                         <li>
-                            <?=$_experience->getExperienceName();?>
+                            <?= $_experience->getExperienceName(); ?>
                         </li>
                     <?php endforeach; ?>
                 </ol>
@@ -175,13 +178,20 @@
                 <ol>
                     <?php foreach ( $_referees as $_referee ): ?>
                         <li>
-                            <?php $email = $_referee->getEmail() ? ' | ' . $_referee->getEmail() : ''?>
-                            <?php $contactNumber = $_referee->getContactPhone() ? ' | ' . $_referee->getContactPhone() : ''?>
-                            <?=$_referee->getFullName() . $email . $contactNumber ;?>
+                            <?php $email = $_referee->getEmail() ? ' | ' . $_referee->getEmail() : '' ?>
+                            <?php $contactNumber = $_referee->getContactPhone() ? ' | ' . $_referee->getContactPhone() : '' ?>
+                            <?= $_referee->getFullName() . $email . $contactNumber; ?>
                         </li>
                     <?php endforeach; ?>
                 </ol>
             <?php endif; ?>
         </div>
     </div>
+    <?php if ( !isset( $_alreadyPdf ) ): ?>
+        <div class="row clearfix">
+            <div class="col-md-12 column">
+                <p style="float: right;"><a href="<?= site_url( 'curriculum/edit/' . $_jobseeker->getId() ) ?>">Edit this CV</a></p>
+            </div>
+        </div>
+    <?php endif; ?>
 </div>
