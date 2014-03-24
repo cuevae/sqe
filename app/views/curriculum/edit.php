@@ -36,7 +36,7 @@
         ?>
         <?php #region Title
         $id = 'title';
-        $label = 'Title: ';
+        $label = 'Title*: ';
         $options = array(
             'mr' => 'Mr.',
             'ms' => 'Ms.',
@@ -50,7 +50,7 @@
         <br/>
         <?php #region Forename1
         $id = 'forename1';
-        $label = 'Forename 1: ';
+        $label = 'Forename 1*: ';
         $data = array(
             'name' => $id,
             'id' => $id,
@@ -76,7 +76,7 @@
         <br/>
         <?php #region Surname
         $id = 'surname';
-        $label = 'Surname: ';
+        $label = 'Surname*: ';
         $data = array(
             'name' => $id,
             'id' => $id,
