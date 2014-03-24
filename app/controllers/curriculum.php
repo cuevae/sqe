@@ -98,6 +98,23 @@ class Curriculum extends MY_Controller
         $this->load->view( 'default', $this->viewData );
     }
 
+
+    public function pdf( $idUser = null )
+    {
+        $idUser = $idUser ? : $this->getIdUser();
+        if ( $idUser != $this->getIdUser() && !$this->isAdmin() ) {
+            show_404();
+        }
+
+        $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
+        $tmpData = [ '_jobseeker' => $jobseeker ];
+        $empData['_alreadyPdf'] = true;
+        $data['_view'] = $this->load->view( 'curriculum/view', $tmpData, TRUE );
+        $data['_username'] = $this->session->userdata( 'username' );
+
+        $this->load->view( 'curriculum/pdf', $data );
+    }
+
     private function setEditFormRules()
     {
         $this->form_validation->set_rules( 'title', 'Title', 'trim|required|xss_clean' );

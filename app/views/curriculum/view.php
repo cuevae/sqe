@@ -1,14 +1,16 @@
-<?php /** @var $_jobseeker Jobseeker */ ?>
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-2 column">
-            <img alt="140x140" src="http://lorempixel.com/140/140/" class="img-circle"/>
+            <img alt="140x140" src="http://lorempixel.com/140/140/people" class="img-circle"/>
         </div>
         <div class="col-md-10 column">
             <div class="row clearfix">
                 <div class="col-md-8 column">
                     <h1 class="text-left">
                         <?= $_jobseeker->getFullName(); ?>
+                        <?php if ( !isset( $_alreadyPdf ) ): ?>
+                            <small><a href="<?= site_url( 'curriculum/pdf/' ) ?>">pdf</a></small>
+                        <?php endif; ?>
                     </h1>
 
                     <p>
@@ -26,26 +28,26 @@
     <div class="row clearfix">
         <div class="col-md-4 column">
             <h4>Contact</h4>
-            <abbr title="Email">E:</abbr> <?= $_jobseeker->getUsername(); ?>
+            <span title="Email">E:</span> <?= $_jobseeker->getUsername(); ?>
             <?php $email2 = $_jobseeker->getSecondEmail() ?>
             <?php if ( !empty( $email2 ) && $email2 != $_jobseeker->getUsername() ) : ?>
-                <br/><abbr title="Email2">E:</abbr> <?= $email2; ?>
+                <br/><span title="Email2">E:</span> <?= $email2; ?>
             <?php endif; ?>
-            <?php $landline = $_jobseeker->getLandline()  ?>
-            <?php if ( !empty( $landline) ) : ?>
-                <br/><abbr title="Phone">P:</abbr> <?= $landline; ?>
+            <?php $landline = $_jobseeker->getLandline() ?>
+            <?php if ( !empty( $landline ) ) : ?>
+                <br/><span title="Phone">P:</span> <?= $landline; ?>
             <?php endif; ?>
             <?php $mobile = $_jobseeker->getMobile() ?>
             <?php if ( !empty( $mobile ) ) : ?>
-                <br/><abbr title="Mobile">M:</abbr> <?= $mobile; ?>
+                <br/><span title="Mobile">M:</span> <?= $mobile; ?>
             <?php endif; ?>
             <?php $personalUrl = $_jobseeker->getPersonalUrl() ?>
             <?php if ( !empty( $personalUrl ) ) : ?>
-                <br/><abbr title="Web">W:</abbr> <?= $personalUrl; ?>
+                <br/><span title="Web">W:</span> <?= $personalUrl; ?>
             <?php endif; ?>
             <?php $contactPreference = $_jobseeker->getContactPreference() ?>
             <?php if ( !empty( $contactPreference ) ) : ?>
-                    <br/><em>Contact preference: <?= $contactPreference ?></em>
+                <br/><em>Contact preference: <?= $contactPreference ?></em>
             <?php endif; ?>
         </div>
         <div class="col-md-4 column">
