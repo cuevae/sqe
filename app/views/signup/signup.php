@@ -18,8 +18,13 @@
     <?php echo form_open("signup");?>
     <table cellspacing="1" cellpadding="2" width="600" align="center">
         <tbody>
-
-
+        <?php if ( isset( $_error ) && !empty( $_error ) ): ?>
+        <tr>
+            <td width="38%" align="right"></td>
+            <td><CSS class="mandatory_star"></CSS></td>
+            <td nowrap="nowrap"><p><?= $_error; ?></p></td>
+        </tr>
+        <?php endif; ?>
         <tr>
             <td width="38%" align="right">First Name</td>
             <td><CSS class="mandatory_star">*</CSS></td>
@@ -32,7 +37,7 @@
         </tr>
 
         <tr>
-            <td align="right">Email</td>
+            <td align="right">Username</td>
             <td class="mandatory_star">*</td>
             <td nowrap="nowrap"><?php echo form_input($username);?></td>
         </tr>

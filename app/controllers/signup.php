@@ -49,7 +49,7 @@ class Signup extends MY_Controller
 
         //display the create user form
         //set the flash data error message if there is one
-        $this->data['message'] = ( validation_errors() ? validation_errors() : ( $this->session->flashdata( 'message' ) ) );
+        $this->data['_error'] = ( validation_errors() ? validation_errors() : ( $this->session->flashdata( 'message' ) ) );
 
         $this->data['forename1'] = array(
             'name' => 'forename1',
