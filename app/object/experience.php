@@ -136,8 +136,8 @@ class Experience extends Base
     {
         $jobTitle = $this->jobtitle->getJobTitle( $htmlSafe );
         $employerName = $this->getEmployerName( $htmlSafe );
-        $dateStarted = $this->getDateStarted( $htmlSafe );
-        $dateFinished = $this->getDateFinished( $htmlSafe );
+        $dateStarted = $this->getDateStarted();
+        $dateFinished = $this->getDateFinished();
 
         $result = $jobTitle;
         $result .= ( $employerName ) ? ' @ ' . $employerName : '';
