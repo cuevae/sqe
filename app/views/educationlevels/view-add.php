@@ -26,7 +26,7 @@
 
             <?php
             $id = 'educationLevel';
-            $label = 'Education Level: ';
+            $label = 'Education Level*: ';
             $data = array(
                 'name' => $id,
                 'id' => $id,

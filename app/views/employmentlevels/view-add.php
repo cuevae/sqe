@@ -26,7 +26,7 @@
 
             <?php #region Skill Name
             $id = 'employmentLevel';
-            $label = 'Employment Level: ';
+            $label = 'Employment Level*: ';
             $data = array(
                 'name' => $id,
                 'id' => $id,

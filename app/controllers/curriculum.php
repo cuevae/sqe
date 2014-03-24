@@ -69,7 +69,9 @@ class Curriculum extends MY_Controller
                     if ( $data['postcode'] ) {
                         $data['postcode'] = strtoupper( $data['postcode'] );
                         preg_match( '#^[A-Z]+[0-9]{2}#', $data['postcode'], $matches );
-                        $data['postcodeStart'] = $matches[0];
+                        if ( isset( $matches ) && !empty( $matches ) ) {
+                            $data['postcodeStart'] = $matches[0];
+                        }
                     }
                     $data['fiveOrMoreGcses'] = ( $data['noOfGcses'] >= 5 );
                     $jobseeker = new Jobseeker( $data );

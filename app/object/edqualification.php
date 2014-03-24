@@ -9,7 +9,7 @@
 class EdQualification extends Base
 {
 
-    protected $requiredFields = array();
+    protected $requiredFields = array('qualificationType', 'courseName');
 
     var $idEducationalQualifications;
     var $Persons_idUser;

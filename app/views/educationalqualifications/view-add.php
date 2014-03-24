@@ -26,7 +26,7 @@
 
                 <?php
                 $id = 'qualificationType';
-                $label = 'Qualification Type: ';
+                $label = 'Qualification Type*: ';
                 $data = array(
                     'name' => $id,
                     'id' => $id,
@@ -38,7 +38,7 @@
                 <br/>
                 <?php
                 $id = 'courseName';
-                $label = 'Course Name: ';
+                $label = 'Course Name*: ';
                 $data = array(
                     'name' => $id,
                     'id' => $id,
