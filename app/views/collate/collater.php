@@ -44,7 +44,7 @@ echo form_dropdown( 'educationalQualification', array( -1 => '-' ) + $_edQualifi
 echo form_label( 'Professional Qualification', 'professionalQualification' );
 echo form_dropdown( 'professionalQualification', array( -1 => '-' ) + $_professionalQualificationOptions );
 ?>
-
+<br/>
 <?php
 //Title
 $options = array(
@@ -61,7 +61,7 @@ echo form_dropdown( 'experience', $options, '' );
 <br/>
 
 <?php
-echo form_submit( 'submit-query', 'Submit!' );
+echo form_submit( 'submit-query', 'Submit', "class=btn btn-success btn-large"  );
 ?>
 
 <?php echo form_close(); ?>

@@ -46,7 +46,7 @@ echo form_dropdown( $id, $options );
 ?>
     <br/>
 <?php
-echo form_submit( 'submit-skill', 'Add' );
+echo form_submit( 'submit-skill', 'Add', "class=btn btn-success btn-large"  );
 ?>
 <?= form_close(); ?>
 

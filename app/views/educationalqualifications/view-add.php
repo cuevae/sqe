@@ -136,7 +136,7 @@ echo form_input( $data );
 ?>
     <br/>
 <?php
-echo form_submit( 'submit-educationalqualifications', 'Add' );
+echo form_submit( 'submit-educationalqualifications', 'Add', "class=btn btn-success btn-large" );
 ?>
 <?= form_close(); ?>
 

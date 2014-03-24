@@ -85,7 +85,7 @@ echo form_input( $data );
 ?>
 <br/>
 <?php
-echo form_submit( 'submit-professionalqualifications', 'Add' );
+echo form_submit( 'submit-professionalqualifications', 'Add', "class=btn btn-success btn-large"  );
 ?>
 <?= form_close(); ?>
 

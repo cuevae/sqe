@@ -31,7 +31,7 @@ echo form_input( $data );
 ?>
     <br/>
 <?php
-echo form_submit( 'submit-sector', 'Add' );
+echo form_submit( 'submit-sector', 'Add', "class=btn btn-success btn-large"  );
 ?>
 <?= form_close(); ?>
 

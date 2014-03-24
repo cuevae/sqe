@@ -24,7 +24,7 @@ echo form_dropdown( 'JobTitles_idJobTitles', $_jobTitleOptions );
 ?>
 <br/>
 <?php
-echo form_submit( 'submit-preference', 'Add' );
+echo form_submit( 'submit-preference', 'Add', "class=btn btn-success btn-large" );
 ?>
 <?= form_close(); ?>
 

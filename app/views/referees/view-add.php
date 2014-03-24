@@ -123,7 +123,7 @@ echo form_upload( $data );
 <br/>-->
 
 <?php
-echo form_submit( 'submit-referee', 'Add' );
+echo form_submit( 'submit-referee', 'Add', "class=btn btn-success btn-large"  );
 ?>
 <?= form_close(); ?>
 

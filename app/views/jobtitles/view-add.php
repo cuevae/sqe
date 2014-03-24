@@ -38,7 +38,7 @@ echo form_dropdown( $id, $_sectors );
 ?>
     <br/>
 <?php
-echo form_submit( 'submit-jobtitle', 'Add' );
+echo form_submit( 'submit-jobtitle', 'Add', "class=btn btn-success btn-large" );
 ?>
 <?= form_close(); ?>
 

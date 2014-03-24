@@ -100,7 +100,7 @@ echo form_dropdown( $id, $_employmentLevelOptions );
 <br/>
 
 <?php
-echo form_submit( 'submit-experience', 'Add' );
+echo form_submit( 'submit-experience', 'Add', "class=btn btn-success btn-large" );
 ?>
 <?= form_close(); ?>
 

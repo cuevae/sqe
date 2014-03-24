@@ -29,7 +29,7 @@ echo form_input( $data );
 ?>
     <br/>
 <?php
-echo form_submit( 'submit-edlevel', 'Add' );
+echo form_submit( 'submit-edlevel', 'Add', "class=btn btn-success btn-large"  );
 ?>
 <?= form_close(); ?>
 

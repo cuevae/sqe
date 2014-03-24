@@ -2,12 +2,13 @@
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="Content-type" content="text/html;charset=UTF-8">
-    <script src="<?=base_url();?>/assets/js/jquery-1.11.0.min.js"></script>
+    <script src="<?= base_url(); ?>/assets/js/jquery-1.11.0.min.js"></script>
     <script src="//code.jquery.com/ui/1.10.4/jquery-ui.js"></script>
-    <script src="<?=base_url();?>/assets/js/scripts.js"></script>
-    <script src="<?=base_url();?>/assets/js/bootstrap.min.js"></script>
+    <script src="<?= base_url(); ?>/assets/js/scripts.js"></script>
+    <script src="<?= base_url(); ?>/assets/js/bootstrap.min.js"></script>
     <?php
     echo "\n" . link_tag( 'assets/css/bootstrap.min.css' );
+    echo "\n" . link_tag( 'assets/css/style.css' );
     echo "\n" . link_tag( 'assets/css/datepicker.css' );
     if ( isset( $theme ) ) {
         echo "\n" . link_tag( 'assets/css/' . $theme . '.min.css' );
@@ -77,18 +78,24 @@
     <div class="break">
     </div>
 
-    <div id="div_footer_wrapper">
-        <table width="100%">
-            <tr width="100%">
-                <td width="25%" align="left">
-                    <b>
-                        <!-- Can't pre-render this, as it'll throw the reported results -->
-                        Rendered in {elapsed_time}s, and {memory_usage}.
-                    </b>
-                </td>
-            </tr>
-        </table>
-    </div>
+    <?php if ( ENVIRONMENT != 'production' ): ?>
+        <div id="div_footer_wrapper">
+            <table width="100%">
+                <tr width="100%">
+                    <td width="25%" align="left">
+                        <b>
+                            <!-- Can't pre-render this, as it'll throw the reported results -->
+                            Rendered in {elapsed_time}s, and {memory_usage}.
+                        </b>
+                    </td>
+                </tr>
+            </table>
+        </div>
+    <?php else: ?>
+        <div id="div_footer_wrapper">
+            Emplome &copyrigth; <?= date( 'Y' ) ?>
+        </div>
+    <?php endif; ?>
 </div>
 
 
