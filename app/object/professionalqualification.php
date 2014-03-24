@@ -121,5 +121,23 @@ class ProfessionalQualification extends Base
         return $this->qualificationName;
     }
 
+    public function getFullName( $htmlSafe = true )
+    {
+        $name = $this->getQualificationName( $htmlSafe );
+        $awardingBody = $this->getAwardingBody( $htmlSafe );
+        $yearObtained = $this->getYearObtained();
+
+        $result = '';
+        $result .= $name;
+        if ( !empty( $awardingBody ) ) {
+            $result .= ' - ' . $awardingBody;
+        }
+        if ( !empty( $yearObtained ) ) {
+            $result .= ' [' . $yearObtained . ']';
+        }
+
+        return $result;
+    }
+
 
 } 

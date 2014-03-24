@@ -85,4 +85,19 @@ class Skill extends Base
     }
 
 
+    public function getFullName( $htmlSafe = true )
+    {
+        $level = $this->getSkillLevel( $htmlSafe );
+        $name = $this->getSkillName( $htmlSafe );
+
+        $result = '';
+        $result .= $name;
+        if ( !empty( $level ) ) {
+            $result .= ' [' . $level . ']';
+        }
+
+        return $result;
+    }
+
+
 }

@@ -11,6 +11,16 @@ class Curriculum extends MY_Controller
 
     /** @var  $curriculum Curriculum_Model */
     var $curriculum;
+    /** @var  Skills_Model */
+    var $skills;
+    /** @var  Experiences_Model */
+    var $experiences;
+    /** @var  EducationalQualifications_Model */
+    var $eqs;
+    /** @var  ProfessionalQualifications_Model */
+    var $pqs;
+    /** @var  Referees_Model */
+    var $referees;
 
     /**
      *
@@ -19,6 +29,11 @@ class Curriculum extends MY_Controller
     {
         parent::__construct();
         $this->load->model( 'curriculum' );
+        $this->load->model( 'skills' );
+        $this->load->model( 'experiences' );
+        $this->load->model( 'professionalqualifications', 'pqs' );
+        $this->load->model( 'educationalqualifications', 'eqs' );
+        $this->load->model( 'referees' );
     }
 
 
@@ -72,7 +87,6 @@ class Curriculum extends MY_Controller
         $this->viewData['main_content_view'] = $this->load->view( 'curriculum/edit', $tmpData, TRUE );
         $this->viewData['title'] = 'Edit';
         $this->load->view( 'default', $this->viewData );
-        //$this->load->view( 'curriculum/edit', $tmpData );
     }
 
 
@@ -87,12 +101,21 @@ class Curriculum extends MY_Controller
         }
 
         $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
-
         if ( !$jobseeker instanceof Jobseeker ) {
             show_404();
         }
-
-        $tmpData = [ '_jobseeker' => $jobseeker ];
+        $skills = $this->skills->getUserSkills( $idUser );
+        $experiences = $this->experiences->getUserExperiences( $idUser );
+        $eqs = $this->eqs->getUserEdQualifications( $idUser );
+        $pqs = $this->pqs->getUserProfessionalQualifications( $idUser );
+        $referees = $this->referees->getUserReferees( $idUser );
+        $tmpData = [ '_jobseeker' => $jobseeker,
+                     '_skills' => $skills,
+                     '_experiences' => $experiences,
+                     '_edQualifications' => $eqs,
+                     '_profQualifications' => $pqs,
+                     '_referees' => $referees,
+        ];
         $this->viewData['main_content_view'] = $this->load->view( 'curriculum/view', $tmpData, TRUE );
         $this->viewData['title'] = 'View CV';
         $this->load->view( 'default', $this->viewData );
@@ -107,7 +130,21 @@ class Curriculum extends MY_Controller
         }
 
         $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
-        $tmpData = [ '_jobseeker' => $jobseeker ];
+        if ( !$jobseeker instanceof Jobseeker ) {
+            show_404();
+        }
+        $skills = $this->skills->getUserSkills( $idUser );
+        $experiences = $this->experiences->getUserExperiences( $idUser );
+        $eqs = $this->eqs->getUserEdQualifications( $idUser );
+        $pqs = $this->pqs->getUserProfessionalQualifications( $idUser );
+        $referees = $this->referees->getUserReferees( $idUser );
+        $tmpData = [ '_jobseeker' => $jobseeker,
+                     '_skills' => $skills,
+                     '_experiences' => $experiences,
+                     '_edQualifications' => $eqs,
+                     '_profQualifications' => $pqs,
+                     '_referees' => $referees,
+        ];
         $tmpData['_alreadyPdf'] = true;
         $data['_view'] = $this->load->view( 'curriculum/view', $tmpData, TRUE );
         $data['_username'] = $this->session->userdata( 'username' );

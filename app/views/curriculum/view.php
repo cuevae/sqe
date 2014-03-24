@@ -1,7 +1,11 @@
 <div class="container">
     <div class="row clearfix">
         <div class="col-md-2 column">
-            <img alt="140x140" src="http://lorempixel.com/140/140/people" class="img-circle"/>
+            <?php if( $_jobseeker->isFemale() ) :?>
+                <img alt="140x140" src="http://lorempixel.com/140/140/people/9" class="img-circle"/>
+            <?php else: ?>
+                <img alt="140x140" src="http://lorempixel.com/140/140/business/7" class="img-circle"/>
+            <?php endif; ?>
         </div>
         <div class="col-md-10 column">
             <div class="row clearfix">
@@ -105,32 +109,79 @@
         </div>
         <div class="col-md-4 column">
             <h4>Skills</h4>
-            <ul>
-                <li>
-                    Lorem ipsum dolor sit amet
-                </li>
-                <li>
-                    Consectetur adipiscing elit
-                </li>
-                <li>
-                    Integer molestie lorem at massa
-                </li>
-                <li>
-                    Facilisis in pretium nisl aliquet
-                </li>
-                <li>
-                    Nulla volutpat aliquam velit
-                </li>
-                <li>
-                    Faucibus porta lacus fringilla vel
-                </li>
-                <li>
-                    Aenean sit amet erat nunc
-                </li>
-                <li>
-                    Eget porttitor lorem
-                </li>
-            </ul>
+            <?php if ( !isset( $_skills ) || empty( $_skills ) ): ?>
+                <p>No skills added. Click <a href="<?= site_url( 'skills' ) ?>">here</a> to start adding</p>
+            <?php else: ?>
+                <ol>
+                    <?php foreach ( $_skills as $_skill ): ?>
+                        <li>
+                            <?=$_skill->getFullName();?>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-4 column">
+            <h4>Educational Qualifications</h4>
+            <?php if ( !isset( $_edQualifications ) || empty( $_edQualifications ) ): ?>
+                <p>No qualifications added. Click <a href="<?= site_url( 'educationalqualifications' ) ?>">here</a> to start adding</p>
+            <?php else: ?>
+                <ol>
+                    <?php foreach ( $_edQualifications as $_edQualification ): ?>
+                        <li>
+                            <?=$_edQualification->getQualificationFullName();?>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            <?php endif; ?>
+        </div>
+        <div class="col-md-4 column">
+            <h4>Professional Qualifications</h4>
+            <?php if ( !isset( $_profQualifications ) || empty( $_profQualifications ) ): ?>
+                <p>No qualifications added. Click <a href="<?= site_url( 'professionalqualifications' ) ?>">here</a> to start adding</p>
+            <?php else: ?>
+                <ol>
+                    <?php foreach ( $_profQualifications as $_profQualification ): ?>
+                        <li>
+                            <?=$_profQualification->getFullName();?>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            <?php endif; ?>
+        </div>
+        <div class="col-md-4 column">
+            <h4>Working Experience</h4>
+            <?php if ( !isset( $_experiences ) || empty( $_experiences ) ): ?>
+                <p>No working experiences added. Click <a href="<?= site_url( 'experiences' ) ?>">here</a> to start adding</p>
+            <?php else: ?>
+                <ol>
+                    <?php foreach ( $_experiences as $_experience ): ?>
+                        <li>
+                            <?=$_experience->getExperienceName();?>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            <?php endif; ?>
+        </div>
+    </div>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <h4>Referees</h4>
+            <?php if ( !isset( $_referees ) || empty( $_referees ) ): ?>
+                <p>No referees added. Click <a href="<?= site_url( 'referees' ) ?>">here</a> to start adding</p>
+            <?php else: ?>
+                <ol>
+                    <?php foreach ( $_referees as $_referee ): ?>
+                        <li>
+                            <?php $email = $_referee->getEmail() ? ' | ' . $_referee->getEmail() : ''?>
+                            <?php $contactNumber = $_referee->getContactPhone() ? ' | ' . $_referee->getContactPhone() : ''?>
+                            <?=$_referee->getFullName() . $email . $contactNumber ;?>
+                        </li>
+                    <?php endforeach; ?>
+                </ol>
+            <?php endif; ?>
         </div>
     </div>
 </div>
