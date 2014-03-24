@@ -111,7 +111,7 @@ echo form_checkbox( $data );
 ?>
 <br/>
 <?php
-$id = 'referenceDoc';
+/*$id = 'referenceDoc';
 $label = 'ReferenceDoc: ';
 $data = array(
     'name' => $id,
@@ -119,8 +119,8 @@ $data = array(
 );
 echo form_label( $label, $id );
 echo form_upload( $data );
-?>
-<br/>
+*/?><!--
+<br/>-->
 
 <?php
 echo form_submit( 'submit-referee', 'Add' );

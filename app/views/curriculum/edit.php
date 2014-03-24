@@ -142,7 +142,7 @@ echo form_label( $label, $id );
 echo form_input( $data );
 #endregion?>
     <br/>
-<?php #region Photo
+<?php /*#region Photo
 $id = 'photo';
 $label = 'Photo: ';
 $data = array(
@@ -151,7 +151,7 @@ $data = array(
 );
 echo form_label( $label, $id );
 echo form_upload( $data );
-#endregion?>
+#endregion*/?>
     <br/>
 <?php #region Male/Female
 $id = 'sex';
