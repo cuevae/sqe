@@ -81,6 +81,9 @@ class Professionalqualifications_Model extends CI_Model
 
         $objects = array();
         foreach ( $results as $result ) {
+            if ( !empty( $result['yearObtained'] ) ) {
+                $result['yearObtained'] = date( 'Y', strtotime( $result['yearObtained'] ) );
+            }
             $obj = new $this->objectClass( $result );
             $objects[] = $obj;
         }

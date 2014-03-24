@@ -68,6 +68,9 @@ class EducationalQualifications_Model extends CI_Model
 
         $objects = array();
         foreach ( $results as $result ) {
+            if ( !empty( $result['yearObtained'] ) ) {
+                $result['yearObtained'] = date( 'Y', strtotime( $result['yearObtained'] ) );
+            }
             $result['edLevel'] = new Edlevel( $result );
             $obj = new $this->objectClass( $result );
             $objects[] = $obj;

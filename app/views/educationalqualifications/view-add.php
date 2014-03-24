@@ -108,7 +108,7 @@ $data = array(
     'max_length' => 45,
 );
 echo form_label( $label, $id );
-echo form_dropdown( $id, array_reverse( array_combine( range( 1920, date( 'Y' ) ), range( 1920, date( 'Y' ) ) ) ), date( 'Y' ) );
+echo form_dropdown( $id, array_reverse( array_combine( range( 1920, date( 'Y' ) ), range( 1920, date( 'Y' ) ) ), true ), date( 'Y' ) );
 ?>
     <br/>
 <?php

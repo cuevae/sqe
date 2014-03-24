@@ -44,6 +44,9 @@ class Professionalqualifications extends MY_Controller
                 try {
                     $data = $this->input->post();
                     $data['Persons_idUser'] = $this->getIdUser();
+                    if ( !empty( $data['yearObtained'] ) ) {
+                        $data['yearObtained'] = date( 'Y-m-d', strtotime( '01-01-' . $data['yearObtained'] ) );
+                    }
                     $pq = new ProfessionalQualification( $data );
                     $result = $this->pqs->addProfessionalQualification( $this->getIdUser(), $pq );
                 } catch ( Exception $e ) {

@@ -44,6 +44,9 @@ class EducationalQualifications extends MY_Controller
                 try {
                     $data = $this->input->post();
                     $data['Persons_idUser'] = $this->getIdUser();
+                    if ( !empty( $data['yearObtained'] ) ) {
+                        $data['yearObtained'] = date( 'Y-m-d', strtotime( '01-01-' . $data['yearObtained'] ) );
+                    }
                     $obj = new EdQualification( $data );
                     $result = $this->model->addQualification( $this->getIdUser(), $obj );
                 } catch ( Exception $e ) {
