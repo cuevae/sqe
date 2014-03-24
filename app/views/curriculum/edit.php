@@ -31,7 +31,7 @@ $options = array(
     'miss' => 'Miss.'
 );
 echo form_label( $label, $id );
-echo form_dropdown( $id, $options, $_jobseeker->getTitle() );
+echo form_dropdown( $id, $options, $_jobseeker->getTitle(false) );
 #endregion ?>
 <br/>
 <?php #region Forename1
@@ -40,7 +40,7 @@ $label = 'Forename 1: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getForename1(),
+    'value' => $_jobseeker->getForename1(false),
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -52,7 +52,7 @@ $label = 'Forename 2: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getForename2(),
+    'value' => $_jobseeker->getForename2(false),
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -64,7 +64,7 @@ $label = 'Surname: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getSurname()
+    'value' => $_jobseeker->getSurname(false)
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -76,7 +76,7 @@ $label = 'Address Line 1: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getAddressLine1()
+    'value' => $_jobseeker->getAddressLine1(false)
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -88,7 +88,7 @@ $label = 'Address Line 2: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getAddressLine2()
+    'value' => $_jobseeker->getAddressLine2(false)
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -100,7 +100,7 @@ $label = 'Town: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getTown()
+    'value' => $_jobseeker->getTown(false)
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -112,7 +112,7 @@ $label = 'Postcode: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getPostcode()
+    'value' => $_jobseeker->getPostcode(false)
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -124,7 +124,7 @@ $label = 'Alternative Email: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getSecondEmail()
+    'value' => $_jobseeker->getSecondEmail(false)
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -136,7 +136,7 @@ $label = 'Website: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getPersonalUrl()
+    'value' => $_jobseeker->getPersonalUrl(false)
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -170,7 +170,7 @@ $label = 'Authority To Work Statement: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getAuthorityToWorkStatement()
+    'value' => $_jobseeker->getAuthorityToWorkStatement(false)
 );
 echo form_label( $label, $id );
 echo form_textarea( $data );
@@ -211,7 +211,7 @@ $label = 'GCSE English Grade: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getGcseEnglishGrade()
+    'value' => $_jobseeker->getGcseEnglishGrade(false)
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -223,7 +223,7 @@ $label = 'GCSE Maths Grade: ';
 $data = array(
     'name' => $id,
     'id' => $id,
-    'value' => $_jobseeker->getGcseMathsGrade()
+    'value' => $_jobseeker->getGcseMathsGrade(false)
 );
 echo form_label( $label, $id );
 echo form_input( $data );
@@ -296,7 +296,8 @@ $data = array(
     'name' => $id,
     'id' => $id,
     'value' => set_value($id),
-    'class' => 'datepicker'
+    'class' => 'datepicker',
+    'value' => $_jobseeker->getDob()
 );
 echo form_label( $label, $id );
 echo form_input( $data );

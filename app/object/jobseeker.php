@@ -202,6 +202,11 @@ class Jobseeker extends Person
         return $result;
     }
 
+    public function getDob()
+    {
+        return $this->dob;
+    }
+
     public function isFemale()
     {
         return $this->female == 1;

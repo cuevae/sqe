@@ -27,7 +27,10 @@ class Curriculum extends MY_Controller
      */
     public function edit( $idUser = null )
     {
-        $idUser = $idUser ?: $this->getIdUser();
+        $idUser = $idUser ? : $this->getIdUser();
+        if ( $idUser != $this->getIdUser() && !$this->isAdmin() ) {
+            show_404();
+        }
 
         $tmpData['_educationLevelOptions'] = $this->curriculum->getAvailableEducationLevels();
         $tmpData['_idUser'] = $idUser;
@@ -78,7 +81,10 @@ class Curriculum extends MY_Controller
      */
     public function view( $idUser = null )
     {
-        $idUser = $idUser ?: $this->getIdUser();
+        $idUser = $idUser ? : $this->getIdUser();
+        if ( $idUser != $this->getIdUser() && !$this->isAdmin() ) {
+            show_404();
+        }
 
         $jobseeker = $this->curriculum->getJobseekerDetails( $idUser );
 
