@@ -78,24 +78,11 @@
     <div class="break">
     </div>
 
-    <?php if ( ENVIRONMENT != 'production' ): ?>
-        <div id="div_footer_wrapper">
-            <table width="100%">
-                <tr width="100%">
-                    <td width="25%" align="left">
-                        <b>
-                            <!-- Can't pre-render this, as it'll throw the reported results -->
-                            Rendered in {elapsed_time}s, and {memory_usage}.
-                        </b>
-                    </td>
-                </tr>
-            </table>
-        </div>
-    <?php else: ?>
-        <div id="div_footer_wrapper">
-            Emplome &copyrigth; <?= date( 'Y' ) ?>
-        </div>
-    <?php endif; ?>
+    <div id="div_footer_wrapper">
+        EmployMe &copy; <?= date( 'Y' ) ?>  - <a href="https://www.linkedin.com/pub/enmanuel-cueva/48/270/760">E. Cueva</a>, F. Deriye, A. Ogunnaike
+    </div>
+
+
 </div>
 
 

@@ -11,8 +11,19 @@
 #div_main_content{
     padding: 2%;
 }
+#div_torso_wrapper{
+    margin-bottom: 70px;
+}
 #div_footer_wrapper{
-    padding: 2%;
+    padding: 7px 20px 7px 0;
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    height: 35px;
+    border-top: 1px solid #ddd;
+    background-color: #eee;
+    width: 100%;
+    text-align: right;
 }
 label{
     margin-right: 4px;
